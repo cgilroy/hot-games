@@ -1,0 +1,418 @@
+{
+  "copyright" : "NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2018. All Rights Reserved.",
+  "totalItems" : 8,
+  "totalEvents" : 0,
+  "totalGames" : 8,
+  "totalMatches" : 0,
+  "wait" : 10,
+  "dates" : [ {
+    "date" : "2018-09-29",
+    "totalItems" : 8,
+    "totalEvents" : 0,
+    "totalGames" : 8,
+    "totalMatches" : 0,
+    "games" : [ {
+      "gamePk" : 2018010102,
+      "link" : "/api/v1/game/2018010102/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-30T00:00:00Z",
+      "status" : {
+        "abstractGameState" : "Live",
+        "codedGameState" : "3",
+        "detailedState" : "In Progress",
+        "statusCode" : "3",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 29,
+            "name" : "Columbus Blue Jackets",
+            "link" : "/api/v1/teams/29"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 4,
+          "team" : {
+            "id" : 16,
+            "name" : "Chicago Blackhawks",
+            "link" : "/api/v1/teams/16"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5092,
+        "name" : "United Center",
+        "link" : "/api/v1/venues/5092"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010102/content"
+      }
+    }, {
+      "gamePk" : 2018010103,
+      "link" : "/api/v1/game/2018010103/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-30T02:00:00Z",
+      "status" : {
+        "abstractGameState" : "Preview",
+        "codedGameState" : "2",
+        "detailedState" : "Pre-Game",
+        "statusCode" : "2",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 53,
+            "name" : "Arizona Coyotes",
+            "link" : "/api/v1/teams/53"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 23,
+            "name" : "Vancouver Canucks",
+            "link" : "/api/v1/teams/23"
+          }
+        }
+      },
+      "venue" : {
+        "name" : "Prospera Place",
+        "link" : "/api/v1/venues/null"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010103/content"
+      }
+    }, {
+      "gamePk" : 2018010104,
+      "link" : "/api/v1/game/2018010104/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-30T02:30:00Z",
+      "status" : {
+        "abstractGameState" : "Preview",
+        "codedGameState" : "2",
+        "detailedState" : "Pre-Game",
+        "statusCode" : "2",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 24,
+            "name" : "Anaheim Ducks",
+            "link" : "/api/v1/teams/24"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 0,
+            "losses" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 26,
+            "name" : "Los Angeles Kings",
+            "link" : "/api/v1/teams/26"
+          }
+        }
+      },
+      "venue" : {
+        "name" : "STAPLES Center",
+        "link" : "/api/v1/venues/null"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010104/content"
+      }
+    }, {
+      "gamePk" : 2018010097,
+      "link" : "/api/v1/game/2018010097/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-29T19:00:00Z",
+      "status" : {
+        "abstractGameState" : "Final",
+        "codedGameState" : "6",
+        "detailedState" : "Final",
+        "statusCode" : "6",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 4,
+            "losses" : 3,
+            "ot" : 3,
+            "type" : "league"
+          },
+          "score" : 3,
+          "team" : {
+            "id" : 20,
+            "name" : "Calgary Flames",
+            "link" : "/api/v1/teams/20"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 6,
+            "losses" : 1,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 4,
+          "team" : {
+            "id" : 22,
+            "name" : "Edmonton Oilers",
+            "link" : "/api/v1/teams/22"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5100,
+        "name" : "Rogers Place",
+        "link" : "/api/v1/venues/5100"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010097/content"
+      }
+    }, {
+      "gamePk" : 2018010098,
+      "link" : "/api/v1/game/2018010098/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-29T21:00:00Z",
+      "status" : {
+        "abstractGameState" : "Final",
+        "codedGameState" : "6",
+        "detailedState" : "Final",
+        "statusCode" : "6",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 4,
+            "losses" : 3,
+            "ot" : 1,
+            "type" : "league"
+          },
+          "score" : 4,
+          "team" : {
+            "id" : 4,
+            "name" : "Philadelphia Flyers",
+            "link" : "/api/v1/teams/4"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 5,
+            "losses" : 1,
+            "ot" : 2,
+            "type" : "league"
+          },
+          "score" : 1,
+          "team" : {
+            "id" : 6,
+            "name" : "Boston Bruins",
+            "link" : "/api/v1/teams/6"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5085,
+        "name" : "TD Garden",
+        "link" : "/api/v1/venues/5085"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010098/content"
+      }
+    }, {
+      "gamePk" : 2018010099,
+      "link" : "/api/v1/game/2018010099/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-29T23:00:00Z",
+      "status" : {
+        "abstractGameState" : "Final",
+        "codedGameState" : "6",
+        "detailedState" : "Final",
+        "statusCode" : "6",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 6,
+            "losses" : 2,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 1,
+          "team" : {
+            "id" : 10,
+            "name" : "Toronto Maple Leafs",
+            "link" : "/api/v1/teams/10"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 7,
+            "losses" : 1,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 5,
+          "team" : {
+            "id" : 17,
+            "name" : "Detroit Red Wings",
+            "link" : "/api/v1/teams/17"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5145,
+        "name" : "Little Caesars Arena",
+        "link" : "/api/v1/venues/5145"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010099/content"
+      }
+    }, {
+      "gamePk" : 2018010100,
+      "link" : "/api/v1/game/2018010100/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-29T23:00:00Z",
+      "status" : {
+        "abstractGameState" : "Final",
+        "codedGameState" : "6",
+        "detailedState" : "Final",
+        "statusCode" : "6",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 4,
+            "losses" : 3,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 3,
+          "team" : {
+            "id" : 14,
+            "name" : "Tampa Bay Lightning",
+            "link" : "/api/v1/teams/14"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 3,
+            "losses" : 4,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 2,
+          "team" : {
+            "id" : 13,
+            "name" : "Florida Panthers",
+            "link" : "/api/v1/teams/13"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5027,
+        "name" : "BB&T Center",
+        "link" : "/api/v1/venues/5027"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010100/content"
+      }
+    }, {
+      "gamePk" : 2018010101,
+      "link" : "/api/v1/game/2018010101/feed/live",
+      "gameType" : "PR",
+      "season" : "20182019",
+      "gameDate" : "2018-09-29T23:00:00Z",
+      "status" : {
+        "abstractGameState" : "Final",
+        "codedGameState" : "6",
+        "detailedState" : "Final",
+        "statusCode" : "6",
+        "startTimeTBD" : false
+      },
+      "teams" : {
+        "away" : {
+          "leagueRecord" : {
+            "wins" : 4,
+            "losses" : 3,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 0,
+          "team" : {
+            "id" : 8,
+            "name" : "Montréal Canadiens",
+            "link" : "/api/v1/teams/8"
+          }
+        },
+        "home" : {
+          "leagueRecord" : {
+            "wins" : 2,
+            "losses" : 4,
+            "ot" : 0,
+            "type" : "league"
+          },
+          "score" : 3,
+          "team" : {
+            "id" : 9,
+            "name" : "Ottawa Senators",
+            "link" : "/api/v1/teams/9"
+          }
+        }
+      },
+      "venue" : {
+        "id" : 5031,
+        "name" : "Canadian Tire Centre",
+        "link" : "/api/v1/venues/5031"
+      },
+      "content" : {
+        "link" : "/api/v1/game/2018010101/content"
+      }
+    } ],
+    "events" : [ ],
+    "matches" : [ ]
+  } ]
+}

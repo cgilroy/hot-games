@@ -1,0 +1,608 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  -webkit-animation: App-logo-spin infinite 20s linear;
+          animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  height: 200px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+
+}
+
+.App-header img {
+  height: 100%;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.container1 .gameDiv:last-child {
+  /* margin-bottom: 10px; */
+}
+
+.container2 {
+  margin: 0 10px;
+}
+
+.gamesContainer {
+  margin: 10px 0;
+}
+
+.gameDiv {
+  /* max-width: 800px; */
+  display: -ms-flexbox;
+  /* display: inline-block; */
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* border: 1px solid #605f5e; */
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  background: #ddd;
+  /* border-radius: 10px; */
+  color: #262626;
+  /* margin-top: 10px;
+  margin-right: 10px; */
+  /* height: 450px; */
+  /* transition: ease 0.3s all; */
+  overflow: hidden;
+  min-height: 180px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.gameDiv.inprogress,
+.gameDiv.inprogress-critical,
+.gameDiv.final {
+  /* padding-right: 0; */
+}
+
+.gameDiv.scheduled,
+.gameDiv.pre-game {
+  display: flex;
+}
+
+.gameDiv.final {
+  /* background: #262626; */
+}
+
+.gameDiv h2 {
+  width: 100%;
+}
+
+.gameDiv>div {
+  justify-content: space-around;
+}
+
+.gameDiv .homeLogo, .gameDiv .awayLogo {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.gameDiv .logoPPBadge {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.gameDiv .logoPPBadge h4 {
+  font-weight: bold;
+  background: #ff0000;
+  width: 100%;
+  margin: 0;
+  color: white;
+}
+
+.gameDiv img {
+  width: 100%;
+}
+
+@font-face {
+  font-family: 'digital-font';
+  src:url('/resources/digital-7.ttf');
+}
+
+.gameDiv .timeRemaining {
+  width: auto;
+  padding: 10px;
+  background: #262626;
+  border-radius: 10px;
+  justify-content: center;
+  display: -ms-flexbox;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  border: 2px solid white;
+  color: white;
+
+}
+
+div[class*='inprogress'] .timeRemaining {
+  font-family: 'digital-font', sans-serif;
+  color: #ffd800;
+}
+
+.gameDiv .timeRemaining h1:last-child {
+  padding-left: 6px;
+  font-size: 1.4em;
+  font-weight: lighter;
+}
+.gameDiv .timeRemaining h1:first-child {
+  font-size: 2.0em;
+  padding-left:0;
+  font-weight: lighter;
+}
+
+
+.gameDiv .timeRemaining h1 {
+  margin:0;
+}
+
+.gameDiv .timeAndScore {
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  height: 60px;
+  display: flex;
+}
+
+.gameDiv .timeAndScore h2 {
+  color: white;
+  background: #262626;
+  font-family: 'digital-font';
+  font-weight: lighter;
+  padding: 3px 0;
+  line-height: 100%;
+  font-size: 1.7em;
+}
+
+.gameDiv .timeAndScore h2:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.gameDiv .timeAndScore h2:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.teamNames {
+  display: flex;
+  justify-content: space-around;
+  color: #262626;
+  align-items: center;
+  height: 80px;
+  width: 100%
+}
+
+.liveData {
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  width: 100%;
+  height: 100%;
+  transition: 0s ease height;
+}
+
+.liveData .latestPlays {
+  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* box-shadow: 0px 10px 30px 1px#888888; */
+}
+
+.liveData .latestPlays span {
+  width: 100%;
+}
+
+.liveData .latestPlays .eventRow {
+  background: white;
+  display: flex;
+  width: 100%;
+  /* height: 30px; */
+  overflow: hidden;
+  margin-bottom: 2px;
+  align-items: center;
+  padding: 3px;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.liveData .latestPlays .eventRow:first-child {
+  /* box-shadow: 0px 10px 50px 0px #00000069;
+  margin-bottom: 10px;
+  z-index: 999; */
+}
+
+.liveData .latestPlays button {
+  /* display:none; */
+}
+
+.liveData .latestPlays .eventRow p {
+  margin: 0;
+}
+
+.liveData .latestPlays .eventRow p:first-child {
+  margin: 0;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  width: 100%;
+  font-size: 0.8em;
+  padding-left: 2px;
+  display: block;
+  text-align: center;
+}
+
+.liveData .top {
+  display: flex;
+  /* margin-right: 10px; */
+  /* flex-wrap: wrap; */
+}
+
+.liveData .top-left{
+  min-width: 480px;
+}
+
+.scheduled .top-left, .pre-game .top-left {
+  min-width: 280px;
+  width: 100%
+}
+
+.liveData .top-right{
+  width: 100%;
+  padding-left:6px;
+}
+
+.liveData .bottom {
+  transition: ease 0.8s height;
+  display: block;
+  margin-top:0;
+}
+
+.liveData.expanded-game .bottom {
+  margin-top:10px;
+}
+
+.inprogress .dataToggleButton,
+.inprogress-critical .dataToggleButton {
+  /* background: #605f5e; */
+}
+
+.dataToggleButton {
+  align-items: center;
+  display: flex;
+  width:100%;
+}
+
+.dataToggleButton h2 {
+  color: #262626;
+  margin: 10px 0 0;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  height: 28px;
+  border-radius: 10px;
+  /* height: 100%; */
+}
+
+.dataToggleButton h2:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  cursor: pointer;
+  /* font-size: 1.6em; */
+}
+
+.liveData .bottomData {
+  transition: 0.8s ease all;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.liveData.expanded-game .bottom .bottomData {
+  /* padding-top: 6px; */
+  box-sizing: border-box;
+  opacity: 1;
+  display: flex;
+}
+
+.liveData.normal-game .bottom .bottomData {
+  opacity: 0;
+  display: none;
+}
+
+.liveData.expanded-game .bottomData {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.gameDiv.scheduled , .gameDiv.pre-game {
+  height: 180px;
+}
+
+.gameDiv.scheduled .liveData,
+.gameDiv.pre-game .liveData {
+  height: 100%;
+}
+
+.gameDiv.scheduled .top ,
+.gameDiv.pre-game .top {
+  height: 100%;
+}
+
+.gameDiv.scheduled .top-left ,
+.gameDiv.pre-game .top-left {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.gameDiv.scheduled .bottom, .gameDiv.pre-game .bottom {
+  display: none;
+}
+
+.gameDiv.scheduled .latestPlays, .gameDiv.pre-game .latestPlays, .gameDiv.final .latestPlays {
+  display: none;
+}
+
+.gameDiv.scheduled .dataToggleButton, .gameDiv.pre-game .dataToggleButton {
+  display: none;
+}
+
+.gameDiv .scoringTable {
+  color: #262626;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.liveData .scoringTable .no-scoring-message {
+  height: 100%;
+  text-align: center;
+
+}
+
+.liveData .scoringTable {
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 170px;
+  overflow-y: auto;
+  margin-top: 8px;
+  /* background: white; */
+  display: block;
+  color: #262626;
+  /* border: 1px solid white */
+}
+
+.liveData .scoringRow {
+  padding: 2px 0;
+  /* border: 1px solid white; */
+  /* background: white; */
+  align-items: center;
+  height: 35px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  margin-right: 13px;
+  position: relative;
+  /* border-bottom: 1px solid white; */
+}
+
+.liveData .scoringRow .goalStrength, .liveData .scoringRow .emptyNet {
+  padding-left: 6px;
+  font-size: 0.8em;
+}
+
+.liveData .scoringRow:last-child {
+  border: none;
+}
+
+.liveData .scoringRow.headerRow {
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  justify-content: center;
+}
+
+.liveData .scoringRow>h4 {
+  margin: 0;
+  border-right: 1px solid #262626;
+  line-height: 100%;
+  padding:0 6px 0 4px;
+  font-size: 1em;
+  width: 50px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.liveData .scoreTime {
+  width: auto;
+  white-space: nowrap;
+  align-items: baseline;
+  padding-right: 3px;
+  display: flex;
+  position: absolute;
+  right: 0;
+
+}
+
+.liveData .scoreTime h4 {
+  margin: 0;
+  font-weight: lighter;
+}
+
+.liveData .scoringRow .scorer {
+  font-size: 0.8em;
+  text-align: left;
+  margin: 0;
+  /* height: 25px; */
+  /* width: 100%; */
+  white-space: nowrap;
+}
+
+.liveData .scoreData {
+  padding-left: 6px;
+  display: flex;
+  align-items: center;
+  /* width: 100%; */
+  white-space: nowrap;
+}
+
+.liveData .scoringRow .assistOne, .liveData .scoringRow .assistTwo {
+  font-size: 0.8em;
+  text-align: left;
+  margin:0;
+  padding: 0 6px;
+  width: 100%;
+  font-weight: lighter;
+  /* width: 30px; */
+
+}
+
+.liveData .assistData {
+  padding-left: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* height: 25px; */
+}
+
+.liveData .boxScore {
+  color: #262626;
+  height: 100%;
+  /* overflow-y: scroll; */
+  width: 100%;
+}
+
+.boxScore .ReactTable {
+  margin-right: 13px;
+  border:none;
+}
+
+.boxScore .ReactTable .rt-td {
+  padding: 2px
+}
+
+.boxScore .ReactTable .rt-th:focus {
+  outline: none;
+}
+
+.boxScore .ReactTable .rt-tbody {
+  /* border: 1px solid rgba(255, 255, 255, 0.5); */
+  border-top: none;
+  background: white;
+  overflow: hidden;
+
+}
+
+.boxScore .ReactTable .rt-table {
+  overflow: hidden;
+}
+
+.boxScore .ReactTable .rt-thead {
+  background: #262626;
+  color: white;
+  height: 30px;
+
+}
+
+.boxScore .ReactTable .rt-tbody .rt-tr-group {
+  border-bottom: 1px solid #ddd;
+  height: 21px;
+}
+
+.boxScore .ReactTable .rt-noData {
+  background: none;
+  /* color: white */
+}
+
+.scoringTable .simplebar-content {
+  margin-right: 10px!important;
+}
+
+.simplebar-scrollbar:before {
+  background: #ddd;
+  opacity: 1;
+}
+
+.liveData .simplebar-track .simplebar-scrollbar.visible:before {
+  opacity: 1;
+}
+
+.boxScore .simplebar-track.vertical {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-bottom: none;
+}
+
+.buttonRow {
+  width: 100%;
+  display: flex;
+}
+
+.buttonRow button {
+  width: 100%;
+  background:#ddddddab;
+  border: none;
+  cursor: pointer;
+  /* color: #262626 */
+}
+
+
+.buttonRow button.active {
+  background: white;
+  color:#262626;
+}
+
+.buttonRow button:focus {
+  outline: none
+}
+
+.container1 {
+
+}
+
+.latestPlaysTransitionGroup-enter {
+  opacity: 0.01;
+}
+
+.latestPlaysTransitionGroup-enter.latestPlaysTransitionGroup-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.latestPlaysTransitionGroup-leave {
+  opacity: 1;
+}
+
+.latestPlaysTransitionGroup-leave.latestPlaysTransitionGroup-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+/*
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+*/
