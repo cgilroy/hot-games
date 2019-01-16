@@ -94,17 +94,18 @@ export class APISchedFetch extends Component {
 
   this.refreshData();
 
-  this._interval = window.setInterval(this.refreshData,5000);
+  // this._interval = window.setInterval(this.refreshData,5000);
 }
 
 componentWillUnMount() {
-  this._interval && window.clearInterval(this._interval);
+  // this._interval && window.clearInterval(this._interval);
 }
 
 sideBarClick(gameFID) {
   console.log(gameFID);
   this.setState({mainGamePk: gameFID});
-  this.refreshData();
+
+
 }
 
   render() {

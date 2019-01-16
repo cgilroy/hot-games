@@ -21,38 +21,48 @@ export class APIActiveGameFetch extends Component {
       // activeBoxData:[],
       activeBoxTeam:'home',
       expanded: false,
-      gameBanner:[]
+      gameBanner:[],
+      currentGameID:""
     }
     this.refreshGame = this.refreshGame.bind(this);
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
-  refreshGame() {
-    let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + this.props.gameID + '/feed/live';
+  refreshGame(gameID) {
+    let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gameID + '/feed/live';
     console.log('apiString',apiString);
     fetch(apiString)
       .then(results => {
         return results.json();
       }).then(data => {
         // console.log('data.liveData',data.liveData);
-        if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
-          let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
-          timeLeft = timeLeft.replace(/^0/,'');
-          let ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
+        if ((data.liveData !== undefined)
+          && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
+
+          let timeLeft = "";
+          let ordinalPeriod = "";
+          let homeTeamOnPP = "";
+          let awayTeamOnPP = "";
+          let powerPlayStrength = "";
           let homeScore = "";
           let awayScore = "";
           let gameState = data.gameData.status.detailedState;
           gameState = gameState.toLowerCase().replace(/\s/g, '');
           if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
+            timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
+            timeLeft = timeLeft.replace(/^0/,'');
+            ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
+            homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
+            awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
+            powerPlayStrength = data.liveData.linescore.powerPlayStrength;
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
           };
           let currentTimeStamp = data.metaData.timeStamp;
-          let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
-          let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
-          let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
-          let homeName = data.gameData.teams.home.teamName;
-          let awayName = data.gameData.teams.away.teamName;
+          let homeTeamName = data.gameData.teams.home.teamName;
+          let homeCityName = data.gameData.teams.home.locationName;
+          let awayTeamName = data.gameData.teams.away.teamName;
+          let awayCityName = data.gameData.teams.away.locationName;
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
             // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
@@ -62,8 +72,10 @@ export class APIActiveGameFetch extends Component {
               <MainGameBanner
                 homeScore={homeScore}
                 awayScore={awayScore}
-                homeName={homeName}
-                awayName={awayName}
+                homeTeamName={homeTeamName}
+                awayTeamName={awayTeamName}
+                homeCityName={homeCityName}
+                awayCityName={awayCityName}
                 />
             );
 
@@ -100,7 +112,8 @@ export class APIActiveGameFetch extends Component {
               timeStamp: currentTimeStamp,
               homePPBadge: homePPLogoBadge,
               awayPPBadge: awayPPLogoBadge,
-              gameBanner: gameBanner
+              gameBanner: gameBanner,
+              currentGameID: this.props.gameID
               // activeBoxScore: activeBoxScore
             })
           // }
@@ -110,15 +123,15 @@ export class APIActiveGameFetch extends Component {
   }
 
   componentDidMount() {
-      this.refreshGame();
+      this.refreshGame(this.props.gameID);
   }
 
   componentWillUpdate(nextProps) {
-    if ((nextProps.gameState === "inprogress-critical") || (nextProps.gameState === "inprogress")) {
-      // console.log('refreshUpdate');
-      this.refreshGame();
-    }
-    this.refreshGame();
+    // if ((nextProps.gameState === "inprogress-critical") || (nextProps.gameState === "inprogress")) {
+    //   // console.log('refreshUpdate');
+    //   this.refreshGame();
+    // }
+    this.refreshGame(nextProps.gameID);
   }
 
   handleClick(team) {
@@ -160,7 +173,7 @@ export class APIActiveGameFetch extends Component {
       let homePPBadge = this.state.homePPBadge;
     }
 
-    let expandedChar = (this.state.expanded) ? (<FontAwesomeIcon icon="chevron-up"/>) : <FontAwesomeIcon icon='chevron-down'/>;
+    // let expandedChar = (this.state.expanded) ? (<FontAwesomeIcon icon="chevron-up"/>) : <FontAwesomeIcon icon='chevron-down'/>;
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
@@ -186,9 +199,6 @@ export class APIActiveGameFetch extends Component {
             {this.state.currentPlays}
           </div>
         </div>
-        <div className="dataToggleButton" onClick={this.toggleExpandedGame}>
-          <h2>{expandedChar}</h2>
-        </div>
         <div className="bottom">
 
           <div className="bottomData">
@@ -212,8 +222,10 @@ function MainGameBanner(props) {
   console.log(props);
   return (
     <div className="bannerContainer">
-
-      <h1>{props.homeScore}</h1>
+      <div className="bannerGroup">
+        <img src={getLogoPath(props.homeCityName+" "+props.homeTeamName)} />
+        <h1>{props.homeTeamName}</h1>
+      </div>
     </div>
   )
 }
