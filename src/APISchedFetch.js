@@ -89,22 +89,36 @@ export class APISchedFetch extends Component {
 
 }
 
+<<<<<<< HEAD
 
   componentDidMount() {
 
   this.refreshData();
 
   this._interval = window.setInterval(this.refreshData,5000);
+=======
+
+  componentDidMount() {
+
+  this.refreshData();
+
+  // this._interval = window.setInterval(this.refreshData,5000);
+>>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
 }
 
 componentWillUnMount() {
-  this._interval && window.clearInterval(this._interval);
+  // this._interval && window.clearInterval(this._interval);
 }
 
 sideBarClick(gameFID) {
   console.log(gameFID);
   this.setState({mainGamePk: gameFID});
+<<<<<<< HEAD
   this.refreshData();
+=======
+
+
+>>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
 }
 
   render() {
