@@ -5,13 +5,12 @@ import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export class APISideGameFetch extends Component {
+export class APIGameFetch extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      timeRemaining: [],
-      currentTeamsAndScore: [],
+      timeAndScore: [],
       scoringTable:[],
       currentPlays:[],
       awayBoxData:[],
@@ -24,7 +23,7 @@ export class APISideGameFetch extends Component {
       expanded: false
     }
     this.refreshGame = this.refreshGame.bind(this);
-    this.wasClicked = this.wasClicked.bind(this);
+    this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
   refreshGame() {
@@ -36,61 +35,33 @@ export class APISideGameFetch extends Component {
       }).then(data => {
         // console.log('data.liveData',data.liveData);
         if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
-
-          //timeLeft = isNaN(timeLeft.charAt(0)) ? timeLeft : timeLeft.replace(/^0/,'');
+          let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
+          timeLeft = timeLeft.replace(/^0/,'');
           let ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
-          let homeScore = "";
-          let awayScore = "";
-          if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
-            homeScore = data.liveData.linescore.teams.home.goals;
-            awayScore = data.liveData.linescore.teams.away.goals;
-          }
-
+          let homeScore = data.liveData.linescore.teams.home.goals;
+          let awayScore = data.liveData.linescore.teams.away.goals;
           let currentTimeStamp = data.metaData.timeStamp;
           let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
           let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
           let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
-          let homeTriCode = data.gameData.teams.home.triCode;
-          let awayTriCode = data.gameData.teams.away.triCode;
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
-            // let timeAndScore = (
-            //   <div className="timeAndScore">
-            //     <h2>{homeScore}</h2>
-            //     <div className="timeRemaining">
-            //       <h1>{timeLeft}</h1>
-            //       { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
-            //         <h1>{ordinalPeriod}</h1>
-            //       }
-            //     </div>
-            //     <h2>{awayScore}</h2>
-            //   </div>
-            // );
+            let timeAndScore = (
+              <div className="timeAndScore">
+                <h2>{homeScore}</h2>
+                <div className="timeRemaining">
+                  <h1>{timeLeft}</h1>
+                  { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
+                    <h1>{ordinalPeriod}</h1>
+                  }
+                </div>
+                <h2>{awayScore}</h2>
+              </div>
+            );
 
-            let timeRemaining = [];
-            if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
-              let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
-              timeLeft = timeLeft.replace(/^0/,'');
-              timeRemaining = (
-                  <div className="timeRemaining">
-                    <h1>{timeLeft}</h1>
-                    { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
-                      <h1>{ordinalPeriod}</h1>
-                    }
-                  </div>
-              );
-            }else{
-              let msec = Date.parse('this.props.gameTime');
-              let gameTime = new Date(msec);
-
-              timeRemaining = (
-                  <div className="timeRemaining">
-                    <h1><Moment format="h:mm A">{this.props.gameTime}</Moment></h1>
-                  </div>
-              );
-            }
-
-
+            let scoringTable = (
+              <ScoringTable plays={data.liveData.plays}/>
+            );
 
             let latestPlaysTable = (
               <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays}/>
@@ -101,6 +72,9 @@ export class APISideGameFetch extends Component {
             //     <PostGameSection data={data.liveData} />
             //   )
             // }
+
+            let homeBoxData = data.liveData.boxscore.teams.home;
+            let awayBoxData = data.liveData.boxscore.teams.away;
 
             let homePPLogoBadge = homeTeamOnPP ? (
               <div className="logoPPBadge">
@@ -114,33 +88,14 @@ export class APISideGameFetch extends Component {
               </div>
             ) : ('');
 
-            let teamsAndScore = (
-              <div className={"teamsAndScore"}>
-                <div className={"teamInfo"}>
-                  <div className="homeLogo">
-                    <img src={getLogoPath(this.props.homeName)} alt={this.props.homeName}/>
-                    {homePPLogoBadge}
-                  </div>
-                  <h2>{homeTriCode}</h2>
-                  <h2>{homeScore}</h2>
-                </div>
-                <div className="teamInfo">
-                  <div className="awayLogo">
-                    <img src={getLogoPath(this.props.awayName)} alt={this.props.awayName}/>
-                    {awayPPLogoBadge}
-                  </div>
-                  <h2>{awayTriCode}</h2>
-                  <h2>{awayScore}</h2>
-                </div>
-              </div>
-            )
-
             // console.log('awayPP',awayPPLogoBadge);
 
             this.setState({
-              timeRemaining: timeRemaining,
-              currentTeamsAndScore: teamsAndScore,
+              timeAndScore: timeAndScore,
+              scoringTable: scoringTable,
               currentPlays: latestPlaysTable,
+              homeBoxData: homeBoxData,
+              awayBoxData: awayBoxData,
               timeStamp: currentTimeStamp,
               homePPBadge: homePPLogoBadge,
               awayPPBadge: awayPPLogoBadge
@@ -158,12 +113,18 @@ export class APISideGameFetch extends Component {
         console.log('firstRefresh');
         this.refreshGame();
       }else {
-        // game has not started yet
+        let msec = Date.parse('this.props.gameTime');
+        let gameTime = new Date(msec);
 
-
-
+        let timeAndScore = (
+          <div className="timeAndScore">
+            <div className="timeRemaining">
+            <h1><Moment format="h:mm A">{this.props.gameTime}</Moment></h1>
+            </div>
+          </div>
+        );
+        this.setState({timeAndScore:timeAndScore})
       };
-      this.refreshGame();
   }
 
   componentWillUpdate(nextProps) {
@@ -188,15 +149,11 @@ export class APISideGameFetch extends Component {
 
   componentDidUpdate() {
     console.log('gamecomponentupdate');
-    // this.props.toggleHandler();
+    this.props.toggleHandler();
   }
 
   toggleExpandedGame() {
     this.setState({expanded: !this.state.expanded});
-  }
-
-  wasClicked() {
-    this.props.sideClick(this.props.gameID);
   }
 
   render() {
@@ -220,10 +177,44 @@ export class APISideGameFetch extends Component {
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
-      <div onClick={this.wasClicked}>
-        {this.state.currentTeamsAndScore}
-        {this.state.timeRemaining}
+      <div className={`liveData ${this.state.expanded ? 'expanded-game' : 'normal-game'}`}>
+        <div className="top">
+          <div className="top-left">
+            <div className="teamNames">
+              <div className="homeLogo">
+                <img src={getLogoPath(this.props.homeName)} alt={this.props.homeName}/>
+                {this.state.homePPBadge}
+              </div>
+              <h3>vs</h3>
+              <div className="awayLogo">
+                <img src={getLogoPath(this.props.awayName)} alt={this.props.awayName}/>
+                {this.state.awayPPBadge}
+              </div>
+            </div>
+            {this.state.timeAndScore}
+            {this.state.scoringTable}
+          </div>
+          <div className="top-right">
+            {this.state.currentPlays}
+          </div>
+        </div>
+        <div className="dataToggleButton" onClick={this.toggleExpandedGame}>
+          <h2>{expandedChar}</h2>
+        </div>
+        <div className="bottom">
+
+          <div className="bottomData">
+            <div className="buttonRow">
+              <button className={this.state.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.handleClick('home')}>{this.props.homeName}</button>
+              <button className={this.state.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.handleClick('away')}>{this.props.awayName}</button>
+            </div>
+            <BoxScoreStateless playerData={boxData}/>
+          </div>
+
+        </div>
       </div>
+
+
     )
   }
 
