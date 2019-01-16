@@ -70,7 +70,7 @@ export class APISideGameFetch extends Component {
             let timeRemaining = [];
             if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
               let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
-              timeLeft.replace(/^0/,'');
+              timeLeft = timeLeft.replace(/^0/,'');
               timeRemaining = (
                   <div className="timeRemaining">
                     <h1>{timeLeft}</h1>

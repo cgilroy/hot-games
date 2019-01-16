@@ -20,10 +20,11 @@ export class APIActiveGameFetch extends Component {
       awayPPBadge:'',
       // activeBoxData:[],
       activeBoxTeam:'home',
-      expanded: false
+      expanded: false,
+      gameBanner:[]
     }
     this.refreshGame = this.refreshGame.bind(this);
-    this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
+    // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
   refreshGame() {
@@ -38,25 +39,32 @@ export class APIActiveGameFetch extends Component {
           let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
           timeLeft = timeLeft.replace(/^0/,'');
           let ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
-          let homeScore = data.liveData.linescore.teams.home.goals;
-          let awayScore = data.liveData.linescore.teams.away.goals;
+          let homeScore = "";
+          let awayScore = "";
+          let gameState = data.gameData.status.detailedState;
+          gameState = gameState.toLowerCase().replace(/\s/g, '');
+          if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
+            homeScore = data.liveData.linescore.teams.home.goals;
+            awayScore = data.liveData.linescore.teams.away.goals;
+          };
           let currentTimeStamp = data.metaData.timeStamp;
           let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
           let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
           let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
+          let homeName = data.gameData.teams.home.teamName;
+          let awayName = data.gameData.teams.away.teamName;
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
-            let timeAndScore = (
-              <div className="timeAndScore">
-                <h2>{homeScore}</h2>
-                <div className="timeRemaining">
-                  <h1>{timeLeft}</h1>
-                  { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
-                    <h1>{ordinalPeriod}</h1>
-                  }
-                </div>
-                <h2>{awayScore}</h2>
-              </div>
+            // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
+            //
+            // }
+            let gameBanner = (
+              <MainGameBanner
+                homeScore={homeScore}
+                awayScore={awayScore}
+                homeName={homeName}
+                awayName={awayName}
+                />
             );
 
             let scoringTable = (
@@ -66,12 +74,6 @@ export class APIActiveGameFetch extends Component {
             let latestPlaysTable = (
               <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays}/>
             );
-
-            // if this.props.gameState = 'Final' {
-            //   let postGameSection = (
-            //     <PostGameSection data={data.liveData} />
-            //   )
-            // }
 
             let homeBoxData = data.liveData.boxscore.teams.home;
             let awayBoxData = data.liveData.boxscore.teams.away;
@@ -91,14 +93,14 @@ export class APIActiveGameFetch extends Component {
             // console.log('awayPP',awayPPLogoBadge);
 
             this.setState({
-              timeAndScore: timeAndScore,
               scoringTable: scoringTable,
               currentPlays: latestPlaysTable,
               homeBoxData: homeBoxData,
               awayBoxData: awayBoxData,
               timeStamp: currentTimeStamp,
               homePPBadge: homePPLogoBadge,
-              awayPPBadge: awayPPLogoBadge
+              awayPPBadge: awayPPLogoBadge,
+              gameBanner: gameBanner
               // activeBoxScore: activeBoxScore
             })
           // }
@@ -108,23 +110,7 @@ export class APIActiveGameFetch extends Component {
   }
 
   componentDidMount() {
-    // console.log('mountGame');
-      if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
-        console.log('firstRefresh');
-        this.refreshGame();
-      }else {
-        let msec = Date.parse('this.props.gameTime');
-        let gameTime = new Date(msec);
-
-        let timeAndScore = (
-          <div className="timeAndScore">
-            <div className="timeRemaining">
-            <h1><Moment format="h:mm A">{this.props.gameTime}</Moment></h1>
-            </div>
-          </div>
-        );
-        this.setState({timeAndScore:timeAndScore})
-      };
+      this.refreshGame();
   }
 
   componentWillUpdate(nextProps) {
@@ -132,6 +118,7 @@ export class APIActiveGameFetch extends Component {
       // console.log('refreshUpdate');
       this.refreshGame();
     }
+    this.refreshGame();
   }
 
   handleClick(team) {
@@ -149,12 +136,12 @@ export class APIActiveGameFetch extends Component {
 
   componentDidUpdate() {
     console.log('gamecomponentupdate');
-    this.props.toggleHandler();
+    // this.props.toggleHandler();
   }
 
-  toggleExpandedGame() {
-    this.setState({expanded: !this.state.expanded});
-  }
+  // toggleExpandedGame() {
+  //   this.setState({expanded: !this.state.expanded});
+  // }
 
   render() {
     console.log('renderGame');
@@ -177,7 +164,8 @@ export class APIActiveGameFetch extends Component {
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
-      <div className={`liveData ${this.state.expanded ? 'expanded-game' : 'normal-game'}`}>
+      <div className={"liveData"}>
+        {this.state.gameBanner}
         <div className="top">
           <div className="top-left">
             <div className="teamNames">
@@ -218,6 +206,16 @@ export class APIActiveGameFetch extends Component {
     )
   }
 
+}
+
+function MainGameBanner(props) {
+  console.log(props);
+  return (
+    <div className="bannerContainer">
+
+      <h1>{props.homeScore}</h1>
+    </div>
+  )
 }
 
 function getLogoPath(teamName) {
