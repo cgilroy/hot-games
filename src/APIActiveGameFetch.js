@@ -5,7 +5,7 @@ import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export class APIGameFetch extends Component {
+export class APIActiveGameFetch extends Component {
 
   constructor(props) {
     super(props);

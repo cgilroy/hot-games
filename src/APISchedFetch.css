@@ -1,0 +1,69 @@
+.gamesSideBar {
+  width: 200px;
+  margin-left: 0;
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+
+}
+
+.sideBarScore {
+  display: flex;
+}
+
+.sideBarScore {
+  display: flex;
+}
+
+.sideBarGame {
+  border-bottom: 1px solid #ddd;
+  padding: 4px;
+  height: auto;
+  min-height: 0;
+}
+
+.sideBarGame .teamInfo {
+  display: flex;
+  width: 100px;
+  align-items: center;
+  padding: 2px;
+}
+
+.sideBarGame .teamInfo h2 {
+  font-size: 0.9em;
+  width: auto;
+  margin: 0;
+}
+
+.sideBarGame .timeRemaining {
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+.sideBarGame.gameDiv .timeRemaining h1 {
+  color: #262626;
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.sideBarGame .teamInfo h2:last-child {
+  margin-left: auto;
+}
+
+.sideBarGame>div {
+  display: flex;
+  align-items: flex-end;
+}
+.sideBarGame:last-child {
+  border-bottom: none;
+}
+.sideBarGame:hover {
+  background: #e6f2fa;
+  cursor: pointer;
+}
+
+.sideBarGame .homeLogo, .sideBarGame .awayLogo {
+  height: 20px;
+  width: 20px;
+  margin-right: 6px;
+}

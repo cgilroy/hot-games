@@ -336,10 +336,6 @@ div[class*='inprogress'] .timeRemaining {
   overflow: hidden;
 }
 
-.gameDiv.scheduled , .gameDiv.pre-game {
-  height: 180px;
-}
-
 .gameDiv.scheduled .liveData,
 .gameDiv.pre-game .liveData {
   height: 100%;

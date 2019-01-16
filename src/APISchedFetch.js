@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {APIGameFetch} from './APIGameFetch.js';
+import {APISideGameFetch} from './APISideGameFetch.js';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import StackGrid from 'react-stack-grid';
+import './APISchedFetch.css'
 
 export class APISchedFetch extends Component {
   constructor() {
@@ -10,9 +11,10 @@ export class APISchedFetch extends Component {
     this.state = {
       liveGames: [],
       scheduledGames: [],
-      finalGames:[]
+      finalGames:[],
+      mainGamePk: ""
     };
-    this.updateGridLayout = this.updateGridLayout.bind(this);
+    this.sideBarClick = this.sideBarClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,29 +38,46 @@ export class APISchedFetch extends Component {
           let gamePk = iterGame.gamePk;
           let gameTime = iterGame.gameDate;
 
-          // let gameDiv = (
-          //   <div className={"gameDiv " + gameState} key={gamePk}>
-          //     <APIGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} toggleHandler={this.updateGridLayout} />
-          //   </div>
-          // )
-
-          let gameDiv = (
-            <div className={"sideBarGame " + gameState} key={gamePk}>
-              <div className={"homeSideBar"}>
-                {homeTeam.team.name}
-              </div>
-              <div className={"SideBar"}>
-                {awayTeam.team.name}
-              </div>
+          let sideGameDiv = (
+            <div className={"sideBarGame gameDiv " + gameState} key={gamePk}>
+              <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} sideClick={this.sideBarClick} />
             </div>
           )
 
+          // let activeGameDiv = (
+          //   <div className={"sideBarGame " + gameState} key={gamePk}>
+          //     <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} toggleHandler={this.updateGridLayout} />
+          //   </div>
+          // )
+
+          // let gameDiv = (
+          //   <div className={"sideBarGame " + gameState} key={gamePk}>
+          //     <div className={"scoreGroup"}>
+          //       <div className={"sideBarScore"}>
+          //         <div className={"teamName"}>{homeTeam.team.name}</div>
+          //         <div className={"teamScore"}>
+          //           {gameState.includes("progress") ? homeTeam.score : ""}
+          //         </div>
+          //         <div className={"timeRemaining"}>
+          //           {gameState.includes("progress") ? gameTime :
+          //         </div>
+          //       </div>
+          //       <div className={"sideBarScore"}>
+          //         <div className={"teamName"}>{awayTeam.team.name}</div>
+          //         <div className={"teamScore"}>
+          //           {gameState.includes("progress") ? awayTeam.score : ""}
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+          // )
+
           if (gameState.search('progress') !== -1) {
-            liveGames = liveGames.concat(gameDiv);
+            liveGames = liveGames.concat(sideGameDiv);
           } else if ((gameState.search('scheduled') !== -1) || (gameState.search('pre-game') !== -1)) {
-            scheduledGames = scheduledGames.concat(gameDiv);
+            scheduledGames = scheduledGames.concat(sideGameDiv);
           } else if (gameState.search('final') !== -1) {
-            finalGames = finalGames.concat(gameDiv);
+            finalGames = finalGames.concat(sideGameDiv);
           }
 
         }
@@ -78,9 +97,9 @@ componentWillUnMount() {
   this._interval && window.clearInterval(this._interval);
 }
 
-updateGridLayout() {
-  this.finalGrid.updateLayout();
-  this.liveGrid.updateLayout();
+sideBarClick(gameFID) {
+  console.log(gameFID);
+  this.setState({mainGamePk: gameFID})
 }
 
   render() {
@@ -89,8 +108,9 @@ updateGridLayout() {
 
       <div className="container2">
         {test}
+        {this.state.mainGamePk}
         <button onClick={this.updateGridLayout}>update</button>
-        <div className="container1">
+        <div className="gamesSideBar">
           <div className="gamesContainer live">
               {this.state.liveGames}
           </div>
