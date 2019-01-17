@@ -57,6 +57,7 @@
   align-items: center;
   height: 100%;
   display: flex;
+  min-width: 210px;
 }
 
 .timeAndScore h2 {

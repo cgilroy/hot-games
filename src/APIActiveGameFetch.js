@@ -202,7 +202,6 @@ export class APIActiveGameFetch extends Component {
                 <img src={getLogoPath(this.props.homeName)} alt={this.props.homeName}/>
                 {this.state.homePPBadge}
               </div>
-              <h3>vs</h3>
               <div className="awayLogo">
                 <img src={getLogoPath(this.props.awayName)} alt={this.props.awayName}/>
                 {this.state.awayPPBadge}
