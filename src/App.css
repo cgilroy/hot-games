@@ -157,34 +157,6 @@ div[class*='inprogress'] .timeRemaining {
   margin:0;
 }
 
-.gameDiv .timeAndScore {
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  height: 60px;
-  display: flex;
-}
-
-.gameDiv .timeAndScore h2 {
-  color: white;
-  background: #262626;
-  font-family: 'digital-font';
-  font-weight: lighter;
-  padding: 3px 0;
-  line-height: 100%;
-  font-size: 1.7em;
-}
-
-.gameDiv .timeAndScore h2:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.gameDiv .timeAndScore h2:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
 .teamNames {
   display: flex;
   justify-content: space-around;

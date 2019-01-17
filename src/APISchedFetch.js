@@ -83,27 +83,24 @@ export class APISchedFetch extends Component {
 
       }
 
-      this.setState({liveGames: liveGames,scheduledGames:scheduledGames,finalGames:finalGames});
+      if (this.state.mainGamePk === "") {
+        let firstGamePk = data.dates[0].games[0].gamePk;
+        this.setState({liveGames: liveGames,scheduledGames:scheduledGames,finalGames:finalGames,mainGamePk:firstGamePk});
+      } else {
+        this.setState({liveGames: liveGames,scheduledGames:scheduledGames,finalGames:finalGames});
+      }
+
     })
 
 
 }
 
-<<<<<<< HEAD
-
-  componentDidMount() {
-
-  this.refreshData();
-
-  this._interval = window.setInterval(this.refreshData,5000);
-=======
 
   componentDidMount() {
 
   this.refreshData();
 
   // this._interval = window.setInterval(this.refreshData,5000);
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
 }
 
 componentWillUnMount() {
@@ -113,12 +110,8 @@ componentWillUnMount() {
 sideBarClick(gameFID) {
   console.log(gameFID);
   this.setState({mainGamePk: gameFID});
-<<<<<<< HEAD
-  this.refreshData();
-=======
 
 
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
 }
 
   render() {
@@ -142,7 +135,6 @@ sideBarClick(gameFID) {
             </div>
         </div>
         <div className="mainGameArea">
-          {this.state.mainGamePk}
           <APIActiveGameFetch gameID={activeGameVar} />
         </div>
       </div>

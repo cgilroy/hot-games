@@ -4,6 +4,7 @@ import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './APIActiveGameFetch.css';
 
 export class APIActiveGameFetch extends Component {
 
@@ -21,12 +22,8 @@ export class APIActiveGameFetch extends Component {
       // activeBoxData:[],
       activeBoxTeam:'home',
       expanded: false,
-<<<<<<< HEAD
-      gameBanner:[]
-=======
       gameBanner:[],
       currentGameID:""
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
     }
     this.refreshGame = this.refreshGame.bind(this);
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
@@ -40,12 +37,6 @@ export class APIActiveGameFetch extends Component {
         return results.json();
       }).then(data => {
         // console.log('data.liveData',data.liveData);
-<<<<<<< HEAD
-        if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
-          let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
-          timeLeft = timeLeft.replace(/^0/,'');
-          let ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
-=======
         if ((data.liveData !== undefined)
           && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
 
@@ -54,57 +45,55 @@ export class APIActiveGameFetch extends Component {
           let homeTeamOnPP = "";
           let awayTeamOnPP = "";
           let powerPlayStrength = "";
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
           let homeScore = "";
           let awayScore = "";
           let gameState = data.gameData.status.detailedState;
           gameState = gameState.toLowerCase().replace(/\s/g, '');
           if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
-<<<<<<< HEAD
-=======
             timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
             timeLeft = timeLeft.replace(/^0/,'');
             ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
             homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
             awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
             powerPlayStrength = data.liveData.linescore.powerPlayStrength;
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
           };
           let currentTimeStamp = data.metaData.timeStamp;
-<<<<<<< HEAD
-          let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
-          let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
-          let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
-          let homeName = data.gameData.teams.home.teamName;
-          let awayName = data.gameData.teams.away.teamName;
-=======
           let homeTeamName = data.gameData.teams.home.teamName;
           let homeCityName = data.gameData.teams.home.locationName;
           let awayTeamName = data.gameData.teams.away.teamName;
           let awayCityName = data.gameData.teams.away.locationName;
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
             // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
             //
             // }
+
+            let timeAndScore = (
+              <div className="timeAndScore">
+                <h2>{homeScore}</h2>
+                <div className="timeRemaining">
+                  <h1>{timeLeft}</h1>
+                  { ((gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
+                    <h1>{ordinalPeriod}</h1>
+                  }
+                </div>
+                <h2>{awayScore}</h2>
+              </div>
+            );
             let gameBanner = (
               <MainGameBanner
-                homeScore={homeScore}
-                awayScore={awayScore}
-<<<<<<< HEAD
-                homeName={homeName}
-                awayName={awayName}
-=======
+                timeAndScore={timeAndScore}
                 homeTeamName={homeTeamName}
                 awayTeamName={awayTeamName}
                 homeCityName={homeCityName}
                 awayCityName={awayCityName}
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
                 />
             );
+
+
+
 
             let scoringTable = (
               <ScoringTable plays={data.liveData.plays}/>
@@ -139,12 +128,8 @@ export class APIActiveGameFetch extends Component {
               timeStamp: currentTimeStamp,
               homePPBadge: homePPLogoBadge,
               awayPPBadge: awayPPLogoBadge,
-<<<<<<< HEAD
-              gameBanner: gameBanner
-=======
               gameBanner: gameBanner,
               currentGameID: this.props.gameID
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
               // activeBoxScore: activeBoxScore
             })
           // }
@@ -154,17 +139,6 @@ export class APIActiveGameFetch extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-      this.refreshGame();
-  }
-
-  componentWillUpdate(nextProps) {
-    if ((nextProps.gameState === "inprogress-critical") || (nextProps.gameState === "inprogress")) {
-      // console.log('refreshUpdate');
-      this.refreshGame();
-    }
-    this.refreshGame();
-=======
       this.refreshGame(this.props.gameID);
   }
 
@@ -174,7 +148,6 @@ export class APIActiveGameFetch extends Component {
     //   this.refreshGame();
     // }
     this.refreshGame(nextProps.gameID);
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
   }
 
   handleClick(team) {
@@ -265,15 +238,15 @@ function MainGameBanner(props) {
   console.log(props);
   return (
     <div className="bannerContainer">
-<<<<<<< HEAD
-
-      <h1>{props.homeScore}</h1>
-=======
-      <div className="bannerGroup">
+      <div className="bannerGroup home">
         <img src={getLogoPath(props.homeCityName+" "+props.homeTeamName)} />
         <h1>{props.homeTeamName}</h1>
       </div>
->>>>>>> 6710e9f13aaa627f177b1472d73d4617ceff319e
+      {props.timeAndScore}
+      <div className="bannerGroup away">
+        <h1>{props.awayTeamName}</h1>
+        <img src={getLogoPath(props.awayCityName+" "+props.awayTeamName)} />
+      </div>
     </div>
   )
 }
