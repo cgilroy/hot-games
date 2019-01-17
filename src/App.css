@@ -141,21 +141,7 @@ div[class*='inprogress'] .timeRemaining {
   color: #ffd800;
 }
 
-.gameDiv .timeRemaining h1:last-child {
-  padding-left: 6px;
-  font-size: 1.4em;
-  font-weight: lighter;
-}
-.gameDiv .timeRemaining h1:first-child {
-  font-size: 2.0em;
-  padding-left:0;
-  font-weight: lighter;
-}
 
-
-.gameDiv .timeRemaining h1 {
-  margin:0;
-}
 
 .teamNames {
   display: flex;
