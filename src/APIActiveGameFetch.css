@@ -81,7 +81,7 @@
   border-bottom-right-radius: 5px;
 }
 
-.timeRemaining {
+.bannerContainer .timeRemaining {
   width: auto;
   padding: 10px;
   background: #262626;
