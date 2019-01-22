@@ -197,16 +197,6 @@ export class APIActiveGameFetch extends Component {
         {this.state.gameBanner}
         <div className="top">
           <div className="top-left">
-            <div className="teamNames">
-              <div className="homeLogo">
-                <img src={getLogoPath(this.props.homeName)} alt={this.props.homeName}/>
-                {this.state.homePPBadge}
-              </div>
-              <div className="awayLogo">
-                <img src={getLogoPath(this.props.awayName)} alt={this.props.awayName}/>
-                {this.state.awayPPBadge}
-              </div>
-            </div>
             {this.state.timeAndScore}
             {this.state.scoringTable}
           </div>
