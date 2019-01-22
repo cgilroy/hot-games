@@ -155,7 +155,7 @@ div[class*='inprogress'] .timeRemaining {
   color: #262626;
   align-items: center;
   height: 80px;
-  width: 100%
+  width: 100%;
 }
 
 .liveData {
