@@ -100,7 +100,7 @@ export class APIActiveGameFetch extends Component {
             );
 
             let latestPlaysTable = (
-              <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays}/>
+              <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays} gamePk={gameID}/>
             );
 
             let homeBoxData = data.liveData.boxscore.teams.home;
@@ -197,21 +197,21 @@ export class APIActiveGameFetch extends Component {
         {this.state.gameBanner}
         <div className="top">
           <div className="top-left">
-            {this.state.timeAndScore}
+            {this.state.currentPlays}
             {this.state.scoringTable}
           </div>
           <div className="top-right">
-            {this.state.currentPlays}
-          </div>
-        </div>
-        <div className="bottom">
-
-          <div className="bottomData">
             <div className="buttonRow">
               <button className={this.state.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.handleClick('home')}>{this.props.homeName}</button>
               <button className={this.state.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.handleClick('away')}>{this.props.awayName}</button>
             </div>
             <BoxScoreStateless playerData={boxData}/>
+          </div>
+        </div>
+        <div className="bottom">
+
+          <div className="bottomData">
+
           </div>
 
         </div>

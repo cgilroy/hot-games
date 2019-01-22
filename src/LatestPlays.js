@@ -10,7 +10,8 @@ export class LatestPlays extends React.Component {
       playData: [],
       playCount: 0,
       prevLastEventId:'',
-      playsToAdd:''
+      playsToAdd:'',
+      gamePk: props.gamePk
     }
     this.parsePlayData = this.parsePlayData.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -23,24 +24,24 @@ export class LatestPlays extends React.Component {
   superscriptPeriod(period) {
     switch (period) {
       case '1st':
-        return (<p>1<sup>st</sup></p>);
+        return (<span>1<sup>st</sup></span>);
       case '2nd':
-        return (<p>2<sup>nd</sup></p>);
+        return (<span>2<sup>nd</sup></span>);
       case '3rd':
-        return (<p>3<sup>rd</sup></p>);
+        return (<span>3<sup>rd</sup></span>);
       default:
-    return (<p>{period}</p>);
+    return (<span>{period}</span>);
     }
   }
 
-  parsePlayData(plays) {
+  parsePlayData(plays,gameId) {
     let lastPlay = plays[plays.length-1];
     let lastPlayId = lastPlay.about.eventIdx;
-
-    if (lastPlayId > this.state.prevLastEventId) {
-      let playsArrayData = (this.state.prevLastEventId !== '') ? (
-        plays.slice(this.state.prevLastEventId+1,lastPlayId+1)
-      ) : ([lastPlay]);
+    let prevLastEventId = (gameId !== this.state.gamePk) ? ('') : (this.state.prevLastEventId);
+    if (lastPlayId > prevLastEventId) {
+      let playsArrayData = (prevLastEventId !== '') ? (
+        plays.slice(prevLastEventId+1,lastPlayId+1)
+      ) : (plays.slice(-10));
       let playsToAdd = [];
       for (let i = 0, j = playsArrayData.length; i < j; i++) {
         let iterPlay = playsArrayData[i];
@@ -58,14 +59,15 @@ export class LatestPlays extends React.Component {
 
         playsToAdd = [newPlay].concat(playsToAdd);
       }
-      let playData = this.state.playData;
+      let playData = (gameId !== this.state.gamePk) ? ([]) : (this.state.playData);
       playData = playsToAdd.concat(playData);
-      playData = playData.slice(0,15);
+      playData = playData.slice(0,10);
       let playCount = this.state.playCount + playsArrayData.length;
       this.setState({
         playData:playData,
         playCount: playCount,
-        prevLastEventId:lastPlayId
+        prevLastEventId:lastPlayId,
+        gamePk: gameId
       });
     }
 
@@ -78,9 +80,9 @@ export class LatestPlays extends React.Component {
       }
     }
 
-    componentWillReceiveProps() {
-      if (this.props.plays !== undefined && this.props.plays.length !== 0) {
-        this.parsePlayData(this.props.plays);
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.plays !== undefined && nextProps.plays.length !== 0) {
+        this.parsePlayData(nextProps.plays,nextProps.gamePk);
       }
     }
 
@@ -94,7 +96,7 @@ export class LatestPlays extends React.Component {
         </div>
       ];
       newItems = newItems.concat(this.state.playData);
-      newItems = newItems.slice(0,15);
+      newItems = newItems.slice(0,10);
         this.setState({playData:newItems});
     }
 
