@@ -230,7 +230,7 @@ div[class*='inprogress'] .timeRemaining {
   font-size: 0.8em;
   padding-left: 2px;
   display: block;
-  text-align: center;
+  text-align: left;
 }
 
 .liveData .top {
@@ -532,6 +532,7 @@ div[class*='inprogress'] .timeRemaining {
 
 .buttonRow {
   width: 100%;
+  height: 20px;
   display: flex;
 }
 

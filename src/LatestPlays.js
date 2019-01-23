@@ -104,7 +104,7 @@ export class LatestPlays extends React.Component {
   render() {
     let items = this.state.playData;
     return(
-      <SimpleBar style={{height:'288px'}}>
+
         <div className="latestPlays">
           <CSSTransitionGroup
             transitionName="latestPlaysTransitionGroup"
@@ -113,7 +113,7 @@ export class LatestPlays extends React.Component {
             {this.state.playData}
           </CSSTransitionGroup>
         </div>
-      </SimpleBar>
+
     )
   }
 }
