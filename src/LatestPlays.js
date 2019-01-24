@@ -106,12 +106,9 @@ export class LatestPlays extends React.Component {
     return(
 
         <div className="latestPlays">
-          <CSSTransitionGroup
-            transitionName="latestPlaysTransitionGroup"
-            transitionEnterTimeout={0}
-            transitionLeaveTimeout={0}>
+
             {this.state.playData}
-          </CSSTransitionGroup>
+
         </div>
 
     )

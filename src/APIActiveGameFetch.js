@@ -29,17 +29,12 @@ export class APIActiveGameFetch extends Component {
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
-  refreshGame(gameID) {
-    let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gameID + '/feed/live';
-    console.log('apiString',apiString);
-    fetch(apiString)
-      .then(results => {
-        return results.json();
-      }).then(data => {
+  refreshGame(gameData) {
+      let data = gameData;
         // console.log('data.liveData',data.liveData);
-        if ((data.liveData !== undefined)
+        if ((data !== undefined)
           && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
-
+          let gameID = data.gameData.game.pk;
           let timeLeft = "";
           let ordinalPeriod = "";
           let homeTeamOnPP = "";
@@ -135,11 +130,10 @@ export class APIActiveGameFetch extends Component {
           // }
 
       }
-      })
   }
 
   componentDidMount() {
-      this.refreshGame(this.props.gameID);
+      this.refreshGame(this.props.data);
   }
 
   componentWillUpdate(nextProps) {
@@ -147,7 +141,10 @@ export class APIActiveGameFetch extends Component {
     //   // console.log('refreshUpdate');
     //   this.refreshGame();
     // }
-    this.refreshGame(nextProps.gameID);
+    if (nextProps.data !== undefined) {
+      this.refreshGame(nextProps.data);
+    }
+
   }
 
   handleClick(team) {

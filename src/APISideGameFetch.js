@@ -28,12 +28,7 @@ export class APISideGameFetch extends Component {
     // this.buttonClick = this.buttonClick.bind(this);
   }
   refreshGame() {
-    let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + this.props.gameID + '/feed/live';
-    console.log('apiString',apiString);
-    fetch(apiString)
-      .then(results => {
-        return results.json();
-      }).then(data => {
+        let data = this.props.data;
         // console.log('data.liveData',data.liveData);
         if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
 
@@ -149,8 +144,7 @@ export class APISideGameFetch extends Component {
           // }
 
       }
-      })
-  }
+    }
 
   componentDidMount() {
     // console.log('mountGame');

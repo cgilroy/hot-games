@@ -13,98 +13,88 @@ export class APISchedFetch extends Component {
       liveGames: [],
       scheduledGames: [],
       finalGames:[],
-      mainGamePk: ""
+      mainGamePk: "",
+      gamesData:[]
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
 
   refreshData() {
-    let dateTest = '?date=2018-10-18';
+    let dateTest = '?date=2019-01-18';
     // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
-  .then(results => {
-
-    return results.json();
+  .then(schedResults => {
+    return schedResults.json();
   }).then(data => {
     let liveGames = [];
     let scheduledGames = [];
     let finalGames = [];
+    let allGames = [];
+    let allGamesJSON = [];
+    console.log("dateslength",data.dates[0].games.length)
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
-        let iterGame = data.dates[0].games[i];
-        let homeTeam = iterGame.teams.home;
-        let awayTeam = iterGame.teams.away;
-        let gameState = iterGame.status.detailedState;
-        gameState = gameState.toLowerCase().replace(/\s/g, '');
-        let gamePk = iterGame.gamePk;
-        let gameTime = iterGame.gameDate;
+      let iterGame = data.dates[0].games[i];
+      let homeTeam = iterGame.teams.home;
+      let awayTeam = iterGame.teams.away;
+      let gameState = iterGame.status.detailedState;
+      gameState = gameState.toLowerCase().replace(/\s/g, '');
+      let gamePk = iterGame.gamePk;
+      let gameTime = iterGame.gameDate;
+      let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gamePk + '/feed/live';
+      var fetches = [];
+      fetches.push(
+        fetch(apiString)
+        .then(gameResults => {
+          return gameResults.json();
+        }).then(gameData => {
 
-        let sideGameDiv = (
-          <div className={"sideBarGame gameDiv " + gameState} key={gamePk}>
-            <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} sideClick={this.sideBarClick} />
-          </div>
-        )
+          let sideGameDiv = (
+            <div className={"sideBarGame gameDiv " + gameState} key={gamePk}>
+              <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} sideClick={this.sideBarClick} data={gameData} />
+            </div>
+          )
 
-        // let activeGameDiv = (
-        //   <div className={"sideBarGame " + gameState} key={gamePk}>
-        //     <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} toggleHandler={this.updateGridLayout} />
-        //   </div>
-        // )
+          if (gameState.search('progress') !== -1) {
+            liveGames = liveGames.concat(sideGameDiv);
+          } else if ((gameState.search('scheduled') !== -1) || (gameState.search('pre-game') !== -1)) {
+            scheduledGames = scheduledGames.concat(sideGameDiv);
+          } else if (gameState.search('final') !== -1) {
+            finalGames = finalGames.concat(sideGameDiv);
+          }
+          allGames = [liveGames,scheduledGames,finalGames,data];
+          allGamesJSON = allGamesJSON.concat(gameData);
+        })
 
-        // let gameDiv = (
-        //   <div className={"sideBarGame " + gameState} key={gamePk}>
-        //     <div className={"scoreGroup"}>
-        //       <div className={"sideBarScore"}>
-        //         <div className={"teamName"}>{homeTeam.team.name}</div>
-        //         <div className={"teamScore"}>
-        //           {gameState.includes("progress") ? homeTeam.score : ""}
-        //         </div>
-        //         <div className={"timeRemaining"}>
-        //           {gameState.includes("progress") ? gameTime :
-        //         </div>
-        //       </div>
-        //       <div className={"sideBarScore"}>
-        //         <div className={"teamName"}>{awayTeam.team.name}</div>
-        //         <div className={"teamScore"}>
-        //           {gameState.includes("progress") ? awayTeam.score : ""}
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // )
+      )
+    };
 
-        if (gameState.search('progress') !== -1) {
-          liveGames = liveGames.concat(sideGameDiv);
-        } else if ((gameState.search('scheduled') !== -1) || (gameState.search('pre-game') !== -1)) {
-          scheduledGames = scheduledGames.concat(sideGameDiv);
-        } else if (gameState.search('final') !== -1) {
-          finalGames = finalGames.concat(sideGameDiv);
-        }
-
-      }
-
+    Promise.all(fetches).then(() => {
+      console.log("allGames",allGames[2]);
+      // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
-        let firstGamePk = data.dates[0].games[0].gamePk;
-        this.setState({liveGames: liveGames,scheduledGames:scheduledGames,finalGames:finalGames,mainGamePk:firstGamePk});
+        let firstGamePk = allGames[3].dates[0].games[0].gamePk;
+        this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],mainGamePk:firstGamePk,gamesData:allGamesJSON});
       } else {
-        this.setState({liveGames: liveGames,scheduledGames:scheduledGames,finalGames:finalGames});
+        this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],gamesData:allGamesJSON});
       }
+    })
+     .catch(err => {return console.log(err);});
 
     })
 
-
-}
+  }
 
 
   componentDidMount() {
 
   this.refreshData();
 
-  this._interval = window.setInterval(this.refreshData,5000);
+  // this._interval = window.setInterval(this.refreshData,5000);
 }
 
 componentWillUnMount() {
-  this._interval && window.clearInterval(this._interval);
+  // this._interval && window.clearInterval(this._interval);
 }
 
 sideBarClick(gameFID) {
@@ -117,6 +107,13 @@ sideBarClick(gameFID) {
   render() {
     let test = new Date().toString();
     let activeGameVar = this.state.mainGamePk;
+    let a= this.state.liveGames;
+    let b= this.state.scheduledGames;
+    let c = this.state.finalGames;
+    let tg = this.state.gamesData;
+    let activeGameData = tg.find(obj => {
+      return obj.gamePk == activeGameVar
+    });
     return (
 
       <div className="totalViewContainer">
@@ -135,7 +132,7 @@ sideBarClick(gameFID) {
             </div>
         </div>
         <div className="mainGameArea">
-          <APIActiveGameFetch gameID={activeGameVar} />
+          <APIActiveGameFetch gameID={activeGameVar} data={activeGameData} />
         </div>
       </div>
     )
