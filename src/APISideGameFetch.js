@@ -201,11 +201,13 @@ export class APISideGameFetch extends Component {
       let homePPBadge = this.state.homePPBadge;
     }
 
+    let activeClass = (this.props.activeID === gameID) ? 'active' : '';
+
     let expandedChar = (this.state.expanded) ? (<FontAwesomeIcon icon="chevron-up"/>) : <FontAwesomeIcon icon='chevron-down'/>;
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
-      <div className={"sideBarGame gameDiv " + gameState} key={gameID} onClick={this.wasClicked}>
+      <div className={"sideBarGame gameDiv " + gameState + ' ' + activeClass} key={gameID} onClick={this.wasClicked}>
         {this.state.currentTeamsAndScore}
         {this.state.timeRemaining}
       </div>

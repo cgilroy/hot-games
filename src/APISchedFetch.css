@@ -44,6 +44,10 @@
   min-height: 0;
 }
 
+.sideBarGame.active {
+  background: #e6f2fa;
+}
+
 .sideBarGame .teamInfo {
   display: flex;
   width: 80px;
