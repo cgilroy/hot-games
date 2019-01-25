@@ -32,6 +32,7 @@ export class APISchedFetch extends Component {
     let finalGames = [];
     let allGames = [];
     let allGamesJSON = [];
+    var fetches = [];
     console.log("dateslength",data.dates[0].games.length)
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
       let iterGame = data.dates[0].games[i];
@@ -42,7 +43,7 @@ export class APISchedFetch extends Component {
       let gamePk = iterGame.gamePk;
       let gameTime = iterGame.gameDate;
       let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gamePk + '/feed/live';
-      var fetches = [];
+
       fetches.push(
         fetch(apiString)
         .then(gameResults => {
