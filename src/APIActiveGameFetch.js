@@ -194,7 +194,7 @@ export class APIActiveGameFetch extends Component {
         {this.state.gameBanner}
         <div className="top">
           <div className="top-left">
-            <div class="section-title">
+            <div className="section-title">
               <h1>Last 10 Plays</h1>
             </div>
             {this.state.currentPlays}

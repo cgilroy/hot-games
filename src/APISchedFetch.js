@@ -116,17 +116,17 @@ sideBarClick(gameFID) {
             <div className="gamesScroll">
               <div className="gamesContainer live">
                 {
-                  this.state.liveGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.liveGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
               <div className="gamesContainer sched">
                 {
-                  this.state.scheduledGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.scheduledGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
               <div className="gamesContainer final">
                 {
-                  this.state.finalGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.finalGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
             </div>
