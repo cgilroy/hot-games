@@ -74,7 +74,7 @@
   margin-left: auto;
 }
 
-.sideBarGame>div {
+.sideBarGame {
   display: flex;
   justify-content: space-between;
   /* align-items: flex-end; */

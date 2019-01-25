@@ -31,12 +31,16 @@ export class APISideGameFetch extends Component {
         let data = this.props.data;
         // console.log('data.liveData',data.liveData);
         if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
-
+          let gameState = data.gameData.status.detailedState;
+          gameState = gameState.toLowerCase().replace(/\s/g, '');
+          let gameTime = data.gameData.dateTime;
+          let homeName = data.gameData.teams.home.name;
+          let awayName = data.gameData.teams.away.name;
           //timeLeft = isNaN(timeLeft.charAt(0)) ? timeLeft : timeLeft.replace(/^0/,'');
           let ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
           let homeScore = "";
           let awayScore = "";
-          if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
+          if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
           }
@@ -47,40 +51,26 @@ export class APISideGameFetch extends Component {
           let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
           let homeTriCode = data.gameData.teams.home.triCode;
           let awayTriCode = data.gameData.teams.away.triCode;
-          // if (currentTimeStamp !== this.state.timeStamp) {
-            // console.log('firstRefreshIn')
-            // let timeAndScore = (
-            //   <div className="timeAndScore">
-            //     <h2>{homeScore}</h2>
-            //     <div className="timeRemaining">
-            //       <h1>{timeLeft}</h1>
-            //       { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
-            //         <h1>{ordinalPeriod}</h1>
-            //       }
-            //     </div>
-            //     <h2>{awayScore}</h2>
-            //   </div>
-            // );
 
             let timeRemaining = [];
-            if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
+            if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
               let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
               timeLeft = timeLeft.replace(/^0/,'');
               timeRemaining = (
                   <div className="timeRemaining">
                     <h1>{timeLeft}</h1>
-                    { ((this.props.gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
+                    { ((gameState === 'inprogress') || (gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && gameState === 'final')) &&
                       <h1>{ordinalPeriod}</h1>
                     }
                   </div>
               );
             }else{
-              let msec = Date.parse('this.props.gameTime');
+              let msec = Date.parse('gameTime');
               let gameTime = new Date(msec);
 
               timeRemaining = (
                   <div className="timeRemaining">
-                    <h1><Moment format="h:mm A">{this.props.gameTime}</Moment></h1>
+                    <h1><Moment format="h:mm A">{gameTime}</Moment></h1>
                   </div>
               );
             }
@@ -90,12 +80,6 @@ export class APISideGameFetch extends Component {
             let latestPlaysTable = (
               <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays}/>
             );
-
-            // if this.props.gameState = 'Final' {
-            //   let postGameSection = (
-            //     <PostGameSection data={data.liveData} />
-            //   )
-            // }
 
             let homePPLogoBadge = homeTeamOnPP ? (
               <div className="logoPPBadge">
@@ -113,7 +97,7 @@ export class APISideGameFetch extends Component {
               <div className={"teamsAndScore"}>
                 <div className={"teamInfo"}>
                   <div className="homeLogo">
-                    <img src={getLogoPath(this.props.homeName)} alt={this.props.homeName}/>
+                    <img src={getLogoPath(homeName)} alt={homeName}/>
                     {homePPLogoBadge}
                   </div>
                   <h2>{homeTriCode}</h2>
@@ -121,7 +105,7 @@ export class APISideGameFetch extends Component {
                 </div>
                 <div className="teamInfo">
                   <div className="awayLogo">
-                    <img src={getLogoPath(this.props.awayName)} alt={this.props.awayName}/>
+                    <img src={getLogoPath(awayName)} alt={awayName}/>
                     {awayPPLogoBadge}
                   </div>
                   <h2>{awayTriCode}</h2>
@@ -148,7 +132,9 @@ export class APISideGameFetch extends Component {
 
   componentDidMount() {
     // console.log('mountGame');
-      if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
+      let gameState = this.props.data.gameData.status.detailedState;
+      gameState = gameState.toLowerCase().replace(/\s/g, '');
+      if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
         console.log('firstRefresh');
         this.refreshGame();
       }else {
@@ -161,7 +147,9 @@ export class APISideGameFetch extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if ((nextProps.gameState === "inprogress-critical") || (nextProps.gameState === "inprogress")) {
+    let gameState = nextProps.data.gameData.status.detailedState;
+    gameState = gameState.toLowerCase().replace(/\s/g, '');
+    if ((gameState === "inprogress-critical") || (gameState === "inprogress")) {
       // console.log('refreshUpdate');
       this.refreshGame();
     }
@@ -190,10 +178,13 @@ export class APISideGameFetch extends Component {
   }
 
   wasClicked() {
-    this.props.sideClick(this.props.gameID);
+    this.props.sideClick(this.props.data.gameData.game.pk);
   }
 
   render() {
+    let gameState = this.props.data.gameData.status.detailedState;
+    gameState = gameState.toLowerCase().replace(/\s/g, '');
+    let gameID = this.props.data.gameData.game.pk;
     console.log('renderGame');
     let boxData = (this.state.activeBoxTeam === 'home') ? (
       this.state.homeBoxData
@@ -205,7 +196,7 @@ export class APISideGameFetch extends Component {
 
     let awayPPBadge = '';
     let homePPBadge = '';
-    if (this.props.gameState !== 'final') {
+    if (gameState !== 'final') {
       let awayPPBadge = this.state.awayPPBadge;
       let homePPBadge = this.state.homePPBadge;
     }
@@ -214,7 +205,7 @@ export class APISideGameFetch extends Component {
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
-      <div onClick={this.wasClicked}>
+      <div className={"sideBarGame gameDiv " + gameState} key={gameID} onClick={this.wasClicked}>
         {this.state.currentTeamsAndScore}
         {this.state.timeRemaining}
       </div>

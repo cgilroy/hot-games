@@ -43,25 +43,18 @@ export class APISchedFetch extends Component {
       let gamePk = iterGame.gamePk;
       let gameTime = iterGame.gameDate;
       let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gamePk + '/feed/live';
-
       fetches.push(
         fetch(apiString)
         .then(gameResults => {
           return gameResults.json();
         }).then(gameData => {
 
-          let sideGameDiv = (
-            <div className={"sideBarGame gameDiv " + gameState} key={gamePk}>
-              <APISideGameFetch gameTime={gameTime} gameID={gamePk} gameState={gameState} homeName={homeTeam.team.name} awayName={awayTeam.team.name} sideClick={this.sideBarClick} data={gameData} />
-            </div>
-          )
-
           if (gameState.search('progress') !== -1) {
-            liveGames = liveGames.concat(sideGameDiv);
+            liveGames = liveGames.concat(gameData);
           } else if ((gameState.search('scheduled') !== -1) || (gameState.search('pre-game') !== -1)) {
-            scheduledGames = scheduledGames.concat(sideGameDiv);
+            scheduledGames = scheduledGames.concat(gameData);
           } else if (gameState.search('final') !== -1) {
-            finalGames = finalGames.concat(sideGameDiv);
+            finalGames = finalGames.concat(gameData);
           }
           allGames = [liveGames,scheduledGames,finalGames,data];
           allGamesJSON = allGamesJSON.concat(gameData);
@@ -122,13 +115,19 @@ sideBarClick(gameFID) {
             <img src={'/resources/hockey-night-live-logo.jpg'}/>
             <div className="gamesScroll">
               <div className="gamesContainer live">
-                  {this.state.liveGames}
+                {
+                  this.state.liveGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} />)
+                }
               </div>
               <div className="gamesContainer sched">
-                  {this.state.scheduledGames}
+                {
+                  this.state.scheduledGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} />)
+                }
               </div>
               <div className="gamesContainer final">
-                  {this.state.finalGames}
+                {
+                  this.state.finalGames.map((game) => <APISideGameFetch sideClick={this.sideBarClick} data={game} />)
+                }
               </div>
             </div>
         </div>
