@@ -33,7 +33,7 @@ export class APISideGameFetch extends Component {
         if ((data.liveData !== undefined) && (data.metaData.timeStamp !== this.state.timeStamp)) {
           let gameState = data.gameData.status.detailedState;
           gameState = gameState.toLowerCase().replace(/\s/g, '');
-          let gameTime = data.gameData.dateTime;
+          let gameTime = data.gameData.datetime.dateTime;
           let homeName = data.gameData.teams.home.name;
           let awayName = data.gameData.teams.away.name;
           //timeLeft = isNaN(timeLeft.charAt(0)) ? timeLeft : timeLeft.replace(/^0/,'');
@@ -65,8 +65,8 @@ export class APISideGameFetch extends Component {
                   </div>
               );
             }else{
-              let msec = Date.parse('gameTime');
-              let gameTime = new Date(msec);
+              // let msec = Date.parse(gameTime);
+              // let gameTime = new Date(msec);
 
               timeRemaining = (
                   <div className="timeRemaining">

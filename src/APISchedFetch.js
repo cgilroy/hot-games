@@ -21,7 +21,7 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    let dateTest = '?date=2019-01-18';
+    let dateTest = '?date=2019-02-02';
     // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -65,6 +65,10 @@ export class APISchedFetch extends Component {
 
     Promise.all(fetches).then(() => {
       console.log("allGames",allGames[2]);
+      sortByKey(liveGames,'gamePk');
+      sortByKey(scheduledGames,'gamePk');
+      sortByKey(finalGames,'gamePk');
+      sortByKey(allGamesJSON,'gamePk');
       // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
@@ -138,4 +142,11 @@ sideBarClick(gameFID) {
     )
   }
 
+}
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
 }
