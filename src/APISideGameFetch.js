@@ -49,8 +49,8 @@ export class APISideGameFetch extends Component {
           let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
           let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
           let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
-          let homeTriCode = data.gameData.teams.home.triCode;
-          let awayTriCode = data.gameData.teams.away.triCode;
+          let homeTriCode = data.gameData.teams.home.abbreviation;
+          let awayTriCode = data.gameData.teams.away.abbreviation;
 
             let timeRemaining = [];
             if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
