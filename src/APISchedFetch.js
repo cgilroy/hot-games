@@ -4,7 +4,9 @@ import {APIActiveGameFetch} from './APIActiveGameFetch.js';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import StackGrid from 'react-stack-grid';
-import './APISchedFetch.css'
+import './APISchedFetch.css';
+import { BounceLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 
 export class APISchedFetch extends Component {
   constructor() {
@@ -14,14 +16,15 @@ export class APISchedFetch extends Component {
       scheduledGames: [],
       finalGames:[],
       mainGamePk: "",
-      gamesData:[]
+      gamesData:[],
+      loading:true
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
 
   refreshData() {
-    let dateTest = '?date=2019-02-02';
+    let dateTest = '?date=2019-01-08';
     // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -72,9 +75,9 @@ export class APISchedFetch extends Component {
       // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
-        this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],mainGamePk:firstGamePk,gamesData:allGamesJSON});
+        this.setState({loading:false,liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],mainGamePk:firstGamePk,gamesData:allGamesJSON});
       } else {
-        this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],gamesData:allGamesJSON});
+        this.setState({loading:false,liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],gamesData:allGamesJSON});
       }
     })
      .catch(err => {return console.log(err);});
@@ -112,12 +115,23 @@ sideBarClick(gameFID) {
     let activeGameData = tg.find(obj => {
       return obj.gamePk == activeGameVar
     });
+    let mainGameArea = (this.state.loading) ? (
+      <BounceLoader
+        sizeUnit={"px"}
+        size={50}
+        color={'#262626'}
+        loading={this.state.loading}
+      />
+    ) : (
+      <APIActiveGameFetch gameID={activeGameVar} data={activeGameData} />
+    )
     return (
 
       <div className="totalViewContainer">
         <div className="gamesSideBar">
-            <img src={'/resources/hockey-night-live-logo.jpg'}/>
+            <img src={'/resources/hockey-night-live-logo.png'}/>
             <div className="gamesScroll">
+              <h3>Today's Games</h3>
               <div className="gamesContainer live">
                 {
                   this.state.liveGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
@@ -135,8 +149,8 @@ sideBarClick(gameFID) {
               </div>
             </div>
         </div>
-        <div className="mainGameArea">
-          <APIActiveGameFetch gameID={activeGameVar} data={activeGameData} />
+        <div className={"mainGameArea " + (this.state.loading ? 'loading' : '')}>
+          { mainGameArea }
         </div>
       </div>
     )
