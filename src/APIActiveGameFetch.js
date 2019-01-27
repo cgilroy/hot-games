@@ -225,119 +225,154 @@ export class APIActiveGameFetch extends Component {
 
 function MainGameBanner(props) {
   console.log(props);
+  let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
+  let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
   return (
     <div className="bannerContainer">
-      <div className="bannerGroup home">
-        <img src={getLogoPath(props.homeCityName+" "+props.homeTeamName)} />
+      <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
+        <img src={homeTeamResources.imagePath} />
         <h1>{props.homeTeamName}</h1>
       </div>
       {props.timeAndScore}
-      <div className="bannerGroup away">
+      <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
         <h1>{props.awayTeamName}</h1>
-        <img src={getLogoPath(props.awayCityName+" "+props.awayTeamName)} />
+        <img src={awayTeamResources.imagePath} />
       </div>
     </div>
   )
 }
 
-function getLogoPath(teamName) {
+function getTeamResources(teamName) {
   var imagePath: string;
+  var primaryColor: string;
   switch (teamName) {
     case 'Anaheim Ducks':
       imagePath = '/resources/NHL-Icons-ANA.jpg';
+      primaryColor = '#B09862';
+      break;
+    case 'Arizona Coyotes':
+    imagePath = '/resources/NHL-Icons-PHO.jpg';
+    primaryColor = '#8C2633';
       break;
     case 'Boston Bruins':
       imagePath = '/resources/NHL-Icons-BOS.jpg';
+      primaryColor = '#FFB81C';
       break;
     case 'Buffalo Sabres':
       imagePath = '/resources/NHL-Icons-BUF.jpg';
+      primaryColor = '#002654';
       break;
     case 'Calgary Flames':
       imagePath = '/resources/NHL-Icons-CAL.jpg';
+      primaryColor = '#C8102E';
       break;
     case 'Carolina Hurricanes':
     imagePath = '/resources/NHL-Icons-CAR.jpg';
+    primaryColor = '#CC0000';
     break;
     case 'Chicago Blackhawks':
     imagePath = '/resources/NHL-Icons-CHI.jpg';
+    primaryColor = '#CF0A2C';
     break;
     case 'Colorado Avalanche':
     imagePath = '/resources/NHL-Icons-COL.jpg';
+    primaryColor = '#6F263D';
     break;
     case 'Columbus Blue Jackets':
     imagePath = '/resources/NHL-Icons-COL1.jpg';
+    primaryColor = '#002654';
     break;
     case 'Dallas Stars':
     imagePath = '/resources/NHL-Icons-DAL.jpg';
+    primaryColor = '#006847';
     break;
     case 'Detroit Red Wings':
     imagePath = '/resources/NHL-Icons-DET.jpg';
+    primaryColor = '#CE1126';
     break;
     case 'Edmonton Oilers':
     imagePath = '/resources/NHL-Icons-EDM.jpg';
+    primaryColor = '#041E42';
     break;
     case 'Florida Panthers':
       imagePath = '/resources/NHL-Icons-FLO.jpg';
+      primaryColor = '#041E42';
       break;
     case 'Los Angeles Kings':
     imagePath = '/resources/NHL-Icons-LAK.jpg';
+    primaryColor = '#111111';
     break;
     case 'Minnesota Wild':
     imagePath = '/resources/NHL-Icons-MIN.jpg';
+    primaryColor = '#154734';
     break;
     case 'Montréal Canadiens':
     imagePath = '/resources/NHL-Icons-MTL.jpg';
+    primaryColor = '#AF1E2D';
     break;
     case 'Nashville Predators':
     imagePath = '/resources/NHL-Icons-NAS.jpg';
+    primaryColor = '#FFB81C';
     break;
     case 'New Jersey Devils':
     imagePath = '/resources/NHL-Icons-NJD.jpg';
+    primaryColor = '#CE1126';
     break;
     case 'New York Islanders':
       imagePath = '/resources/NHL-Icons-NYI.jpg';
+      primaryColor = '#00539B';
       break;
     case 'New York Rangers':
       imagePath = '/resources/NHL-Icons-NYR.jpg';
+      primaryColor = '#0038A8';
       break;
     case 'Ottawa Senators':
     imagePath = '/resources/NHL-Icons-OTT.jpg';
+    primaryColor = '#E31837';
     break;
     case 'Philadelphia Flyers':
     imagePath = '/resources/NHL-Icons-PHI.jpg';
-    break;
-    case 'Arizona Coyotes':
-    imagePath = '/resources/NHL-Icons-PHO.jpg';
+    primaryColor = '#F74902';
     break;
     case 'Pittsburgh Penguins':
     imagePath = '/resources/NHL-Icons-PIT.jpg';
+    primaryColor = '#FCB514';
     break;
     case 'San Jose Sharks':
     imagePath = '/resources/NHL-Icons-SJ.jpg';
+    primaryColor = '#006D75';
     break;
     case 'St. Louis Blues':
       imagePath = '/resources/NHL-Icons-SL.jpg';
+      primaryColor = '#002F87';
       break;
     case 'Tampa Bay Lightning':
     imagePath = '/resources/NHL-Icons-TAM.jpg';
+    primaryColor = '#002868';
     break;
     case 'Toronto Maple Leafs':
       imagePath = '/resources/NHL-Icons-TOR.jpg';
+      primaryColor = '#003E7E';
       break;
     case 'Vancouver Canucks':
     imagePath = '/resources/NHL-Icons-VAN.jpg';
+    primaryColor = '#001F5B';
     break;
     case 'Vegas Golden Knights':
     imagePath = '/resources/NHL-Icons-VGS.jpg';
+    primaryColor = '#B4975A';
     break;
     case 'Winnipeg Jets':
     imagePath = '/resources/NHL-Icons-WIN.jpg';
+    primaryColor = '#041E42';
     break;
     case 'Washington Capitals':
       imagePath = '/resources/NHL-Icons-WAS.jpg';
-      break;
+      primaryColor = '#C8102E';
+    break;
     default:
+      primaryColor: '#ff0000';
 
   }
-  return imagePath;
+  return {imagePath,primaryColor}
 }
