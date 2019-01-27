@@ -59,7 +59,7 @@ export class APISideGameFetch extends Component {
               timeRemaining = (
                   <div className="timeRemaining">
                     <h1>{timeLeft}</h1>
-                    { ((gameState === 'inprogress') || (gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && gameState === 'final')) &&
+                    { ((gameState === 'inprogress') || (gameState === 'inprogress-critical') || ((ordinalPeriod === 'OT' || ordinalPeriod === 'SO') && gameState === 'final')) &&
                       <h1>{ordinalPeriod}</h1>
                     }
                   </div>

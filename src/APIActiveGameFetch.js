@@ -70,7 +70,7 @@ export class APIActiveGameFetch extends Component {
                 <h2>{homeScore}</h2>
                 <div className="timeRemaining">
                   <h1>{timeLeft}</h1>
-                  { ((gameState === 'inprogress') || (this.props.gameState === 'inprogress-critical') || (ordinalPeriod === 'OT' && this.props.gameState === 'final')) &&
+                  { ((gameState === 'inprogress') || (gameState === 'inprogress-critical') || ((ordinalPeriod === 'OT' || ordinalPeriod === 'SO') && gameState === 'final')) &&
                     <h1>{ordinalPeriod}</h1>
                   }
                 </div>
