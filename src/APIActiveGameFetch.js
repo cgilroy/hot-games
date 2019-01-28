@@ -23,7 +23,8 @@ export class APIActiveGameFetch extends Component {
       activeBoxTeam:'home',
       expanded: false,
       gameBanner:[],
-      currentGameID:""
+      currentGameID:"",
+      gameState:""
     }
     this.refreshGame = this.refreshGame.bind(this);
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
@@ -124,7 +125,8 @@ export class APIActiveGameFetch extends Component {
               homePPBadge: homePPLogoBadge,
               awayPPBadge: awayPPLogoBadge,
               gameBanner: gameBanner,
-              currentGameID: this.props.gameID
+              currentGameID: gameID,
+              gameState: gameState
               // activeBoxScore: activeBoxScore
             })
           // }
@@ -177,11 +179,16 @@ export class APIActiveGameFetch extends Component {
       this.state.awayBoxData
     );
 
+    let homeTeamName = this.props.data.gameData.teams.home.teamName;
+    let homeCityName = this.props.data.gameData.teams.home.locationName;
+    let awayTeamName = this.props.data.gameData.teams.away.teamName;
+    let awayCityName = this.props.data.gameData.teams.away.locationName;
+
     // let divHeight = (this.state.expanded) ? {height:'auto'} : {height:'auto'};
 
     let awayPPBadge = '';
     let homePPBadge = '';
-    if (this.props.gameState !== 'final') {
+    if (this.state.gameState !== 'final') {
       let awayPPBadge = this.state.awayPPBadge;
       let homePPBadge = this.state.homePPBadge;
     }
@@ -202,8 +209,8 @@ export class APIActiveGameFetch extends Component {
           </div>
           <div className="top-right">
             <div className="buttonRow">
-              <button className={this.state.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.handleClick('home')}>{this.props.homeName}</button>
-              <button className={this.state.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.handleClick('away')}>{this.props.awayName}</button>
+              <button className={this.state.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.handleClick('home')}>{homeTeamName}</button>
+              <button className={this.state.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.handleClick('away')}>{awayTeamName}</button>
             </div>
             <BoxScoreStateless playerData={boxData}/>
           </div>
