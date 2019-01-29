@@ -5,7 +5,7 @@ import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export class APISideGameFetch extends Component {
+export class SideBarGame extends Component {
 
   constructor(props) {
     super(props);

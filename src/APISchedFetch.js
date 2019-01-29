@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {APISideGameFetch} from './APISideGameFetch.js';
-import {APIActiveGameFetch} from './APIActiveGameFetch.js';
+import {SideBarGame} from './SideBarGame.js';
+import {ActiveGameArea} from './ActiveGameArea.js';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import StackGrid from 'react-stack-grid';
@@ -123,7 +123,7 @@ sideBarClick(gameFID) {
         loading={this.state.loading}
       />
     ) : (
-      <APIActiveGameFetch gameID={activeGameVar} data={activeGameData} />
+      <ActiveGameArea gameID={activeGameVar} data={activeGameData} />
     )
     return (
 
@@ -134,17 +134,17 @@ sideBarClick(gameFID) {
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
                 {
-                  this.state.liveGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.liveGames.map((game) => <SideBarGame key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
               <div className="gamesContainer sched">
                 {
-                  this.state.scheduledGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.scheduledGames.map((game) => <SideBarGame key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
               <div className="gamesContainer final">
                 {
-                  this.state.finalGames.map((game) => <APISideGameFetch key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
+                  this.state.finalGames.map((game) => <SideBarGame key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
             </div>

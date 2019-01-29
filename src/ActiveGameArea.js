@@ -4,9 +4,9 @@ import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './APIActiveGameFetch.css';
+import './ActiveGameArea.css';
 
-export class APIActiveGameFetch extends Component {
+export class ActiveGameArea extends Component {
 
   constructor(props) {
     super(props);
