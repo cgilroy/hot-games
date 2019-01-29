@@ -74,7 +74,7 @@
 
 .sideBarGame .teamInfo {
   display: flex;
-  width: 80px;
+  width: 120px;
   align-items: center;
   padding: 2px;
 }
@@ -83,6 +83,7 @@
   font-size: 0.9em;
   width: auto;
   margin: 0;
+  font-weight: normal;
 }
 
 .sideBarGame .timeRemaining {

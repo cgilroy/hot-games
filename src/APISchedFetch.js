@@ -24,8 +24,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    let dateTest = '?date=2019-01-08';
-    // let dateTest = '';
+    // let dateTest = '?date=2019-01-16';
+    let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
@@ -91,11 +91,11 @@ export class APISchedFetch extends Component {
 
   this.refreshData();
 
-  // this._interval = window.setInterval(this.refreshData,5000);
+  this._interval = window.setInterval(this.refreshData,5000);
 }
 
 componentWillUnMount() {
-  // this._interval && window.clearInterval(this._interval);
+  this._interval && window.clearInterval(this._interval);
 }
 
 sideBarClick(gameFID) {

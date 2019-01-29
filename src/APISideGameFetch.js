@@ -83,13 +83,13 @@ export class APISideGameFetch extends Component {
 
             let homePPLogoBadge = homeTeamOnPP ? (
               <div className="logoPPBadge">
-                <h4>{powerPlayStrength}</h4>
+                <span>PP</span>
               </div>
             ) : ('');
 
             let awayPPLogoBadge = awayTeamOnPP ? (
               <div className="logoPPBadge">
-                <h4>{powerPlayStrength}</h4>
+                <span>PP</span>
               </div>
             ) : ('');
 
@@ -98,17 +98,17 @@ export class APISideGameFetch extends Component {
                 <div className={"teamInfo"}>
                   <div className="homeLogo">
                     <img src={getLogoPath(homeName)} alt={homeName}/>
-                    {homePPLogoBadge}
                   </div>
                   <h2>{homeTriCode}</h2>
+                  {homePPLogoBadge}
                   <h2>{homeScore}</h2>
                 </div>
                 <div className="teamInfo">
                   <div className="awayLogo">
                     <img src={getLogoPath(awayName)} alt={awayName}/>
-                    {awayPPLogoBadge}
                   </div>
                   <h2>{awayTriCode}</h2>
+                  {awayPPLogoBadge}
                   <h2>{awayScore}</h2>
                 </div>
               </div>

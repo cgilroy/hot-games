@@ -237,13 +237,13 @@ function MainGameBanner(props) {
   return (
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
-        <img src={homeTeamResources.imagePath} />
         <h1>{props.homeTeamName}</h1>
+        <img src={homeTeamResources.imagePath} />
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
-        <h1>{props.awayTeamName}</h1>
         <img src={awayTeamResources.imagePath} />
+        <h1>{props.awayTeamName}</h1>
       </div>
     </div>
   )

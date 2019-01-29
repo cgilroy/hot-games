@@ -202,7 +202,6 @@ export class BoxScoreStateless extends React.Component {
     }];
     return(
       <div className="boxScore">
-        <SimpleBar style={{height:'240px'}}>
           <ReactTable
             data={forwardArray}
             columns={forwardColumns}
@@ -230,7 +229,6 @@ export class BoxScoreStateless extends React.Component {
             minRows={0}
             showPaginationBottom={false}
           />
-        </SimpleBar>
       </div>
     )
   }
