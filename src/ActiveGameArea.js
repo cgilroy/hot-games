@@ -36,6 +36,7 @@ export class ActiveGameArea extends Component {
         if ((data !== undefined)
           && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
           let gameID = data.gameData.game.pk;
+          let gameTime = data.gameData.datetime.dateTime;
           let timeLeft = "";
           let ordinalPeriod = "";
           let homeTeamOnPP = "";
@@ -54,7 +55,9 @@ export class ActiveGameArea extends Component {
             powerPlayStrength = data.liveData.linescore.powerPlayStrength;
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
-          };
+          } else if (gameState.search('scheduled') !== -1) {
+            timeLeft = <Moment format="h:mm A">{gameTime}</Moment>
+          }
           let currentTimeStamp = data.metaData.timeStamp;
           let homeTeamName = data.gameData.teams.home.teamName;
           let homeCityName = data.gameData.teams.home.locationName;
