@@ -246,8 +246,10 @@ function TimeAndScore(props) {
       <div className="timeAndScore scheduled">
         <div className="timeRemaining">
           <h1><Moment format="dddd, MMM D, h:mm A">{props.gameDate}</Moment></h1>
-          <span>{props.venue.name}</span>
-          <span>{props.venue.city}</span>
+          <div className="venue">
+            <span>{props.venue.name}</span>
+            <span>{props.venue.city}</span>
+          </div>
         </div>
       </div>
     )

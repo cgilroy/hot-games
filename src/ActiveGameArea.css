@@ -68,8 +68,9 @@
   align-items: center;
   height: 100%;
   display: flex;
-  min-width: 200px;
+  /* min-width: 200px; */
   background: black;
+  flex: 0 0 200px;
 }
 
 .timeAndScore h2 {
@@ -81,7 +82,7 @@
   line-height: 100px;
   height: 100%;
   font-size: 2.5em;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .timeAndScore h2:first-child {
@@ -95,12 +96,12 @@
 }
 
 .bannerContainer .timeRemaining {
-  min-width: 100px;
+  /* min-width: 100px; */
   width: 100%;
   justify-content: center;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   /* border: 2px solid white; */
   box-sizing: border-box;
@@ -133,9 +134,19 @@ font-size: 14px;
 border-bottom: 1px solid #333;
 padding: 8px 4px 4px 4px;
 width: 100%;
+box-sizing: border-box;
+}
+
+.timeAndScore.scheduled .venue {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .timeAndScore.scheduled span {
   width: 100%;
   color: #757575;
+  font-size:11px;
 }
