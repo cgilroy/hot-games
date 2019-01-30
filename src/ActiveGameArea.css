@@ -68,7 +68,8 @@
   align-items: center;
   height: 100%;
   display: flex;
-  width: 310px;
+  min-width: 200px;
+  background: black;
 }
 
 .timeAndScore h2 {
@@ -76,35 +77,35 @@
   background: #262626;
   font-family: 'digital-font';
   font-weight: lighter;
-  padding: 3px 0;
-  line-height: 100%;
+  /* padding: 3px 0; */
+  line-height: 100px;
+  height: 100%;
   font-size: 2.5em;
-  width: 50px;
+  width: 100%;
 }
 
 .timeAndScore h2:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  /* border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; */
 }
 
 .timeAndScore h2:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  /* border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px; */
 }
 
 .bannerContainer .timeRemaining {
-  width: auto;
-  padding: 10px;
-  background: #262626;
-  border-radius: 10px;
+  min-width: 100px;
+  width: 100%;
   justify-content: center;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  border: 2px solid white;
+  /* border: 2px solid white; */
+  box-sizing: border-box;
   color: white;
-  height: 40px;
+  height: 100%;
 }
 
 div[class*='inprogress'] .timeRemaining {
@@ -125,4 +126,16 @@ div[class*='inprogress'] .timeRemaining {
 
 .timeRemaining h1 {
   margin:0;
+}
+
+.timeAndScore.scheduled h1 {
+font-size: 14px;
+border-bottom: 1px solid #333;
+padding: 8px 4px 4px 4px;
+width: 100%;
+}
+
+.timeAndScore.scheduled span {
+  width: 100%;
+  color: #757575;
 }

@@ -36,7 +36,7 @@ export class ActiveGameArea extends Component {
         if ((data !== undefined)
           && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
           let gameID = data.gameData.game.pk;
-          let gameTime = data.gameData.datetime.dateTime;
+          let gameDate = data.gameData.datetime.dateTime;
           let timeLeft = "";
           let ordinalPeriod = "";
           let homeTeamOnPP = "";
@@ -55,14 +55,18 @@ export class ActiveGameArea extends Component {
             powerPlayStrength = data.liveData.linescore.powerPlayStrength;
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
-          } else if (gameState.search('scheduled') !== -1) {
-            timeLeft = <Moment format="h:mm A">{gameTime}</Moment>
           }
           let currentTimeStamp = data.metaData.timeStamp;
           let homeTeamName = data.gameData.teams.home.teamName;
           let homeCityName = data.gameData.teams.home.locationName;
           let awayTeamName = data.gameData.teams.away.teamName;
           let awayCityName = data.gameData.teams.away.locationName;
+          let homeResources = getTeamResources(data.gameData.teams.home.name);
+          let awayResources = getTeamResources(data.gameData.teams.away.name);
+          let venue = {
+            name: data.gameData.teams.home.venue.name,
+            city: data.gameData.teams.home.venue.city
+          }
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
             // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
@@ -70,16 +74,18 @@ export class ActiveGameArea extends Component {
             // }
 
             let timeAndScore = (
-              <div className="timeAndScore">
-                <h2>{homeScore}</h2>
-                <div className="timeRemaining">
-                  <h1>{timeLeft}</h1>
-                  { ((gameState === 'inprogress') || (gameState === 'inprogress-critical') || ((ordinalPeriod === 'OT' || ordinalPeriod === 'SO') && gameState === 'final')) &&
-                    <h1>{ordinalPeriod}</h1>
-                  }
-                </div>
-                <h2>{awayScore}</h2>
-              </div>
+              <TimeAndScore
+                gameState={gameState}
+                timeLeft={timeLeft}
+                homeScore={homeScore}
+                awayScore={awayScore}
+                gameDate={gameDate}
+                periodData={data.liveData.linescore}
+                currentPeriod={ordinalPeriod}
+                homeColor={homeResources.primaryColor}
+                awayColor={awayResources.primaryColor}
+                venue={venue}
+                />
             );
             let gameBanner = (
               <MainGameBanner
@@ -230,6 +236,36 @@ export class ActiveGameArea extends Component {
 
     )
   }
+
+}
+
+function TimeAndScore(props) {
+  if (props.gameState.search('schedule') !== -1) {
+    // game is live
+    return(
+      <div className="timeAndScore scheduled">
+        <div className="timeRemaining">
+          <h1><Moment format="dddd, MMM D, h:mm A">{props.gameDate}</Moment></h1>
+          <span>{props.venue.name}</span>
+          <span>{props.venue.city}</span>
+        </div>
+      </div>
+    )
+  } else {
+    return(
+      <div className="timeAndScore">
+        <h2 style={{background: props.homeColor}}>{props.homeScore}</h2>
+        <div className="timeRemaining">
+          <h1>{props.timeLeft}</h1>
+          { ((props.gameState === 'inprogress') || (props.gameState === 'inprogress-critical') || ((props.ordinalPeriod === 'OT' || props.ordinalPeriod === 'SO') && props.gameState === 'final')) &&
+            <h1>{props.ordinalPeriod}</h1>
+          }
+        </div>
+        <h2 style={{background: props.awayColor}}>{props.awayScore}</h2>
+      </div>
+    )
+  }
+
 
 }
 
