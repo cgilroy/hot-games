@@ -5,6 +5,7 @@ import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './ActiveGameArea.css';
+// import ScheduledBG from '/resources/ice-bg.jpg';
 
 export class ActiveGameArea extends Component {
 
@@ -67,6 +68,8 @@ export class ActiveGameArea extends Component {
             name: data.gameData.teams.home.venue.name,
             city: data.gameData.teams.home.venue.city
           }
+          let homeTricode = data.gameData.teams.home.abbreviation;
+          let awayTricode = data.gameData.teams.away.abbreviation;
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
             // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
@@ -85,6 +88,8 @@ export class ActiveGameArea extends Component {
                 homeColor={homeResources.primaryColor}
                 awayColor={awayResources.primaryColor}
                 venue={venue}
+                homeTricode={homeTricode}
+                awayTricode={awayTricode}
                 />
             );
             let gameBanner = (
@@ -240,7 +245,7 @@ export class ActiveGameArea extends Component {
 }
 
 function TimeAndScore(props) {
-  if (props.gameState.search('schedule') !== -1) {
+  if ((props.gameState.search('schedule') !== -1) || (props.gameState.search('pre-game') !== -1)) {
     // game is live
     return(
       <div className="timeAndScore scheduled">
@@ -256,19 +261,63 @@ function TimeAndScore(props) {
   } else {
     return(
       <div className="timeAndScore">
-        <h2 style={{background: props.homeColor}}>{props.homeScore}</h2>
+        <h2>{props.homeScore}</h2>
         <div className="timeRemaining">
-          <h1>{props.timeLeft}</h1>
+          <h1>{props.timeLeft}
           { ((props.gameState === 'inprogress') || (props.gameState === 'inprogress-critical') || ((props.ordinalPeriod === 'OT' || props.ordinalPeriod === 'SO') && props.gameState === 'final')) &&
-            <h1>{props.ordinalPeriod}</h1>
+            <span>{props.currentPeriod}</span>
           }
+          </h1>
+          <BannerPeriodTable
+            periodData={props.periodData}
+            currentPeriod={props.currentPeriod}
+            homeName={props.homeTricode}
+            awayName={props.awayTricode}
+          />
         </div>
-        <h2 style={{background: props.awayColor}}>{props.awayScore}</h2>
+        <h2>{props.awayScore}</h2>
       </div>
     )
   }
 
 
+}
+
+function BannerPeriodTable(props) {
+  let homeRow = (
+    props.periodData.periods.map((data) => {
+      return <td>{data.home.goals}</td>
+    })
+  );
+  let awayRow = (
+    props.periodData.periods.map((data) => {
+      return <td>{data.away.goals}</td>
+    })
+  );
+  return(
+    <div className="bannerPeriodTable">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{props.homeName}</td>
+            {homeRow}
+          </tr>
+          <tr>
+            <td>{props.awayName}</td>
+            {awayRow}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 function MainGameBanner(props) {

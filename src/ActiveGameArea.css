@@ -75,14 +75,16 @@
 
 .timeAndScore h2 {
   color: white;
-  background: #262626;
+  background: #222;
   font-family: 'digital-font';
   font-weight: lighter;
   /* padding: 3px 0; */
   line-height: 100px;
   height: 100%;
   font-size: 2.5em;
-  /* width: 100%; */
+  padding: 0 8px;
+  min-width: 22px;
+  margin: 0;
 }
 
 .timeAndScore h2:first-child {
@@ -100,13 +102,14 @@
   width: 100%;
   justify-content: center;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   /* border: 2px solid white; */
   box-sizing: border-box;
   color: white;
   height: 100%;
+  /* position: relative; */
 }
 
 div[class*='inprogress'] .timeRemaining {
@@ -114,22 +117,24 @@ div[class*='inprogress'] .timeRemaining {
   color: #ffd800;
 }
 
-.timeRemaining h1:last-child {
-  font-size: 1.4em;
+.timeRemaining h1 span {
+  /* font-size: 1.4em; */
   font-weight: lighter;
   padding-left: 5px;
 }
 .timeRemaining h1:first-child {
-  font-size: 1.4em;
+  /* font-size: 1.4em; */
   padding-left:0;
   font-weight: lighter;
 }
 
-.timeRemaining h1 {
+.timeAndScore .timeRemaining h1 {
   margin:0;
+  top:0;
+  /* position: absolute; */
 }
 
-.timeAndScore.scheduled h1 {
+.timeAndScore.scheduled h1, .timeAndScore h1 {
 font-size: 14px;
 border-bottom: 1px solid #333;
 padding: 8px 4px 4px 4px;
@@ -149,4 +154,23 @@ box-sizing: border-box;
   width: 100%;
   color: #757575;
   font-size:11px;
+}
+
+.timeAndScore table, .timeAndScore th {
+  font-size: 13px;
+  font-weight: 300;
+  /* height: 100% */
+}
+
+.timeAndScore th {
+  color: #959595;
+  font-size: 11px;
+}
+
+.timeAndScore table {
+  margin: 0 auto;
+}
+
+.timeAndScore .bannerPeriodTable {
+
 }
