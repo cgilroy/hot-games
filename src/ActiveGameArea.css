@@ -1,6 +1,6 @@
 /* CSS for ActiveGameArea.js */
 .bannerContainer {
-  height: 100px;
+  height: 80px;
   width: 100%;
   display: flex;
 }
@@ -79,7 +79,7 @@
   font-family: 'digital-font';
   font-weight: lighter;
   /* padding: 3px 0; */
-  line-height: 100px;
+  line-height: 80px;
   height: 100%;
   font-size: 2.5em;
   padding: 0 8px;
@@ -102,7 +102,7 @@
   width: 100%;
   justify-content: center;
   display: -ms-flexbox;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   align-items: center;
   /* border: 2px solid white; */
@@ -110,6 +110,7 @@
   color: white;
   height: 100%;
   /* position: relative; */
+  justify-content: space-between;
 }
 
 div[class*='inprogress'] .timeRemaining {
@@ -137,9 +138,13 @@ div[class*='inprogress'] .timeRemaining {
 .timeAndScore.scheduled h1, .timeAndScore h1 {
 font-size: 14px;
 border-bottom: 1px solid #333;
-padding: 8px 4px 4px 4px;
+/* padding: 8px 4px 4px 4px; */
 width: 100%;
 box-sizing: border-box;
+}
+
+.timeAndScore.scheduled h1 {
+  padding: 8px 4px;
 }
 
 .timeAndScore.scheduled .venue {
@@ -172,5 +177,7 @@ box-sizing: border-box;
 }
 
 .timeAndScore .bannerPeriodTable {
-
+  display: flex;
+  align-items: center;
+  height: 100%
 }
