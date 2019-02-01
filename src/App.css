@@ -209,10 +209,15 @@ div[class*='inprogress'] .timeRemaining {
   /* height: 30px; */
   overflow: hidden;
   align-items: center;
-  padding: 3px;
-  box-sizing: border-box;
+  padding: 5px;
+  /* box-sizing: border-box; */
   position: relative;
   border-bottom: 1px solid #e7e7e7;
+}
+
+.liveData .latestPlays .eventRow img {
+  height: 32px;
+  width: 32px;
 }
 
 .liveData .latestPlays .eventRow:first-child {

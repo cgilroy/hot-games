@@ -106,15 +106,20 @@ export class ActiveGameArea extends Component {
                 />
             );
 
-
-
-
             let scoringTable = (
               <ScoringTable plays={data.liveData.plays}/>
             );
 
             let latestPlaysTable = (
-              <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays} gamePk={gameID}/>
+              <LatestPlays
+                homeTricode={homeTricode}
+                awayTricode={awayTricode}
+                homeResources={homeResources}
+                awayResources={awayResources}
+                currentPlay={data.liveData.plays.currentPlay}
+                plays={data.liveData.plays.allPlays}
+                gamePk={gameID}
+              />
             );
 
             let homeBoxData = data.liveData.boxscore.teams.home;
@@ -215,7 +220,7 @@ export class ActiveGameArea extends Component {
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
-      <div className={"liveData"} style={{backgroundImage: 'url(/resources/ice-bg.jpg)'}}>
+      <div className={"liveData"}>
         {this.state.gameBanner}
         <div className="top">
           <div className="top-left">

@@ -49,8 +49,15 @@ export class LatestPlays extends React.Component {
         let playTime = iterPlay.about.periodTime.replace(/^0/,'');
         let period = iterPlay.about.ordinalNum;
         period = this.superscriptPeriod(period);
+        let imgPath = "";
+        if (iterPlay.team !== undefined) {
+          imgPath = (iterPlay.team.triCode === this.props.homeTricode) ? (
+            this.props.homeResources.imagePath
+          ) : (this.props.awayResources.imagePath)
+        }
         let newPlay = (
           <div className="eventRow" key={iterPlay.about.eventIdx}>
+            <img src={imgPath} />
             <p>{playDescription}</p>
             <p>({playTime})</p>
             <p>{period}</p>
