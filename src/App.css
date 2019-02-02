@@ -218,6 +218,9 @@ div[class*='inprogress'] .timeRemaining {
 .liveData .latestPlays .eventRow img {
   height: 32px;
   width: 32px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  margin-right: 3px;
 }
 
 .liveData .latestPlays .eventRow:first-child {
@@ -232,15 +235,24 @@ div[class*='inprogress'] .timeRemaining {
 
 .liveData .latestPlays .eventRow p {
   margin: 0;
+  font-size: 12px;
 }
 
-.liveData .latestPlays .eventRow p:first-child {
+.latestPlays .eventRow .eventTimeAndScore {
+  display: flex;
+  align-items: baseline;
+  color:#999;
+  min-width: 50px;
+  margin-right: 3px
+}
+
+.liveData .latestPlays .eventRow p:last-child {
   margin: 0;
   text-overflow: ellipsis;
   /* white-space: nowrap; */
   overflow: hidden;
   width: 100%;
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
   padding-left: 2px;
   display: block;
   text-align: left;
