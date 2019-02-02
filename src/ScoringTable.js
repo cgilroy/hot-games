@@ -6,7 +6,12 @@ export class ScoringTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scoringData: [],
+      scoringData: {
+        firstScoring: [],
+        secondScoring:[],
+        thirdScoring:[],
+        otScoring:[]
+      }
     }
     this.parseScoringData = this.parseScoringData.bind(this);
     this.superscriptPeriod = this.superscriptPeriod.bind(this);
@@ -27,8 +32,13 @@ export class ScoringTable extends React.Component {
 
   parseScoringData(plays) {
     let scoringPlays = plays.scoringPlays;
-    let scoringData = [];
-    for (let i = 0, l = scoringPlays.length; i < l; i++) {
+    let scoringData = {
+      firstScoring: [],
+      secondScoring:[],
+      thirdScoring:[],
+      otScoring:[]
+    };
+    for (let i = scoringPlays.length-1; i >= 0; i--) {
       let playIndex = scoringPlays[i];
       let scoringPlay = plays.allPlays[playIndex];
       let teamCode = scoringPlay.team.triCode;
@@ -68,6 +78,13 @@ export class ScoringTable extends React.Component {
         <p className="emptyNet">(EN)</p>
       ) : ('');
 
+      let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+      if (scoringPlay.team !== undefined) {
+        imgPath = (scoringPlay.team.triCode === this.props.homeTricode) ? (
+          this.props.homeResources.imagePath
+        ) : (this.props.awayResources.imagePath)
+      }
+
       // if (strength !== 'EVEN') {
       //   strength = (
       //     <p className="goalStrength">({strength})</p>
@@ -76,9 +93,10 @@ export class ScoringTable extends React.Component {
       //   strength = '';
       // }
 
-      if (scoringData !== undefined) {
-        scoringData.push(
+
+        let rowMarkup = (
           <div className="scoringRow" key={i}>
+            <img src={imgPath}/>
             <h4>{teamCode}</h4>
             {emptyNet}
             {strength}
@@ -91,11 +109,25 @@ export class ScoringTable extends React.Component {
             </div>
             <div className="scoreTime">
               <h4>{time}&nbsp;</h4>
-              {this.superscriptPeriod(period)}
             </div>
           </div>
-        )
-      }
+        );
+        if (rowMarkup !== undefined) {
+          switch (period) {
+            case '1st':
+              scoringData.firstScoring.push(rowMarkup);
+              break;
+            case '2nd':
+              scoringData.secondScoring.push(rowMarkup);
+              break;
+            case '3rd':
+              scoringData.thirdScoring.push(rowMarkup);
+              break;
+            default:
+              scoringData.otScoring.push(rowMarkup);
+              break;
+          }
+        }
 
 
       // ...
@@ -107,14 +139,46 @@ export class ScoringTable extends React.Component {
   render() {
 
     let scoringData = this.parseScoringData(this.props.plays);
-    if (scoringData.length === 0) {
+    if (scoringData.firstScoring.length === 0 && scoringData.secondScoring.length === 0 && scoringData.thirdScoring.length === 0 && scoringData.otScoring.length === 0) {
       scoringData = <div className="no-scoring-message">No Score</div>
     }
     return(
       <div className="scoringTable">
-        <SimpleBar>
-          {scoringData}
-        </SimpleBar>
+        <div className="section-title">
+          <h1>Scoring Summary</h1>
+        </div>
+        {scoringData.otScoring !== undefined &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>OT</span>
+            </div>
+            {scoringData.otScoring}
+          </div>
+        }
+        {scoringData.thirdScoring !== undefined &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>3rd Period</span>
+            </div>
+            {scoringData.thirdScoring}
+          </div>
+        }
+        {scoringData.secondScoring !== undefined &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>2nd Period</span>
+            </div>
+            {scoringData.secondScoring}
+          </div>
+        }
+        {scoringData.firstScoring !== undefined &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>1st Period</span>
+            </div>
+            {scoringData.firstScoring}
+          </div>
+        }
       </div>
     )
   }
