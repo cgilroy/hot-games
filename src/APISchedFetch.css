@@ -66,10 +66,19 @@
   height: auto;
   min-height: 0;
   background: white;
+  position: relative;
 }
 
 .sideBarGame.active {
   background: #e6f2fa;
+}
+
+.sideBarGame span {
+  border-left: 4px solid #ff520d;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  top: 0
 }
 
 .sideBarGame .teamInfo {

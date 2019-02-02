@@ -208,6 +208,9 @@ export class SideBarGame extends Component {
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
       <div className={"sideBarGame gameDiv " + gameState + ' ' + activeClass} key={gameID} onClick={this.wasClicked}>
+        {activeClass === 'active' &&
+          <span></span>
+        }
         {this.state.currentTeamsAndScore}
         {this.state.timeRemaining}
       </div>
