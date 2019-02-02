@@ -115,9 +115,10 @@ export class LatestPlays extends React.Component {
     return(
 
         <div className="latestPlays">
-
-            {this.state.playData}
-
+          <div className="section-title">
+            <h1>Last 10 Plays</h1>
+          </div>
+          {this.state.playData}
         </div>
 
     )
