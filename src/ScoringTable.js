@@ -139,15 +139,17 @@ export class ScoringTable extends React.Component {
   render() {
 
     let scoringData = this.parseScoringData(this.props.plays);
+    let noScoreMessage = '';
     if (scoringData.firstScoring.length === 0 && scoringData.secondScoring.length === 0 && scoringData.thirdScoring.length === 0 && scoringData.otScoring.length === 0) {
-      scoringData = <div className="no-scoring-message">No Score</div>
+      noScoreMessage = <div className="no-scoring-message">No Score</div>
     }
     return(
       <div className="scoringTable">
         <div className="section-title">
           <h1>Scoring Summary</h1>
         </div>
-        {scoringData.otScoring !== undefined &&
+        {noScoreMessage}
+        {(scoringData.otScoring !== undefined && scoringData.otScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
               <span>OT</span>
@@ -155,7 +157,7 @@ export class ScoringTable extends React.Component {
             {scoringData.otScoring}
           </div>
         }
-        {scoringData.thirdScoring !== undefined &&
+        {(scoringData.thirdScoring !== undefined && scoringData.thirdScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
               <span>3rd Period</span>
@@ -163,7 +165,7 @@ export class ScoringTable extends React.Component {
             {scoringData.thirdScoring}
           </div>
         }
-        {scoringData.secondScoring !== undefined &&
+        {(scoringData.secondScoring !== undefined && scoringData.secondScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
               <span>2nd Period</span>
@@ -171,7 +173,7 @@ export class ScoringTable extends React.Component {
             {scoringData.secondScoring}
           </div>
         }
-        {scoringData.firstScoring !== undefined &&
+        {(scoringData.firstScoring !== undefined && scoringData.firstScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
               <span>1st Period</span>

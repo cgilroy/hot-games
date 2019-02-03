@@ -106,27 +106,33 @@ export class ActiveGameArea extends Component {
                 />
             );
 
-            let scoringTable = (
-              <ScoringTable 
-                plays={data.liveData.plays}
-                homeTricode={homeTricode}
-                awayTricode={awayTricode}
-                homeResources={homeResources}
-                awayResources={awayResources}
-              />
-            );
+            let scoringTable = '';
+            if (gameState.search('progress') !== -1 || gameState === 'final') {
+              scoringTable = (
+                <ScoringTable
+                  plays={data.liveData.plays}
+                  homeTricode={homeTricode}
+                  awayTricode={awayTricode}
+                  homeResources={homeResources}
+                  awayResources={awayResources}
+                />
+              );
+            }
 
-            let latestPlaysTable = (
-              <LatestPlays
-                homeTricode={homeTricode}
-                awayTricode={awayTricode}
-                homeResources={homeResources}
-                awayResources={awayResources}
-                currentPlay={data.liveData.plays.currentPlay}
-                plays={data.liveData.plays.allPlays}
-                gamePk={gameID}
-              />
-            );
+            let latestPlaysTable = '';
+            if (gameState.search('progress') !== -1) {
+              latestPlaysTable = (
+                <LatestPlays
+                  homeTricode={homeTricode}
+                  awayTricode={awayTricode}
+                  homeResources={homeResources}
+                  awayResources={awayResources}
+                  currentPlay={data.liveData.plays.currentPlay}
+                  plays={data.liveData.plays.allPlays}
+                  gamePk={gameID}
+                />
+              );
+            }
 
             let homeBoxData = data.liveData.boxscore.teams.home;
             let awayBoxData = data.liveData.boxscore.teams.away;
