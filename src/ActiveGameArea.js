@@ -27,9 +27,14 @@ export class ActiveGameArea extends Component {
       expanded: false,
       gameBanner:[],
       currentGameID:"",
-      gameState:""
+      gameState:"",
+      resources: {
+        home:[],
+        away:[]
+      }
     }
     this.refreshGame = this.refreshGame.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
@@ -161,7 +166,11 @@ export class ActiveGameArea extends Component {
               awayPPBadge: awayPPLogoBadge,
               gameBanner: gameBanner,
               currentGameID: gameID,
-              gameState: gameState
+              gameState: gameState,
+              resources: {
+                home:homeResources,
+                away:awayResources
+              }
               // activeBoxScore: activeBoxScore
             })
           // }
@@ -214,11 +223,26 @@ export class ActiveGameArea extends Component {
       this.state.awayBoxData
     );
 
+
     let homeTeamName = this.props.data.gameData.teams.home.teamName;
     let homeCityName = this.props.data.gameData.teams.home.locationName;
     let awayTeamName = this.props.data.gameData.teams.away.teamName;
     let awayCityName = this.props.data.gameData.teams.away.locationName;
 
+    let boxScore = '';
+    if (this.state.gameState === 'final' || this.state.gameState.search('progress') !== -1) {
+      boxScore = (
+        <BoxScoreStateless
+          playerData={boxData}
+          homeResources={this.state.resources.home}
+          awayResources={this.state.resources.away}
+          homeTeamName={homeTeamName}
+          awayTeamName={awayTeamName}
+          activeBoxTeam={this.state.activeBoxTeam}
+          onClick={this.handleClick}
+        />
+      )
+    }
     // let divHeight = (this.state.expanded) ? {height:'auto'} : {height:'auto'};
 
     let awayPPBadge = '';
@@ -240,11 +264,7 @@ export class ActiveGameArea extends Component {
             {this.state.scoringTable}
           </div>
           <div className="top-right">
-            <div className="buttonRow">
-              <button className={this.state.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.handleClick('home')}>{homeTeamName}</button>
-              <button className={this.state.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.handleClick('away')}>{awayTeamName}</button>
-            </div>
-            <BoxScoreStateless playerData={boxData}/>
+            {boxScore}
           </div>
         </div>
         <div className="bottom">

@@ -255,7 +255,7 @@ div[class*='inprogress'] .timeRemaining {
 
 .liveData .latestPlays .eventRow p:last-child {
   margin: 0;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   /* white-space: nowrap; */
   overflow: hidden;
   width: 100%;
@@ -283,7 +283,7 @@ div[class*='inprogress'] .timeRemaining {
 
 .liveData .top-right{
   width: 100%;
-  padding-left:6px;
+  padding:5px;
 }
 
 .liveData .bottom {
@@ -513,8 +513,9 @@ div[class*='inprogress'] .timeRemaining {
 }
 
 .boxScore .ReactTable {
-  margin-right: 13px;
+  /* margin-right: 13px; */
   border:none;
+  font-size: 13px;
 }
 
 .boxScore .ReactTable .rt-td {
@@ -540,7 +541,7 @@ div[class*='inprogress'] .timeRemaining {
 .boxScore .ReactTable .rt-thead {
   background: #262626;
   color: white;
-  height: 30px;
+  height: 25px;
 
 }
 
@@ -575,22 +576,25 @@ div[class*='inprogress'] .timeRemaining {
 
 .buttonRow {
   width: 100%;
-  height: 20px;
+  /* height: 20px; */
   display: flex;
+  /* border:1px solid black */
 }
 
 .buttonRow button {
   width: 100%;
-  background:#ddddddab;
+  background:none;
   border: none;
   cursor: pointer;
-  /* color: #262626 */
+  color: #262626;
+  padding: 3px;
 }
 
 
 .buttonRow button.active {
   background: white;
-  color:#262626;
+  border-bottom: 3px solid #ff520d;
+  font-weight: bold;
 }
 
 .buttonRow button:focus {
