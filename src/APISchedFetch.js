@@ -17,6 +17,7 @@ export class APISchedFetch extends Component {
       finalGames:[],
       mainGamePk: "",
       gamesData:[],
+      gamesContentData:[],
       loading:true
     };
     this.sideBarClick = this.sideBarClick.bind(this);
@@ -24,8 +25,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-01-29';
-    let dateTest = '';
+    let dateTest = '?date=2019-02-03';
+    // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
@@ -35,6 +36,7 @@ export class APISchedFetch extends Component {
     let finalGames = [];
     let allGames = [];
     let allGamesJSON = [];
+    let gamesContentData = [];
     var fetches = [];
     console.log("dateslength",data.dates[0].games.length)
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
@@ -46,6 +48,7 @@ export class APISchedFetch extends Component {
       let gamePk = iterGame.gamePk;
       let gameTime = iterGame.gameDate;
       let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gamePk + '/feed/live';
+      let apiContentString = 'https://statsapi.web.nhl.com/api/v1/game/' + gamePk + '/content'
       fetches.push(
         fetch(apiString)
         .then(gameResults => {
@@ -62,7 +65,14 @@ export class APISchedFetch extends Component {
           allGames = [liveGames,scheduledGames,finalGames,data];
           allGamesJSON = allGamesJSON.concat(gameData);
         })
-
+      );
+      fetches.push(
+        fetch(apiContentString)
+        .then(contentRaw => {
+          return contentRaw.json();
+        }).then(content => {
+            gamesContentData = gamesContentData.concat(content);
+        })
       )
     };
 
@@ -75,9 +85,24 @@ export class APISchedFetch extends Component {
       // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
-        this.setState({loading:false,liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],mainGamePk:firstGamePk,gamesData:allGamesJSON});
+        this.setState({
+          loading:false,
+          liveGames: allGames[0],
+          scheduledGames:allGames[1],
+          finalGames:allGames[2],
+          mainGamePk:firstGamePk,
+          gamesData:allGamesJSON,
+          gamesContentData:gamesContentData
+        });
       } else {
-        this.setState({loading:false,liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2],gamesData:allGamesJSON});
+        this.setState({
+          loading:false,
+          liveGames: allGames[0],
+          scheduledGames:allGames[1],
+          finalGames:allGames[2],
+          gamesData:allGamesJSON,
+          gamesContentData:gamesContentData
+        });
       }
     })
      .catch(err => {return console.log(err);});
@@ -115,6 +140,10 @@ sideBarClick(gameFID) {
     let activeGameData = tg.find(obj => {
       return obj.gamePk == activeGameVar
     });
+    let tc = this.state.gamesContentData;
+    let activeGameContent = tc.find(obj => {
+      return obj.link == '/api/v1/game/' + activeGameVar + '/content'
+    });
     let mainGameArea = (this.state.loading) ? (
       <BounceLoader
         sizeUnit={"px"}
@@ -123,7 +152,7 @@ sideBarClick(gameFID) {
         loading={this.state.loading}
       />
     ) : (
-      <ActiveGameArea gameID={activeGameVar} data={activeGameData} />
+      <ActiveGameArea gameID={activeGameVar} data={activeGameData} content={activeGameContent} />
     )
     return (
 

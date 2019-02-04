@@ -31,6 +31,9 @@ export class ActiveGameArea extends Component {
       resources: {
         home:[],
         away:[]
+      },
+      media: {
+        gameRecap:[]
       }
     }
     this.refreshGame = this.refreshGame.bind(this);
@@ -38,7 +41,7 @@ export class ActiveGameArea extends Component {
     // this.toggleExpandedGame = this.toggleExpandedGame.bind(this);
     // this.buttonClick = this.buttonClick.bind(this);
   }
-  refreshGame(gameData) {
+  refreshGame(gameData, contentData) {
       let data = gameData;
       // data = TestLiveData;
       // data = TestFinalData;
@@ -124,6 +127,15 @@ export class ActiveGameArea extends Component {
               );
             }
 
+            let gameRecap ='';
+            if (gameState.search('final') !== -1) {
+              gameRecap = (
+                <GameRecap
+                  content={contentData}
+                />
+              )
+            }
+
             let latestPlaysTable = '';
             if (gameState.search('progress') !== -1) {
               latestPlaysTable = (
@@ -170,6 +182,9 @@ export class ActiveGameArea extends Component {
               resources: {
                 home:homeResources,
                 away:awayResources
+              },
+              media: {
+                gameRecap:gameRecap
               }
               // activeBoxScore: activeBoxScore
             })
@@ -179,7 +194,7 @@ export class ActiveGameArea extends Component {
   }
 
   componentDidMount() {
-      this.refreshGame(this.props.data);
+      this.refreshGame(this.props.data, this.props.content);
   }
 
   componentWillUpdate(nextProps) {
@@ -188,7 +203,7 @@ export class ActiveGameArea extends Component {
     //   this.refreshGame();
     // }
     if (nextProps.data !== undefined) {
-      this.refreshGame(nextProps.data);
+      this.refreshGame(nextProps.data,nextProps.content);
     }
 
   }
@@ -270,7 +285,7 @@ export class ActiveGameArea extends Component {
         <div className="bottom">
 
           <div className="bottomData">
-
+            {this.state.media.gameRecap}
           </div>
 
         </div>
@@ -280,6 +295,18 @@ export class ActiveGameArea extends Component {
     )
   }
 
+}
+
+function GameRecap(props) {
+  let item = props.content.media.epg.find(obj => {
+    return obj.title === 'Recap'
+  });
+  let title = item.items[0].title;
+  return (
+    <div className="gameRecap">
+      {title}
+    </div>
+  )
 }
 
 function TimeAndScore(props) {
@@ -297,7 +324,7 @@ function TimeAndScore(props) {
       </div>
     )
   } else {
-    return(
+    return (
       <div className="timeAndScore">
         <h2>{props.homeScore}</h2>
         <div className="timeRemaining">
