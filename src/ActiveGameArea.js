@@ -33,7 +33,8 @@ export class ActiveGameArea extends Component {
         away:[]
       },
       media: {
-        gameRecap:[]
+        gameRecap:[],
+        gamePreview:[]
       }
     }
     this.refreshGame = this.refreshGame.bind(this);
@@ -136,6 +137,15 @@ export class ActiveGameArea extends Component {
               )
             }
 
+            let gamePreview = '';
+            if (gameState.search('schedule') !== -1 || gameState.search('pre') !== -1) {
+              gamePreview = (
+                <GamePreview
+                  content={contentData}
+                />
+              )
+            }
+
             let latestPlaysTable = '';
             if (gameState.search('progress') !== -1) {
               latestPlaysTable = (
@@ -184,7 +194,8 @@ export class ActiveGameArea extends Component {
                 away:awayResources
               },
               media: {
-                gameRecap:gameRecap
+                gameRecap:gameRecap,
+                gamePreview:gamePreview
               }
               // activeBoxScore: activeBoxScore
             })
@@ -273,7 +284,10 @@ export class ActiveGameArea extends Component {
     return (
       <div className={"liveData"}>
         {this.state.gameBanner}
+        {this.state.media.gameRecap}
+        {this.state.media.gamePreview}
         <div className="top">
+
           <div className="top-left">
             {this.state.currentPlays}
             {this.state.scoringTable}
@@ -285,7 +299,7 @@ export class ActiveGameArea extends Component {
         <div className="bottom">
 
           <div className="bottomData">
-            {this.state.media.gameRecap}
+
           </div>
 
         </div>
@@ -298,13 +312,39 @@ export class ActiveGameArea extends Component {
 }
 
 function GameRecap(props) {
-  let item = props.content.media.epg.find(obj => {
-    return obj.title === 'Recap'
-  });
-  let title = item.items[0].title;
+  let item = props.content.editorial.recap.items[0];
+  let headline = item.headline;
+  let subhead = item.subhead;
+  let imgSrc = item.media.image.cuts['1136x640'].src;
+  let description = item.preview;
   return (
     <div className="gameRecap">
-      {title}
+      <div className="blurb">
+        <h1>{headline}</h1>
+        <h2>{subhead}</h2>
+      </div>
+
+        <img src={imgSrc} style={{width:'100%'}}/>
+        <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
+    </div>
+  )
+}
+
+function GamePreview(props) {
+  let item = props.content.editorial.preview.items[0];
+  let headline = item.headline;
+  let subhead = item.subhead;
+  let imgSrc = item.media.image.cuts['1136x640'].src;
+  let description = item.preview;
+  return (
+    <div className="gamePreview">
+      <div className="blurb">
+        <h1>{headline}</h1>
+        <h2>{subhead}</h2>
+      </div>
+      <img src={imgSrc}/>
+      <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
+
     </div>
   )
 }
