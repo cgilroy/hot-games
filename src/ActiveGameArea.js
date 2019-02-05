@@ -130,19 +130,25 @@ export class ActiveGameArea extends Component {
 
             let gameRecap ='';
             if (gameState.search('final') !== -1) {
-              gameRecap = (
+              gameRecap = (contentData.editorial.recap.items.length !== 0) ? (
                 <GameRecap
                   content={contentData}
                 />
+              ) : (
+                ''
               )
             }
 
             let gamePreview = '';
             if (gameState.search('schedule') !== -1 || gameState.search('pre') !== -1) {
-              gamePreview = (
+              gamePreview = (contentData.editorial.preview.items.length !== 0) ? (
                 <GamePreview
                   content={contentData}
                 />
+              ) : (
+                <div className="noMediaContent">
+                  <h1>No Preview Available</h1>
+                </div>
               )
             }
 
@@ -338,12 +344,11 @@ function GamePreview(props) {
   let description = item.preview;
   return (
     <div className="gamePreview">
-      <div className="blurb">
-        <h1>{headline}</h1>
-        <h2>{subhead}</h2>
+      <div className="heroImage">
+        <img src={imgSrc}/>
+        <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
       </div>
-      <img src={imgSrc}/>
-      <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
+
 
     </div>
   )

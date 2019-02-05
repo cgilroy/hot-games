@@ -186,8 +186,8 @@ box-sizing: border-box;
   width: 100%;
   position: relative;
   color: white;
-  overflow: hidden;
-  min-height: 540px;
+  /* overflow: hidden; */
+  /* height: 540px; */
 }
 
 .gameRecap p, .gamePreview p {
@@ -195,14 +195,24 @@ box-sizing: border-box;
 }
 
 .heroImage {
-  height: 640px;
+  height: 540px;
+  width: 100%;
+  position: relative;
 }
 
 .gamePreview img, .gameRecap img {
   width: 100%;
 }
 
-.gamePreview:before,.gameRecap:before {
+.gamePreview .heroImage:before{
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0% 40%, rgba(0,0,0,0.9) 100%);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.gameRecap:before {
   background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 50%,rgba(0,0,0,0.9) 100%);
   content: "";
   position: absolute;
@@ -210,13 +220,16 @@ box-sizing: border-box;
   height: 100%;
 }
 
-.gameRecap .blurb, .gamePreview .blurb {
-  position: absolute;
-  top:0;
+.blurb {
   text-align: left;
   padding: 10px;
   font-weight: normal;
   color: white;
+}
+
+.gameRecap .blurb {
+  position: absolute;
+  top:0;
   z-index: 999;
 }
 
@@ -227,7 +240,12 @@ box-sizing: border-box;
   padding: 10px;
 }
 
-.gameRecap h1, .gamePreview h1 {
+.gamePreview h1 {
+  color: #262626;
+  font-size: 20px;
+}
+
+.gameRecap h1 {
   margin:0;
   margin-bottom: 10px;
   /* color:#262626; */
@@ -243,4 +261,11 @@ box-sizing: border-box;
 
 .gamePreview h5 {
   display: none;
+}
+
+.noMediaContent {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  align-items: center;
 }
