@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSTransitionGroup} from 'react-transition-group'; // ES6
 // var ReactCSSTransitionGroup = require('react-addons-css-transition-group'); // ES5 with npm
-import SimpleBar from 'simplebar-react';
+// import SimpleBar from 'simplebar-react';
 
 export class LatestPlays extends React.Component {
   constructor(props) {
@@ -118,7 +118,13 @@ export class LatestPlays extends React.Component {
           <div className="section-title">
             <h1>Last 10 Plays</h1>
           </div>
-          {this.state.playData}
+          <CSSTransitionGroup
+            transitionName="latestPlaysTransitionGroup"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionLeave={false}>
+            {this.state.playData}
+          </CSSTransitionGroup>
         </div>
 
     )
