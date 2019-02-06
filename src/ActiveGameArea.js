@@ -307,7 +307,7 @@ export class ActiveGameArea extends Component {
           awayResources={allData.resources.away}
           homeTeamName={homeTeamName}
           awayTeamName={awayTeamName}
-          activeBoxTeam={allData.activeBoxTeam}
+          activeBoxTeam={this.state.activeBoxTeam}
           onClick={this.handleClick}
         />
       )
@@ -451,10 +451,10 @@ function BannerPeriodTable(props) {
     overtimeGame = true;
     let homeValue = data[data.length-1].home.goals;
     let homeStyle = (homeValue === 0) ? ({color: '#959595'}) : {};
-    homeData.push(<td style={homeStyle}>{homeValue}</td>);
+    homeData.push(<td key={'otGoalsHome'} style={homeStyle}>{homeValue}</td>);
     let awayValue = data[data.length-1].away.goals;
     let awayStyle = (awayValue === 0) ? ({color: '#959595'}) : {};
-    awayData.push(<td style={awayStyle}>{awayValue}</td>);
+    awayData.push(<td key={'otGoalsAway'} style={awayStyle}>{awayValue}</td>);
   }
 
   return(
