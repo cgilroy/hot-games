@@ -374,7 +374,7 @@ function TimeAndScore(props) {
         <h2>{props.homeScore}</h2>
         <div className="timeRemaining">
           <h1>{props.timeLeft}
-          { ((props.gameState === 'inprogress') || (props.gameState === 'inprogress-critical') || ((props.ordinalPeriod === 'OT' || props.ordinalPeriod === 'SO') && props.gameState === 'final')) &&
+          { ((props.gameState === 'inprogress') || (props.gameState === 'inprogress-critical') || ((props.currentPeriodOrdinal === 'OT' || props.currentPeriodOrdinal === 'SO') && props.gameState === 'final')) &&
             <span>{props.currentPeriodOrdinal}</span>
           }
           </h1>
@@ -411,6 +411,16 @@ function BannerPeriodTable(props) {
       awayData.push(<td style={{color:'#959595'}}>-</td>)
     }
   }
+  let overtimeGame = false;
+  if (data.length > 3) {
+    overtimeGame = true;
+    let homeValue = data[data.length-1].home.goals;
+    let homeStyle = (homeValue === 0) ? ({color: '#959595'}) : {};
+    homeData.push(<td style={homeStyle}>{homeValue}</td>);
+    let awayValue = data[data.length-1].away.goals;
+    let awayStyle = (awayValue === 0) ? ({color: '#959595'}) : {};
+    awayData.push(<td style={awayStyle}>{awayValue}</td>);
+  }
 
   return(
     <div className="bannerPeriodTable">
@@ -421,6 +431,9 @@ function BannerPeriodTable(props) {
             <th>1</th>
             <th>2</th>
             <th>3</th>
+            {overtimeGame &&
+              <th>OT</th>
+            }
           </tr>
         </thead>
         <tbody>
