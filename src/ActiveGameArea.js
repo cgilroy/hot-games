@@ -3,7 +3,6 @@ import { ScoringTable } from './ScoringTable.js';
 import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './ActiveGameArea.css';
 import TestLiveData from './json-test-livegame.json';
 import TestFinalData from './json-test-endedgame.json';
@@ -206,10 +205,10 @@ export class ActiveGameArea extends Component {
               // activeBoxScore: activeBoxScore
             })
 
-            this.setState({
-              currentGameID:gameID,
-              timeStamp: currentTimeStamp
-            })
+            // this.setState({
+            //   currentGameID:gameID,
+            //   timeStamp: currentTimeStamp
+            // })
 
             // this.setState({
             //   scoringTable: scoringTable,
@@ -382,7 +381,7 @@ function GamePreview(props) {
   return (
     <div className="gamePreview">
       <div className="heroImage">
-        <img src={imgSrc}/>
+        <img src={imgSrc} alt=''/>
         <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
       </div>
     </div>
@@ -494,11 +493,11 @@ function MainGameBanner(props) {
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
         <h1>{props.homeTeamName}</h1>
-        <img src={homeTeamResources.imagePath} />
+        <img src={homeTeamResources.imagePath} alt=''/>
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
-        <img src={awayTeamResources.imagePath} />
+        <img src={awayTeamResources.imagePath} alt=''/>
         <h1>{props.awayTeamName}</h1>
       </div>
     </div>
@@ -634,7 +633,7 @@ function getTeamResources(teamName) {
       primaryColor = '#C8102E';
     break;
     default:
-      primaryColor: '#ff0000';
+      primaryColor = '#ff0000';
 
   }
   return {imagePath,primaryColor}

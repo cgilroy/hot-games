@@ -1,6 +1,6 @@
 import React from 'react';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+// import SimpleBar from 'simplebar-react';
+// import 'simplebar/dist/simplebar.min.css';
 
 export class ScoringTable extends React.Component {
   constructor(props) {
@@ -96,7 +96,7 @@ export class ScoringTable extends React.Component {
 
         let rowMarkup = (
           <div className="scoringRow" key={i}>
-            <img src={imgPath}/>
+            <img src={imgPath} alt=''/>
             <h4>{teamCode}</h4>
             {emptyNet}
             {strength}

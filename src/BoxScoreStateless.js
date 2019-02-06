@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import SimpleBar from 'simplebar-react';
 
 export class BoxScoreStateless extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   parseStatData = (playerData) => {
     let players = playerData.players;

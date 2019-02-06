@@ -61,7 +61,7 @@ export class LatestPlays extends React.Component {
               <p>{period}</p>
               <p>{playTime}</p>
             </div>
-            <img src={imgPath} />
+            <img src={imgPath} alt='' />
             <p>{playDescription}</p>
           </div>
         );
@@ -94,24 +94,24 @@ export class LatestPlays extends React.Component {
         this.parsePlayData(nextProps);
       }
     }
-
-    addItem() {
-
-      let newItems = [
-        <div className="eventRow" key={Date().toString()}>
-          <p>haha</p>
-          <p>hahah</p>
-          <p>okay</p>
-        </div>
-      ];
-      newItems = newItems.concat(this.state.playData);
-      newItems = newItems.slice(0,10);
-        this.setState({playData:newItems});
-    }
+    //
+    // addItem() {
+    //
+    //   let newItems = [
+    //     <div className="eventRow" key={Date().toString()}>
+    //       <p>haha</p>
+    //       <p>hahah</p>
+    //       <p>okay</p>
+    //     </div>
+    //   ];
+    //   newItems = newItems.concat(this.state.playData);
+    //   newItems = newItems.slice(0,10);
+    //     this.setState({playData:newItems});
+    // }
 
 
   render() {
-    let items = this.state.playData;
+    // let items = this.state.playData;
     return(
 
         <div className="latestPlays">

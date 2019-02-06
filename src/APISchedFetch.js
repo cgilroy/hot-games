@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {SideBarGame} from './SideBarGame.js';
 import {ActiveGameArea} from './ActiveGameArea.js';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
-import StackGrid from 'react-stack-grid';
 import './APISchedFetch.css';
 import { BounceLoader } from 'react-spinners';
 import { css } from '@emotion/core';
@@ -25,7 +22,7 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    let dateTest = '?date=2019-02-03';
+    let dateTest = '?date=2019-02-05';
     // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -142,7 +139,7 @@ sideBarClick(gameFID) {
     });
     let tc = this.state.gamesContentData;
     let activeGameContent = tc.find(obj => {
-      return obj.link == '/api/v1/game/' + activeGameVar + '/content'
+      return obj.link === '/api/v1/game/' + activeGameVar + '/content'
     });
     let mainGameArea = (this.state.loading) ? (
       <BounceLoader

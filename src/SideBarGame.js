@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { ScoringTable } from './ScoringTable.js';
-import { LatestPlays } from './LatestPlays.js';
-import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class SideBarGame extends Component {
 
@@ -12,14 +9,9 @@ export class SideBarGame extends Component {
     this.state = {
       timeRemaining: [],
       currentTeamsAndScore: [],
-      scoringTable:[],
-      currentPlays:[],
-      awayBoxData:[],
-      homeBoxData:[],
       timeStamp:'',
       homePPBadge:'',
       awayPPBadge:'',
-      // activeBoxData:[],
       activeBoxTeam:'home',
       expanded: false
     }
@@ -48,7 +40,7 @@ export class SideBarGame extends Component {
           let currentTimeStamp = data.metaData.timeStamp;
           let homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
           let awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
-          let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
+          // let powerPlayStrength = data.liveData.linescore.powerPlayStrength;
           let homeTriCode = data.gameData.teams.home.abbreviation;
           let awayTriCode = data.gameData.teams.away.abbreviation;
 
@@ -74,12 +66,6 @@ export class SideBarGame extends Component {
                   </div>
               );
             }
-
-
-
-            let latestPlaysTable = (
-              <LatestPlays currentPlay={data.liveData.plays.currentPlay} plays={data.liveData.plays.allPlays}/>
-            );
 
             let homePPLogoBadge = homeTeamOnPP ? (
               <div className="logoPPBadge">
@@ -115,45 +101,47 @@ export class SideBarGame extends Component {
             )
 
             // console.log('awayPP',awayPPLogoBadge);
-
-            this.setState({
+            return({
               timeRemaining: timeRemaining,
               currentTeamsAndScore: teamsAndScore,
-              currentPlays: latestPlaysTable,
               timeStamp: currentTimeStamp,
               homePPBadge: homePPLogoBadge,
               awayPPBadge: awayPPLogoBadge
-              // activeBoxScore: activeBoxScore
             })
+
+            // this.setState({
+            //
+            //   // activeBoxScore: activeBoxScore
+            // })
           // }
 
       }
     }
 
-  componentDidMount() {
-    // console.log('mountGame');
-      let gameState = this.props.data.gameData.status.detailedState;
-      gameState = gameState.toLowerCase().replace(/\s/g, '');
-      if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
-        console.log('firstRefresh');
-        this.refreshGame();
-      }else {
-        // game has not started yet
+  // componentDidMount() {
+  //   // console.log('mountGame');
+  //     let gameState = this.props.data.gameData.status.detailedState;
+  //     gameState = gameState.toLowerCase().replace(/\s/g, '');
+  //     if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
+  //       console.log('firstRefresh');
+  //       this.refreshGame();
+  //     }else {
+  //       // game has not started yet
+  //
+  //
+  //
+  //     };
+  //     this.refreshGame();
+  // }
 
-
-
-      };
-      this.refreshGame();
-  }
-
-  componentWillUpdate(nextProps) {
-    let gameState = nextProps.data.gameData.status.detailedState;
-    gameState = gameState.toLowerCase().replace(/\s/g, '');
-    if ((gameState === "inprogress-critical") || (gameState === "inprogress")) {
-      // console.log('refreshUpdate');
-      this.refreshGame();
-    }
-  }
+  // componentWillUpdate(nextProps) {
+  //   let gameState = nextProps.data.gameData.status.detailedState;
+  //   gameState = gameState.toLowerCase().replace(/\s/g, '');
+  //   if ((gameState === "inprogress-critical") || (gameState === "inprogress")) {
+  //     // console.log('refreshUpdate');
+  //     this.refreshGame();
+  //   }
+  // }
 
   handleClick(team) {
     console.log('clickclickclick');
@@ -173,37 +161,21 @@ export class SideBarGame extends Component {
     // this.props.toggleHandler();
   }
 
-  toggleExpandedGame() {
-    this.setState({expanded: !this.state.expanded});
-  }
-
   wasClicked() {
     this.props.sideClick(this.props.data.gameData.game.pk);
   }
 
   render() {
+    let data = this.refreshGame();
     let gameState = this.props.data.gameData.status.detailedState;
     gameState = gameState.toLowerCase().replace(/\s/g, '');
     let gameID = this.props.data.gameData.game.pk;
     console.log('renderGame');
-    let boxData = (this.state.activeBoxTeam === 'home') ? (
-      this.state.homeBoxData
-    ) : (
-      this.state.awayBoxData
-    );
 
     // let divHeight = (this.state.expanded) ? {height:'auto'} : {height:'auto'};
 
-    let awayPPBadge = '';
-    let homePPBadge = '';
-    if (gameState !== 'final') {
-      let awayPPBadge = this.state.awayPPBadge;
-      let homePPBadge = this.state.homePPBadge;
-    }
 
     let activeClass = (this.props.activeID === gameID) ? 'active' : '';
-
-    let expandedChar = (this.state.expanded) ? (<FontAwesomeIcon icon="chevron-up"/>) : <FontAwesomeIcon icon='chevron-down'/>;
     // console.log('boxData to render',boxData);
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
@@ -211,8 +183,8 @@ export class SideBarGame extends Component {
         {activeClass === 'active' &&
           <span></span>
         }
-        {this.state.currentTeamsAndScore}
-        {this.state.timeRemaining}
+        {data.currentTeamsAndScore}
+        {data.timeRemaining}
       </div>
     )
   }
