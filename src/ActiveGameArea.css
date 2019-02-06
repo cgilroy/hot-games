@@ -267,8 +267,16 @@ box-sizing: border-box;
 }
 
 .noMediaContent {
-  margin: 0 auto;
-  height: 100%;
-  width: 100%;
+  margin: 10px auto;
+  /* height: 100%; */
+  color: #757575;
+  width: 300px;
   align-items: center;
+  border: 1px solid #757575;
+}
+
+.noMediaContent h1 {
+  margin:0;
+  font-weight: normal;
+  font-size: 22px;
 }
