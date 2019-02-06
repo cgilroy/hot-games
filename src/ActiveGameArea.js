@@ -348,8 +348,6 @@ function GamePreview(props) {
         <img src={imgSrc}/>
         <div className="description" dangerouslySetInnerHTML={{__html:description}}></div>
       </div>
-
-
     </div>
   )
 }
