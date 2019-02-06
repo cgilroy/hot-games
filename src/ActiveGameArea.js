@@ -47,8 +47,8 @@ export class ActiveGameArea extends Component {
       // data = TestLiveData;
       // data = TestFinalData;
         // console.log('data.liveData',data.liveData);
-        if ((data !== undefined)
-          && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
+        // if ((data !== undefined)
+        //   && ((data.metaData.timeStamp !== this.state.timeStamp) || ((data.gameData.game.pk !== this.state.currentGameID)))) {
           let gameID = data.gameData.game.pk;
           let gameDate = data.gameData.datetime.dateTime;
           let timeLeft = "";
@@ -184,7 +184,7 @@ export class ActiveGameArea extends Component {
 
             // console.log('awayPP',awayPPLogoBadge);
 
-            this.setState({
+            return({
               scoringTable: scoringTable,
               currentPlays: latestPlaysTable,
               homeBoxData: homeBoxData,
@@ -205,13 +205,49 @@ export class ActiveGameArea extends Component {
               }
               // activeBoxScore: activeBoxScore
             })
+
+            this.setState({
+              currentGameID:gameID,
+              timeStamp: currentTimeStamp
+            })
+
+            // this.setState({
+            //   scoringTable: scoringTable,
+            //   currentPlays: latestPlaysTable,
+            //   homeBoxData: homeBoxData,
+            //   awayBoxData: awayBoxData,
+            //   timeStamp: currentTimeStamp,
+            //   homePPBadge: homePPLogoBadge,
+            //   awayPPBadge: awayPPLogoBadge,
+            //   gameBanner: gameBanner,
+            //   currentGameID: gameID,
+            //   gameState: gameState,
+            //   resources: {
+            //     home:homeResources,
+            //     away:awayResources
+            //   },
+            //   media: {
+            //     gameRecap:gameRecap,
+            //     gamePreview:gamePreview
+            //   }
+            //   // activeBoxScore: activeBoxScore
+            // })
           // }
 
-      }
+      // }
   }
 
   componentDidMount() {
-      this.refreshGame(this.props.data, this.props.content);
+      // this.refreshGame(this.props.data, this.props.content);
+  }
+
+  shouldComponentUpdate(nextProps,nextState) {
+    if ((nextProps.data !== undefined)
+      && ((nextProps.data.metaData.timeStamp !== this.props.data.metaData.timeStamp) || (nextProps.data.gameData.game.pk !== this.props.data.gameData.game.pk) || (this.state.activeBoxTeam !== nextState.activeBoxTeam))) {
+        return true
+      } else {
+        return false
+      }
   }
 
   componentWillUpdate(nextProps) {
@@ -219,9 +255,9 @@ export class ActiveGameArea extends Component {
     //   // console.log('refreshUpdate');
     //   this.refreshGame();
     // }
-    if (nextProps.data !== undefined) {
-      this.refreshGame(nextProps.data,nextProps.content);
-    }
+    // if (nextProps.data !== undefined) {
+    //   this.refreshGame(nextProps.data,nextProps.content);
+    // }
 
   }
 
@@ -248,11 +284,12 @@ export class ActiveGameArea extends Component {
   // }
 
   render() {
+    let allData = this.refreshGame(this.props.data,this.props.content)
     console.log('renderGame');
     let boxData = (this.state.activeBoxTeam === 'home') ? (
-      this.state.homeBoxData
+      allData.homeBoxData
     ) : (
-      this.state.awayBoxData
+      allData.awayBoxData
     );
 
 
@@ -262,15 +299,15 @@ export class ActiveGameArea extends Component {
     let awayCityName = this.props.data.gameData.teams.away.locationName;
 
     let boxScore = '';
-    if (this.state.gameState === 'final' || this.state.gameState.search('progress') !== -1) {
+    if (allData.gameState === 'final' || allData.gameState.search('progress') !== -1) {
       boxScore = (
         <BoxScoreStateless
           playerData={boxData}
-          homeResources={this.state.resources.home}
-          awayResources={this.state.resources.away}
+          homeResources={allData.resources.home}
+          awayResources={allData.resources.away}
           homeTeamName={homeTeamName}
           awayTeamName={awayTeamName}
-          activeBoxTeam={this.state.activeBoxTeam}
+          activeBoxTeam={allData.activeBoxTeam}
           onClick={this.handleClick}
         />
       )
@@ -279,9 +316,9 @@ export class ActiveGameArea extends Component {
 
     let awayPPBadge = '';
     let homePPBadge = '';
-    if (this.state.gameState !== 'final') {
-      let awayPPBadge = this.state.awayPPBadge;
-      let homePPBadge = this.state.homePPBadge;
+    if (allData.gameState !== 'final') {
+      let awayPPBadge = allData.awayPPBadge;
+      let homePPBadge = allData.homePPBadge;
     }
 
     // let expandedChar = (this.state.expanded) ? (<FontAwesomeIcon icon="chevron-up"/>) : <FontAwesomeIcon icon='chevron-down'/>;
@@ -289,14 +326,14 @@ export class ActiveGameArea extends Component {
     // console.log('currentactiveteam',this.state.activeBoxTeam)
     return (
       <div className={"liveData"}>
-        {this.state.gameBanner}
-        {this.state.media.gameRecap}
-        {this.state.media.gamePreview}
+        {allData.gameBanner}
+        {allData.media.gameRecap}
+        {allData.media.gamePreview}
         <div className="top">
 
           <div className="top-left">
-            {this.state.currentPlays}
-            {this.state.scoringTable}
+            {allData.currentPlays}
+            {allData.scoringTable}
           </div>
           <div className="top-right">
             {boxScore}
