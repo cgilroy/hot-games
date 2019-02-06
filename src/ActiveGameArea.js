@@ -437,13 +437,13 @@ function BannerPeriodTable(props) {
     if (data[i] !== undefined) {
       let homeValue = data[i].home.goals;
       let homeStyle = (homeValue === 0) ? ({color: '#959595'}) : {};
-      homeData.push(<td style={homeStyle}>{homeValue}</td>);
+      homeData.push(<td key={i} style={homeStyle}>{homeValue}</td>);
       let awayValue = data[i].away.goals;
       let awayStyle = (awayValue === 0) ? ({color: '#959595'}) : {};
-      awayData.push(<td style={awayStyle}>{awayValue}</td>);
+      awayData.push(<td key={i} style={awayStyle}>{awayValue}</td>);
     } else {
-      homeData.push(<td style={{color:'#959595'}}>-</td>);
-      awayData.push(<td style={{color:'#959595'}}>-</td>)
+      homeData.push(<td key={i} style={{color:'#959595'}}>-</td>);
+      awayData.push(<td key={i} style={{color:'#959595'}}>-</td>)
     }
   }
   let overtimeGame = false;
