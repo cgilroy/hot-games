@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScoringTable } from './ScoringTable.js';
+import { PenaltyTable } from './PenaltyTable.js';
 import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
 import Moment from 'react-moment';
@@ -127,6 +128,19 @@ export class ActiveGameArea extends Component {
               );
             }
 
+            let penaltyTable = '';
+            if (gameState.search('progress') !== -1 || gameState === 'final') {
+              penaltyTable = (
+                <PenaltyTable
+                  plays={data.liveData.plays}
+                  homeTricode={homeTricode}
+                  awayTricode={awayTricode}
+                  homeResources={homeResources}
+                  awayResources={awayResources}
+                />
+              );
+            }
+
             let gameRecap ='';
             if (gameState.search('final') !== -1) {
               gameRecap = (contentData.editorial.recap.items.length !== 0) ? (
@@ -185,6 +199,7 @@ export class ActiveGameArea extends Component {
 
             return({
               scoringTable: scoringTable,
+              penaltyTable: penaltyTable,
               currentPlays: latestPlaysTable,
               homeBoxData: homeBoxData,
               awayBoxData: awayBoxData,
@@ -333,6 +348,7 @@ export class ActiveGameArea extends Component {
           <div className="top-left">
             {allData.currentPlays}
             {allData.scoringTable}
+            {allData.penaltyTable}
           </div>
           <div className="top-right">
             {boxScore}
@@ -518,7 +534,7 @@ function getTeamResources(teamName) {
       break;
     case 'Boston Bruins':
       imagePath = '/resources/NHL-Icons-BOS.jpg';
-      primaryColor = '#FFB81C';
+      primaryColor = '#000000';
       break;
     case 'Buffalo Sabres':
       imagePath = '/resources/NHL-Icons-BUF.jpg';
@@ -574,7 +590,7 @@ function getTeamResources(teamName) {
     break;
     case 'Nashville Predators':
     imagePath = '/resources/NHL-Icons-NAS.jpg';
-    primaryColor = '#FFB81C';
+    primaryColor = '#041E42';
     break;
     case 'New Jersey Devils':
     imagePath = '/resources/NHL-Icons-NJD.jpg';
