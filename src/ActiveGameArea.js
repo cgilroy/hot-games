@@ -508,6 +508,7 @@ function MainGameBanner(props) {
   return (
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
+        <span>HOME</span>
         <h1>{props.homeTeamName}</h1>
         <img src={homeTeamResources.imagePath} alt=''/>
       </div>
@@ -515,6 +516,7 @@ function MainGameBanner(props) {
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
         <img src={awayTeamResources.imagePath} alt=''/>
         <h1>{props.awayTeamName}</h1>
+        <span>AWAY</span>
       </div>
     </div>
   )
