@@ -211,7 +211,7 @@ div[class*='inprogress'] .timeRemaining {
   width: 100%;
 }
 
-.liveData .latestPlays .eventRow, .liveData .scoringTable .scoringRow {
+.liveData .latestPlays .eventRow, .liveData .scoringTable .scoringRow, .eventRow, .scoringRow {
   background: white;
   display: flex;
   width: 100%;
@@ -224,7 +224,19 @@ div[class*='inprogress'] .timeRemaining {
   border-bottom: 1px solid #e7e7e7;
 }
 
-.liveData .latestPlays .eventRow img, .scoringRow img {
+.scoringRowScore {
+  white-space: nowrap;
+}
+
+.scoringRowScore span {
+  color: white;
+  padding: 3px 0;
+  min-width: 24px;
+  text-align: center;
+  display: inline-block;
+}
+
+.eventRow img, .scoringRow img {
   height: 32px;
   width: 32px;
   border-radius: 16px;
@@ -232,7 +244,7 @@ div[class*='inprogress'] .timeRemaining {
   margin-right: 3px;
 }
 
-.liveData .latestPlays span .eventRow:first-child{
+span .eventRow:first-child{
   border-top: 1px solid #e7e7e7;
 }
 
@@ -240,12 +252,12 @@ div[class*='inprogress'] .timeRemaining {
   /* display:none; */
 }
 
-.liveData .latestPlays .eventRow p {
+.eventRow p {
   margin: 0;
   font-size: 12px;
 }
 
-.latestPlays .eventRow .eventTimeAndScore {
+.eventRow .eventTimeAndScore {
   display: flex;
   align-items: baseline;
   color:#999;
@@ -253,7 +265,7 @@ div[class*='inprogress'] .timeRemaining {
   margin-right: 3px
 }
 
-.liveData .latestPlays .eventRow p:last-child {
+.eventRow p:last-child {
   margin: 0;
   /* text-overflow: ellipsis; */
   /* white-space: nowrap; */
@@ -390,12 +402,12 @@ div[class*='inprogress'] .timeRemaining {
 
 }
 
-.scoringTable .periodHeader {
+.periodHeader {
   font-size: 11px;
   color: #787d82;
 }
 
-.scoringTable .periodSection {
+.periodSection {
   margin-bottom: 20px;
 }
 
@@ -422,7 +434,7 @@ div[class*='inprogress'] .timeRemaining {
   width: 100%;
   display: flex;
   /* margin-right: 13px; */
-  /* position: relative; */
+  position: relative;
   /* border-bottom: 1px solid white; */
 }
 
@@ -444,13 +456,14 @@ div[class*='inprogress'] .timeRemaining {
 
 .liveData .scoringRow>h4 {
   margin: 0;
-  border-right: 1px solid #262626;
+  /* border-right: 1px solid #262626; */
   line-height: 100%;
   padding:0 6px 0 4px;
-  font-size: 1em;
-  width: 50px;
+  font-size: 13px;
+  min-width: 50px;
   text-align: center;
   box-sizing: border-box;
+  font-weight: normal;
 }
 
 .liveData .scoreTime {

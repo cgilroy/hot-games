@@ -46,6 +46,7 @@ export class ScoringTable extends React.Component {
       let period = scoringPlay.about.ordinalNum;
       let strength = scoringPlay.result.strength.code;
       let emptyNet = scoringPlay.result.emptyNet;
+      let scoreArray = scoringPlay.about.goals;
       let time = scoringPlay.about.periodTime.replace(/^0/,'');
       this.scorer = '';
       this.assistOne = '';
@@ -92,12 +93,18 @@ export class ScoringTable extends React.Component {
       // } else {
       //   strength = '';
       // }
-
+      let scoreDiv = (
+        <div className="scoringRowScore">
+          <span style={{background: this.props.homeResources.primaryColor}}>{scoreArray.home}</span>
+          <span style={{background: this.props.awayResources.primaryColor}}>{scoreArray.away}</span>
+        </div>
+      )
 
         let rowMarkup = (
           <div className="scoringRow" key={i}>
             <img src={imgPath} alt=''/>
             <h4>{teamCode}</h4>
+            {scoreDiv}
             {emptyNet}
             {strength}
             <div className="scoreData">
