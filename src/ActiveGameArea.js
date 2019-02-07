@@ -112,6 +112,7 @@ export class ActiveGameArea extends Component {
                 awayTeamName={awayTeamName}
                 homeCityName={homeCityName}
                 awayCityName={awayCityName}
+                records={this.recordArrayToStrings(this.props.records)}
                 />
             );
 
@@ -253,6 +254,15 @@ export class ActiveGameArea extends Component {
 
   componentDidMount() {
       // this.refreshGame(this.props.data, this.props.content);
+  }
+
+  recordArrayToStrings(records) {
+    let hr = records.home;
+    let ar = records.away;
+    return({
+      home: "("+hr.wins+'-'+hr.losses+'-'+hr.ot+")",
+      away: "("+ar.wins+'-'+ar.losses+'-'+ar.ot+")"
+    })
   }
 
   shouldComponentUpdate(nextProps,nextState) {
@@ -508,15 +518,21 @@ function MainGameBanner(props) {
   return (
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
-        <span>HOME</span>
-        <h1>{props.homeTeamName}</h1>
+        <span className="bannerLabel">HOME</span>
+        <div className="nameAndRec">
+          <h1>{props.homeTeamName}</h1>
+          <span className="teamRecord">{props.records.home}</span>
+        </div>
         <img src={homeTeamResources.imagePath} alt=''/>
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
         <img src={awayTeamResources.imagePath} alt=''/>
-        <h1>{props.awayTeamName}</h1>
-        <span>AWAY</span>
+        <div className="nameAndRec">
+          <h1>{props.awayTeamName}</h1>
+          <span className="teamRecord">{props.records.away}</span>
+        </div>
+        <span className="bannerLabel">AWAY</span>
       </div>
     </div>
   )
