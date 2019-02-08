@@ -1,4 +1,5 @@
 import React from 'react';
+import RinkSVG from './RinkSVG.js';
 
 export class RinkMap extends React.Component {
   parsePlays(plays) {
@@ -32,6 +33,7 @@ export class RinkMap extends React.Component {
     let shotData = this.parsePlays(this.props.plays);
     return(
       <div className="rinkMap">
+        <RinkSVG />
         <svg viewBox="-100 -40 200 80">
           {shotData}
         </svg>

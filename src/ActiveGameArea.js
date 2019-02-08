@@ -136,6 +136,7 @@ export class ActiveGameArea extends Component {
             }
 
             let penaltyTable = '';
+            let rinkMap='';
             if (gameState.search('progress') !== -1 || gameState === 'final') {
               penaltyTable = (
                 <PenaltyTable
@@ -146,6 +147,9 @@ export class ActiveGameArea extends Component {
                   awayResources={awayResources}
                 />
               );
+              rinkMap = (
+                <RinkMap plays={data.liveData.plays} />
+              )
             }
 
             let gameRecap ='';
@@ -172,7 +176,6 @@ export class ActiveGameArea extends Component {
               )
             }
 
-            let rinkMap = '';
             let latestPlaysTable = '';
             if (gameState.search('progress') !== -1) {
               latestPlaysTable = (
@@ -186,9 +189,6 @@ export class ActiveGameArea extends Component {
                   gamePk={gameID}
                 />
               );
-              rinkMap = (
-                <RinkMap plays={data.liveData.plays} />
-              )
             }
 
             let homeBoxData = data.liveData.boxscore.teams.home;
