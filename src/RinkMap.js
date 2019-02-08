@@ -6,7 +6,7 @@ export class RinkMap extends React.Component {
     let shotsArray = [];
     for (let i = 0;i<=plays.allPlays.length-1;i++) {
       let playData = plays.allPlays[i];
-      if(playData.result.eventTypeId === "SHOT" || playData.result.eventTypeId === "GOAL") {
+      if(playData.result.eventTypeId === "FACEOFF" || playData.result.eventTypeId === "FACE-OFF") {
         let shotData = {
           description: playData.result.description,
           type: playData.result.eventTypeId,
@@ -23,6 +23,23 @@ export class RinkMap extends React.Component {
         );
         shotsArray.push(element);
       }
+      // if(playData.coordinates.x !== "" && playData.team !== undefined) {
+      //   let shotData = {
+      //     description: playData.result.description,
+      //     type: playData.result.eventTypeId,
+      //     coordinates: {
+      //       x: playData.coordinates.x,
+      //       y: playData.coordinates.y,
+      //       team: playData.team.name
+      //     }
+      //   }
+      //   let element = (
+      //     <g>
+      //       <circle cx={shotData.coordinates.x} cy={shotData.coordinates.y} r="1.4"></circle>
+      //     </g>
+      //   );
+      //   shotsArray.push(element);
+      // }
     }
 
     return shotsArray
@@ -33,9 +50,21 @@ export class RinkMap extends React.Component {
     let shotData = this.parsePlays(this.props.plays);
     return(
       <div className="rinkMap">
-        <RinkSVG />
-        <svg viewBox="-100 -40 200 80">
+        <img src="/resources/rink.png" />
+        <svg viewBox="-100 -42.5 200 85" className="shotsSVGData">
           {shotData}
+          <g>
+            <circle cx='0' cy='40' r="1.4"></circle>
+          </g>
+          <g>
+            <circle cx='0' cy='-40' r="1.4"></circle>
+          </g>
+          <g>
+            <circle cx='-100' cy='0' r="1.4"></circle>
+          </g>
+          <g>
+            <circle cx='100' cy='0' r="1.4"></circle>
+          </g>
         </svg>
       </div>
     )

@@ -329,4 +329,11 @@ box-sizing: border-box;
 .rinkMap {
   height: 200px;
   width: 400px;
+  position: relative;
+}
+
+.shotsSVGData {
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
