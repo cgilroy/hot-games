@@ -23,13 +23,14 @@
 
 .bannerGroup .nameAndRec h1 {
   /* width: 100%; */
+  font-size: 24px;
   margin: 0 5px;
   color: white;
   font-weight: normal;
   text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.bannerGroup .nameAndRec span {
+.bannerGroup .nameAndRec .teamRecord {
   font-size: 12px;
 }
 
@@ -47,6 +48,16 @@
 
 .bannerGroup.home {
   justify-content: flex-end;
+}
+
+.bannerGroup .logoPPBadge {
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 5px;
+  border-radius: 3px;
+  background: #ff0000;
+  font-weight: bold;
+  margin: 0 auto;
 }
 
 .bannerGroup .bannerLabel {
@@ -313,4 +324,9 @@ box-sizing: border-box;
   margin:0;
   font-weight: normal;
   font-size: 22px;
+}
+
+.rinkMap {
+  height: 200px;
+  width: 400px;
 }
