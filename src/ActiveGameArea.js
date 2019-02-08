@@ -3,6 +3,7 @@ import { ScoringTable } from './ScoringTable.js';
 import { PenaltyTable } from './PenaltyTable.js';
 import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
+import { RinkMap } from './RinkMap.js';
 import Moment from 'react-moment';
 import './ActiveGameArea.css';
 import TestLiveData from './json-test-livegame.json';
@@ -53,9 +54,11 @@ export class ActiveGameArea extends Component {
           let gameDate = data.gameData.datetime.dateTime;
           let timeLeft = "";
           let ordinalPeriod = "";
-          let homeTeamOnPP = "";
-          let awayTeamOnPP = "";
-          let powerPlayStrength = "";
+          let ppData = {
+            homeTeamOnPP: "",
+            awayTeamOnPP: "",
+            powerPlayStrength:""
+          };
           let homeScore = "";
           let awayScore = "";
           let gameState = data.gameData.status.detailedState;
@@ -64,9 +67,11 @@ export class ActiveGameArea extends Component {
             timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
             timeLeft = timeLeft.replace(/^0/,'');
             ordinalPeriod = data.liveData.linescore.currentPeriodOrdinal;
-            homeTeamOnPP = data.liveData.linescore.teams.home.powerPlay;
-            awayTeamOnPP = data.liveData.linescore.teams.away.powerPlay;
-            powerPlayStrength = data.liveData.linescore.powerPlayStrength;
+            ppData = {
+              homeTeamOnPP: data.liveData.linescore.teams.home.powerPlay,
+              awayTeamOnPP: data.liveData.linescore.teams.away.powerPlay,
+              powerPlayStrength: data.liveData.linescore.powerPlayStrength
+            }
             homeScore = data.liveData.linescore.teams.home.goals;
             awayScore = data.liveData.linescore.teams.away.goals;
           }
@@ -113,6 +118,7 @@ export class ActiveGameArea extends Component {
                 homeCityName={homeCityName}
                 awayCityName={awayCityName}
                 records={this.recordArrayToStrings(this.props.records)}
+                ppData={ppData}
                 />
             );
 
@@ -166,6 +172,7 @@ export class ActiveGameArea extends Component {
               )
             }
 
+            let rinkMap = '';
             let latestPlaysTable = '';
             if (gameState.search('progress') !== -1) {
               latestPlaysTable = (
@@ -179,20 +186,23 @@ export class ActiveGameArea extends Component {
                   gamePk={gameID}
                 />
               );
+              rinkMap = (
+                <RinkMap plays={data.liveData.plays} />
+              )
             }
 
             let homeBoxData = data.liveData.boxscore.teams.home;
             let awayBoxData = data.liveData.boxscore.teams.away;
 
-            let homePPLogoBadge = homeTeamOnPP ? (
+            let homePPLogoBadge = ppData.homeTeamOnPP ? (
               <div className="logoPPBadge">
-                <h4>{powerPlayStrength}</h4>
+                <h4>{ppData.powerPlayStrength}</h4>
               </div>
             ) : ('');
 
-            let awayPPLogoBadge = awayTeamOnPP ? (
+            let awayPPLogoBadge = ppData.awayTeamOnPP ? (
               <div className="logoPPBadge">
-                <h4>{powerPlayStrength}</h4>
+                <h4>{ppData.powerPlayStrength}</h4>
               </div>
             ) : ('');
 
@@ -214,6 +224,7 @@ export class ActiveGameArea extends Component {
                 home:homeResources,
                 away:awayResources
               },
+              rinkMap: rinkMap,
               media: {
                 gameRecap:gameRecap,
                 gamePreview:gamePreview
@@ -356,6 +367,7 @@ export class ActiveGameArea extends Component {
         <div className="top">
 
           <div className="top-left">
+            {allData.rinkMap}
             {allData.currentPlays}
             {allData.scoringTable}
             {allData.penaltyTable}
@@ -515,10 +527,22 @@ function MainGameBanner(props) {
   console.log(props);
   let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
   let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
+  let homePPLogoBadge = props.ppData.homeTeamOnPP ? (
+    <span className="logoPPBadge">
+      {props.ppData.powerPlayStrength}
+    </span>
+  ) : ('');
+
+  let awayPPLogoBadge = props.ppData.awayTeamOnPP ? (
+    <span className="logoPPBadge">
+      {props.ppData.powerPlayStrength}
+    </span>
+  ) : ('');
   return (
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
         <span className="bannerLabel">HOME</span>
+        {homePPLogoBadge}
         <div className="nameAndRec">
           <h1>{props.homeTeamName}</h1>
           <span className="teamRecord">{props.records.home}</span>
@@ -532,6 +556,7 @@ function MainGameBanner(props) {
           <h1>{props.awayTeamName}</h1>
           <span className="teamRecord">{props.records.away}</span>
         </div>
+        {awayPPLogoBadge}
         <span className="bannerLabel">AWAY</span>
       </div>
     </div>
