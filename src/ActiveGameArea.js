@@ -148,7 +148,11 @@ export class ActiveGameArea extends Component {
                 />
               );
               rinkMap = (
-                <RinkMap plays={data.liveData.plays} />
+                <RinkMap
+                plays={data.liveData.plays}
+                homeResources={homeResources}
+                awayResources={awayResources}
+                />
               )
             }
 
@@ -695,5 +699,5 @@ function getTeamResources(teamName) {
       primaryColor = '#ff0000';
 
   }
-  return {imagePath,primaryColor}
+  return {imagePath,primaryColor,teamName}
 }
