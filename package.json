@@ -18,6 +18,7 @@
     "react-spinners": "^0.5.1",
     "react-stack-grid": "^0.7.1",
     "react-table": "^6.8.6",
+    "react-tooltip": "^3.9.2",
     "react-transition-group": "^1.2.1",
     "simplebar-react": "0.0.1-beta.4"
   },
