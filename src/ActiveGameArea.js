@@ -152,6 +152,8 @@ export class ActiveGameArea extends Component {
                 plays={data.liveData.plays}
                 homeResources={homeResources}
                 awayResources={awayResources}
+                homeTricode={homeTricode}
+                awayTricode={awayTricode}
                 />
               )
             }

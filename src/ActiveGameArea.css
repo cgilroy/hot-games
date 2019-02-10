@@ -5,7 +5,7 @@
   display: flex;
   position: sticky;
   top: 0;
-  z-index: 9999
+  z-index: 999
 }
 
 .bannerGroup {
@@ -273,7 +273,7 @@ box-sizing: border-box;
 .gameRecap .blurb {
   position: absolute;
   top:0;
-  z-index: 999;
+  z-index: 99;
   width: 100%;
   background: #262626ed;
 }
@@ -327,9 +327,41 @@ box-sizing: border-box;
 }
 
 .rinkMap {
-  height: 200px;
-  width: 400px;
+  /* height: 200px; */
+  /* width: 400px; */
   position: relative;
+}
+
+.rinkMap .tooltipTime {
+  margin-right: 4px;
+}
+
+.rinkMap .toolTipInfo {
+
+}
+
+.legendWrapper {
+  display: flex;
+  width: 100%;
+  font-size: 12px;
+  background: #c9ddf5;
+
+}
+
+.legendTricode {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.legendHalf {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.legendText {
+  padding: 0 5px;
 }
 
 .shotsSVGData {
