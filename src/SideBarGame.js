@@ -195,97 +195,97 @@ function getLogoPath(teamName) {
   var imagePath: string;
   switch (teamName) {
     case 'Anaheim Ducks':
-      imagePath = '/resources/NHL-Icons-ANA.jpg';
+      imagePath = '/resources/NHL-Icons-ANA.svg';
       break;
     case 'Boston Bruins':
-      imagePath = '/resources/NHL-Icons-BOS.jpg';
+      imagePath = '/resources/NHL-Icons-BOS.svg';
       break;
     case 'Buffalo Sabres':
-      imagePath = '/resources/NHL-Icons-BUF.jpg';
+      imagePath = '/resources/NHL-Icons-BUF.svg';
       break;
     case 'Calgary Flames':
-      imagePath = '/resources/NHL-Icons-CAL.jpg';
+      imagePath = '/resources/NHL-Icons-CAL.svg';
       break;
     case 'Carolina Hurricanes':
-    imagePath = '/resources/NHL-Icons-CAR.jpg';
+    imagePath = '/resources/NHL-Icons-CAR.svg';
     break;
     case 'Chicago Blackhawks':
-    imagePath = '/resources/NHL-Icons-CHI.jpg';
+    imagePath = '/resources/NHL-Icons-CHI.svg';
     break;
     case 'Colorado Avalanche':
-    imagePath = '/resources/NHL-Icons-COL.jpg';
+    imagePath = '/resources/NHL-Icons-COL.svg';
     break;
     case 'Columbus Blue Jackets':
-    imagePath = '/resources/NHL-Icons-COL1.jpg';
+    imagePath = '/resources/NHL-Icons-COL1.svg';
     break;
     case 'Dallas Stars':
-    imagePath = '/resources/NHL-Icons-DAL.jpg';
+    imagePath = '/resources/NHL-Icons-DAL.svg';
     break;
     case 'Detroit Red Wings':
-    imagePath = '/resources/NHL-Icons-DET.jpg';
+    imagePath = '/resources/NHL-Icons-DET.svg';
     break;
     case 'Edmonton Oilers':
-    imagePath = '/resources/NHL-Icons-EDM.jpg';
+    imagePath = '/resources/NHL-Icons-EDM.svg';
     break;
     case 'Florida Panthers':
-      imagePath = '/resources/NHL-Icons-FLO.jpg';
+      imagePath = '/resources/NHL-Icons-FLO.svg';
       break;
     case 'Los Angeles Kings':
-    imagePath = '/resources/NHL-Icons-LAK.jpg';
+    imagePath = '/resources/NHL-Icons-LAK.svg';
     break;
     case 'Minnesota Wild':
-    imagePath = '/resources/NHL-Icons-MIN.jpg';
+    imagePath = '/resources/NHL-Icons-MIN.svg';
     break;
     case 'Montréal Canadiens':
-    imagePath = '/resources/NHL-Icons-MTL.jpg';
+    imagePath = '/resources/NHL-Icons-MTL.svg';
     break;
     case 'Nashville Predators':
-    imagePath = '/resources/NHL-Icons-NAS.jpg';
+    imagePath = '/resources/NHL-Icons-NAS.svg';
     break;
     case 'New Jersey Devils':
-    imagePath = '/resources/NHL-Icons-NJD.jpg';
+    imagePath = '/resources/NHL-Icons-NJD.svg';
     break;
     case 'New York Islanders':
-      imagePath = '/resources/NHL-Icons-NYI.jpg';
+      imagePath = '/resources/NHL-Icons-NYI.svg';
       break;
     case 'New York Rangers':
-      imagePath = '/resources/NHL-Icons-NYR.jpg';
+      imagePath = '/resources/NHL-Icons-NYR.svg';
       break;
     case 'Ottawa Senators':
-    imagePath = '/resources/NHL-Icons-OTT.jpg';
+    imagePath = '/resources/NHL-Icons-OTT.svg';
     break;
     case 'Philadelphia Flyers':
-    imagePath = '/resources/NHL-Icons-PHI.jpg';
+    imagePath = '/resources/NHL-Icons-PHI.svg';
     break;
     case 'Arizona Coyotes':
-    imagePath = '/resources/NHL-Icons-PHO.jpg';
+    imagePath = '/resources/NHL-Icons-PHO.svg';
     break;
     case 'Pittsburgh Penguins':
-    imagePath = '/resources/NHL-Icons-PIT.jpg';
+    imagePath = '/resources/NHL-Icons-PIT.svg';
     break;
     case 'San Jose Sharks':
-    imagePath = '/resources/NHL-Icons-SJ.jpg';
+    imagePath = '/resources/NHL-Icons-SJ.svg';
     break;
     case 'St. Louis Blues':
-      imagePath = '/resources/NHL-Icons-SL.jpg';
+      imagePath = '/resources/NHL-Icons-SL.svg';
       break;
     case 'Tampa Bay Lightning':
-    imagePath = '/resources/NHL-Icons-TAM.jpg';
+    imagePath = '/resources/NHL-Icons-TAM.svg';
     break;
     case 'Toronto Maple Leafs':
-      imagePath = '/resources/NHL-Icons-TOR.jpg';
+      imagePath = '/resources/NHL-Icons-TOR.svg';
       break;
     case 'Vancouver Canucks':
-    imagePath = '/resources/NHL-Icons-VAN.jpg';
+    imagePath = '/resources/NHL-Icons-VAN.svg';
     break;
     case 'Vegas Golden Knights':
-    imagePath = '/resources/NHL-Icons-VGS.jpg';
+    imagePath = '/resources/NHL-Icons-VGS.svg';
     break;
     case 'Winnipeg Jets':
-    imagePath = '/resources/NHL-Icons-WIN.jpg';
+    imagePath = '/resources/NHL-Icons-WIN.svg';
     break;
     case 'Washington Capitals':
-      imagePath = '/resources/NHL-Icons-WAS.jpg';
+      imagePath = '/resources/NHL-Icons-WAS.svg';
       break;
     default:
 
