@@ -159,6 +159,7 @@ export class ActiveGameArea extends Component {
             }
 
             let gameRecap ='';
+            let threeStars ='';
             if (gameState.search('final') !== -1) {
               gameRecap = (contentData.editorial.recap.items.length !== 0) ? (
                 <GameRecap
@@ -166,7 +167,14 @@ export class ActiveGameArea extends Component {
                 />
               ) : (
                 ''
-              )
+              );
+              threeStars = (data.liveData.decisions.firstStar !== undefined) ? (
+                <ThreeStars
+                  firstStar={data.liveData.decisions.firstStar}
+                  secondStar={data.liveData.decisions.secondStar}
+                  thirdStar={data.liveData.decisions.thirdStar}
+                />
+              ) : ('')
             }
 
             let gamePreview = '';
@@ -234,7 +242,8 @@ export class ActiveGameArea extends Component {
               media: {
                 gameRecap:gameRecap,
                 gamePreview:gamePreview
-              }
+              },
+              threeStars: threeStars
               // activeBoxScore: activeBoxScore
             })
 
@@ -374,6 +383,7 @@ export class ActiveGameArea extends Component {
 
           <div className="top-left">
             {allData.rinkMap}
+            {allData.threeStars}
             {allData.currentPlays}
             {allData.scoringTable}
             {allData.penaltyTable}
@@ -395,6 +405,23 @@ export class ActiveGameArea extends Component {
     )
   }
 
+}
+
+function ThreeStars(props) {
+
+  return(
+    <div className="threeStars">
+      <div className="star">
+        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.firstStar.id+".jpg"} />
+      </div>
+      <div className="star">
+        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.secondStar.id+".jpg"} />
+      </div>
+      <div className="star">
+        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.thirdStar.id+".jpg"} />
+      </div>
+    </div>
+  )
 }
 
 function GameRecap(props) {
