@@ -378,6 +378,7 @@ box-sizing: border-box;
 .starArea > img {
   border-radius: 50%;
   width: 80px;
+  height: 80px;
   border: 2px solid #b2b2b2;
   box-shadow: 0 2px 3px 1px #ddd
 }
