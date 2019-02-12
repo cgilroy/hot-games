@@ -88,6 +88,9 @@ export class ActiveGameArea extends Component {
           }
           let homeTricode = data.gameData.teams.home.abbreviation;
           let awayTricode = data.gameData.teams.away.abbreviation;
+
+          let homeBoxData = data.liveData.boxscore.teams.home;
+          let awayBoxData = data.liveData.boxscore.teams.away;
           // if (currentTimeStamp !== this.state.timeStamp) {
             // console.log('firstRefreshIn')
             // if ((this.props.gameState === "inprogress-critical") || (this.props.gameState === "inprogress") || (this.props.gameState === "final")) {
@@ -173,6 +176,10 @@ export class ActiveGameArea extends Component {
                   firstStar={data.liveData.decisions.firstStar}
                   secondStar={data.liveData.decisions.secondStar}
                   thirdStar={data.liveData.decisions.thirdStar}
+                  homeSkaterData={homeBoxData.players}
+                  awaySkaterData={awayBoxData.players}
+                  homeResources={homeResources}
+                  awayResources={awayResources}
                 />
               ) : ('')
             }
@@ -204,9 +211,6 @@ export class ActiveGameArea extends Component {
                 />
               );
             }
-
-            let homeBoxData = data.liveData.boxscore.teams.home;
-            let awayBoxData = data.liveData.boxscore.teams.away;
 
             let homePPLogoBadge = ppData.homeTeamOnPP ? (
               <div className="logoPPBadge">
@@ -408,17 +412,130 @@ export class ActiveGameArea extends Component {
 }
 
 function ThreeStars(props) {
+  let starLogoPaths=['','',''];
+  let firstStarData = props.homeSkaterData["ID"+props.firstStar.id];
+  starLogoPaths[0] = props.homeResources.imagePath;
+  if (firstStarData === undefined) {
+    firstStarData = props.awaySkaterData["ID"+props.firstStar.id]
+    starLogoPaths[0] = props.awayResources.imagePath;
+  }
+  let secondStarData = props.homeSkaterData["ID"+props.secondStar.id];
+  starLogoPaths[1] = props.homeResources.imagePath;
+  if (secondStarData === undefined) {
+    secondStarData = props.awaySkaterData["ID"+props.secondStar.id]
+    starLogoPaths[1] = props.awayResources.imagePath;
+  }
+  let thirdStarData = props.homeSkaterData["ID"+props.thirdStar.id];
+  starLogoPaths[2] = props.homeResources.imagePath;
+  if (thirdStarData === undefined) {
+    thirdStarData = props.awaySkaterData["ID"+props.thirdStar.id]
+    starLogoPaths[2] = props.awayResources.imagePath;
+  }
 
+  let starData = [firstStarData,secondStarData,thirdStarData];
+  let starTables = [];
+
+  for (let i=0;i<=2;i++) {
+    let data = starData[i];
+    let jsx='';
+    if (data.position.code === "G") {
+      jsx = (
+        <table>
+        <thead>
+          <tr>
+            <th>SA</th>
+            <th>GA</th>
+            <th>SV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{data.stats.goalieStats.shots}</td>
+            <td>{data.stats.goalieStats.shots-data.stats.goalieStats.saves}</td>
+            <td>{data.stats.goalieStats.saves}</td>
+          </tr>
+        </tbody>
+        </table>
+      )
+    } else {
+      jsx = (
+        <table>
+          <thead>
+            <tr>
+              <th>G</th>
+              <th>A</th>
+              <th>+/-</th>
+              <th>TOI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{data.stats.skaterStats.goals}</td>
+              <td>{data.stats.skaterStats.assists}</td>
+              <td>{data.stats.skaterStats.plusMinus}</td>
+              <td>{data.stats.skaterStats.timeOnIce}</td>
+            </tr>
+          </tbody>
+        </table>
+      )
+    }
+    starTables.push(jsx);
+  }
   return(
     <div className="threeStars">
-      <div className="star">
+      <div className="starArea">
         <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.firstStar.id+".jpg"} />
+        <span className="starName">
+          <img src={starLogoPaths[0]} />
+          {props.firstStar.fullName}
+        </span>
+        <div className="starStats">
+          {starTables[0]}
+        </div>
+        <span className="stars">
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+        </span>
       </div>
-      <div className="star">
+      <div className="starArea">
         <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.secondStar.id+".jpg"} />
+        <span className="starName">
+          <img src={starLogoPaths[1]} />
+          {props.secondStar.fullName}
+        </span>
+        <div className="starStats">
+          {starTables[1]}
+        </div>
+        <span className="stars">
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+        </span>
       </div>
-      <div className="star">
+      <div className="starArea">
         <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.thirdStar.id+".jpg"} />
+        <span className="starName">
+          <img src={starLogoPaths[2]} />
+          {props.thirdStar.fullName}
+        </span>
+        <div className="starStats">
+          {starTables[2]}
+        </div>
+        <span className="stars">
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+          <span className="star">
+            <img src="/resources/star.svg" />
+          </span>
+        </span>
       </div>
     </div>
   )
