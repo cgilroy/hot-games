@@ -23,7 +23,7 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-05';
+    // let dateTest = '?date=2019-02-07';
     let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -170,7 +170,7 @@ sideBarClick(gameFID) {
 
       <div className="totalViewContainer">
         <div className="gamesSideBar">
-            <img src={'/resources/hockey-night-live-logo.png'}/>
+            
             <div className="gamesScroll">
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
