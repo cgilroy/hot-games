@@ -439,6 +439,10 @@ function ThreeStars(props) {
     let data = starData[i];
     let jsx='';
     if (data.position.code === "G") {
+      let savePercentage = (data.stats.goalieStats.shots !== 0) ? (
+        +data.stats.goalieStats.saves / +data.stats.goalieStats.shots
+      ) : (0);
+      savePercentage = savePercentage.toFixed(3);
       jsx = (
         <table>
         <thead>
@@ -446,6 +450,7 @@ function ThreeStars(props) {
             <th>SA</th>
             <th>GA</th>
             <th>SV</th>
+            <th>SV%</th>
           </tr>
         </thead>
         <tbody>
@@ -453,6 +458,7 @@ function ThreeStars(props) {
             <td>{data.stats.goalieStats.shots}</td>
             <td>{data.stats.goalieStats.shots-data.stats.goalieStats.saves}</td>
             <td>{data.stats.goalieStats.saves}</td>
+            <td>{savePercentage}</td>
           </tr>
         </tbody>
         </table>
