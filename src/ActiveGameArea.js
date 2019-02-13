@@ -443,6 +443,7 @@ function ThreeStars(props) {
         +data.stats.goalieStats.saves / +data.stats.goalieStats.shots
       ) : (0);
       savePercentage = savePercentage.toFixed(3);
+      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/goalie.jpg");
       jsx = (
         <table>
         <thead>
@@ -465,7 +466,6 @@ function ThreeStars(props) {
       )
     } else {
       errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/skater.jpg");
-      // errorPhotos[0] = "https://nhl.bamcontent.com/images/headshots/current/168x168/player.jpg";
       jsx = (
         <table>
           <thead>
@@ -525,7 +525,7 @@ function ThreeStars(props) {
         </span>
       </div>
       <div className="starArea">
-        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[2]}} alt='No Photo'/>
+        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.thirdStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[2]}} alt='No Photo'/>
         <span className="starName">
           <img src={starLogoPaths[2]} />
           {props.thirdStar.fullName}

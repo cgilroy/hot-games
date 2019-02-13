@@ -243,6 +243,12 @@ div[class*='inprogress'] .timeRemaining {
   margin-right: 3px;
 }
 
+.penaltyTable .scorer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 330px;
+}
+
 span .eventRow:first-child{
   border-top: 1px solid #e7e7e7;
 }

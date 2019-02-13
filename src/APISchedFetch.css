@@ -15,6 +15,11 @@
 
 }
 
+.gamesSideBar .disclaimer {
+  font-size: 10px;
+  width: 230px;
+}
+
 .gamesScroll h3 {
   background: linear-gradient(45deg, #188FFF 0%, #0036B0 100%);
   color: white;

@@ -170,7 +170,6 @@ sideBarClick(gameFID) {
 
       <div className="totalViewContainer">
         <div className="gamesSideBar">
-            
             <div className="gamesScroll">
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
@@ -188,6 +187,10 @@ sideBarClick(gameFID) {
                   this.state.finalGames.map((game) => <SideBarGame key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
                 }
               </div>
+            </div>
+            <div className="disclaimer">
+              <p>This website is not in any way affiliated with the National Hockey League (NHL) or any of its respective teams. The NHL logo, team logos, team names, and other trademarks/copyrighted images are the property of their respective owners.</p>
+              <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
             </div>
         </div>
         <div className={"mainGameArea " + (this.state.loading ? 'loading' : '')}>

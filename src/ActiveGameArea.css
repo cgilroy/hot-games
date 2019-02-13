@@ -277,6 +277,7 @@ box-sizing: border-box;
   z-index: 99;
   width: 100%;
   background: #262626ed;
+  box-sizing: border-box;
 }
 
 .gameRecap .description, .gamePreview .description {
@@ -287,6 +288,7 @@ box-sizing: border-box;
   background: #262626ed;
   width: 100%;
   border-top: 2px solid #ff520d;
+  box-sizing: border-box;
 }
 
 .gameRecap a, .gamePreview a {
