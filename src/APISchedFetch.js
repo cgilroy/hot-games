@@ -23,8 +23,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-07';
-    let dateTest = '';
+    let dateTest = '?date=2019-02-07';
+    // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
