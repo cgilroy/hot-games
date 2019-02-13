@@ -1,6 +1,4 @@
 import React from 'react';
-import * as ReactDOM from "react-dom";
-import RinkSVG from './RinkSVG.js';
 import ReactTooltip from 'react-tooltip';
 
 export class RinkMap extends React.Component {
@@ -25,7 +23,7 @@ export class RinkMap extends React.Component {
           ) : (this.props.awayResources.primaryColor),
           time: playData.about.periodTime.replace(/^0/,'')
         }
-        if (playData.about.period % 2 == 0) {
+        if (playData.about.period % 2 === 0) {
           shotData.coordinates.x = -shotData.coordinates.x;
           shotData.coordinates.y = -shotData.coordinates.y;
         }
@@ -103,7 +101,7 @@ componentDidUpdate() {
     )
     return(
       <div className="rinkMap">
-        <img src="/resources/rink.svg" />
+        <img src="/resources/rink.svg" alt='rink-map'/>
         {output.toolTips}
         <svg viewBox="-100 -42.5 200 85" className="shotsSVGData">
           <clipPath id="logoCircle">

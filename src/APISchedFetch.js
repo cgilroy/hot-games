@@ -3,7 +3,7 @@ import {SideBarGame} from './SideBarGame.js';
 import {ActiveGameArea} from './ActiveGameArea.js';
 import './APISchedFetch.css';
 import { BounceLoader } from 'react-spinners';
-import { css } from '@emotion/core';
+// import { css } from '@emotion/core';
 
 export class APISchedFetch extends Component {
   constructor() {
@@ -45,7 +45,7 @@ export class APISchedFetch extends Component {
       let gameState = iterGame.status.detailedState;
       gameState = gameState.toLowerCase().replace(/\s/g, '');
       let gamePk = iterGame.gamePk;
-      let gameTime = iterGame.gameDate;
+      // let gameTime = iterGame.gameDate;
       let gameRecords = {
         gamePk: gamePk,
         home: homeTeam.leagueRecord,
