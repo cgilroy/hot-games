@@ -395,10 +395,10 @@ span .eventRow:first-child{
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.liveData .scoringTable .no-scoring-message {
+.liveData .no-scoring-message {
   height: 100%;
   text-align: center;
-
+  margin: 10px;
 }
 
 .periodHeader {
@@ -486,7 +486,6 @@ span .eventRow:first-child{
   text-align: left;
   margin: 0;
   /* height: 25px; */
-  /* width: 100%; */
   white-space: nowrap;
 }
 

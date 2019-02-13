@@ -235,7 +235,7 @@ box-sizing: border-box;
 }
 
 .gameRecap p, .gamePreview p {
-  margin: 0
+  margin: 0;
 }
 
 .heroImage {
@@ -287,6 +287,12 @@ box-sizing: border-box;
   background: #262626ed;
   width: 100%;
   border-top: 2px solid #ff520d;
+}
+
+.gameRecap a, .gamePreview a {
+  text-decoration: none;
+  pointer-events: none;
+  color: white;
 }
 
 .gamePreview h1 {
