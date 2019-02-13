@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import SimpleBar from 'simplebar-react';
 
 export class BoxScoreStateless extends React.Component {
 
@@ -202,35 +201,37 @@ export class BoxScoreStateless extends React.Component {
     }];
     return(
       <div className="boxScore">
-        <SimpleBar style={{height:'240px'}}>
-          <ReactTable
-            data={forwardArray}
-            columns={forwardColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-          <ReactTable
-            data={defenseArray}
-            columns={defenseColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-          <ReactTable
-            data={goalieArray}
-            columns={goalieColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-        </SimpleBar>
+        <div className="buttonRow">
+          <button className={this.props.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.props.onClick('home')}>{this.props.homeTeamName}</button>
+          <button className={this.props.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.props.onClick('away')}>{this.props.awayTeamName}</button>
+        </div>
+        <ReactTable
+          data={forwardArray}
+          columns={forwardColumns}
+          resizable={false}
+          sortable={false}
+          noDataText="No stats available"
+          minRows={0}
+          showPaginationBottom={false}
+        />
+        <ReactTable
+          data={defenseArray}
+          columns={defenseColumns}
+          resizable={false}
+          sortable={false}
+          noDataText="No stats available"
+          minRows={0}
+          showPaginationBottom={false}
+        />
+        <ReactTable
+          data={goalieArray}
+          columns={goalieColumns}
+          resizable={false}
+          sortable={false}
+          noDataText="No stats available"
+          minRows={0}
+          showPaginationBottom={false}
+        />
       </div>
     )
   }

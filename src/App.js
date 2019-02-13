@@ -9,9 +9,6 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={'/resources/hockey-night-live-logo.jpg'}/>
-        </header>
         <APISchedFetch />
       </div>
     );

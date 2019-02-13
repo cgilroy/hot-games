@@ -1,12 +1,18 @@
 import React from 'react';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+// import SimpleBar from 'simplebar-react';
+// import 'simplebar/dist/simplebar.min.css';
 
 export class ScoringTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scoringData: [],
+      scoringData: {
+        firstScoring: [],
+        secondScoring:[],
+        thirdScoring:[],
+        otScoring:[],
+        soScoring:[]
+      }
     }
     this.parseScoringData = this.parseScoringData.bind(this);
     this.superscriptPeriod = this.superscriptPeriod.bind(this);
@@ -27,8 +33,14 @@ export class ScoringTable extends React.Component {
 
   parseScoringData(plays) {
     let scoringPlays = plays.scoringPlays;
-    let scoringData = [];
-    for (let i = 0, l = scoringPlays.length; i < l; i++) {
+    let scoringData = {
+      firstScoring: [],
+      secondScoring:[],
+      thirdScoring:[],
+      otScoring:[],
+      soScoring:[]
+    };
+    for (let i = scoringPlays.length-1; i >= 0; i--) {
       let playIndex = scoringPlays[i];
       let scoringPlay = plays.allPlays[playIndex];
       let teamCode = scoringPlay.team.triCode;
@@ -36,23 +48,26 @@ export class ScoringTable extends React.Component {
       let period = scoringPlay.about.ordinalNum;
       let strength = scoringPlay.result.strength.code;
       let emptyNet = scoringPlay.result.emptyNet;
+      let scoreArray = scoringPlay.about.goals;
       let time = scoringPlay.about.periodTime.replace(/^0/,'');
-      this.scorer = '';
-      this.assistOne = '';
-      this.assistTwo = '';
+      let scorer = '';
+      let assistOne = '';
+      let assistTwo = '';
+      let seasonTotal = '';
       for (let j = 0, k = players.length; j < k; j++) {
         // let scorer = '';
         // let assistOne = '';
         // let assistTwo = '';
         switch (players[j].playerType) {
           case 'Scorer':
-            this.scorer = players[j].player.fullName + " (" + players[j].seasonTotal + ")";
+            scorer = players[j].player.fullName;
+            seasonTotal = players[j].seasonTotal;
             break;
           case 'Assist':
             if(j<2){
-              this.assistOne = players[j].player.fullName;
+              assistOne = players[j].player.fullName;
             }else {
-              this.assistTwo = players[j].player.fullName;
+              assistTwo = players[j].player.fullName;
             };
             break;
           default:
@@ -68,6 +83,13 @@ export class ScoringTable extends React.Component {
         <p className="emptyNet">(EN)</p>
       ) : ('');
 
+      let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+      if (scoringPlay.team !== undefined) {
+        imgPath = (scoringPlay.team.triCode === this.props.homeTricode) ? (
+          this.props.homeResources.imagePath
+        ) : (this.props.awayResources.imagePath)
+      }
+
       // if (strength !== 'EVEN') {
       //   strength = (
       //     <p className="goalStrength">({strength})</p>
@@ -75,27 +97,69 @@ export class ScoringTable extends React.Component {
       // } else {
       //   strength = '';
       // }
-
-      if (scoringData !== undefined) {
-        scoringData.push(
-          <div className="scoringRow" key={i}>
-            <h4>{teamCode}</h4>
-            {emptyNet}
-            {strength}
-            <div className="scoreData">
-              <p className="scorer">{this.scorer}</p>
-              <div className="assistData">
-                <p className="assistOne">{this.assistOne}</p>
-                <p className="assistTwo">{this.assistTwo}</p>
-              </div>
-            </div>
-            <div className="scoreTime">
-              <h4>{time}&nbsp;</h4>
-              {this.superscriptPeriod(period)}
+      let scoreData = '';
+      if (period !== "SO") {
+        scoreData = (
+          <div className="scoreData">
+            <p className="scorer">{scorer+ " (" + seasonTotal + ")"}</p>
+            <div className="assistData">
+              <p className="assistOne">{assistOne}</p>
+              <p className="assistTwo">{assistTwo}</p>
             </div>
           </div>
         )
+      } else {
+        scoreData = (
+          <div className="scoreData">
+            <p className="scorer">{scorer+ " (Shootout Winner)"}</p>
+          </div>
+        );
+        if (this.props.homeTricode === scoringPlay.team.triCode) {
+          scoreArray.home = scoreArray.home + 1;
+        } else {
+          scoreArray.away = scoreArray.away + 1;
+        }
       }
+
+      let scoreDiv = (
+        <div className="scoringRowScore">
+          <span style={{background: this.props.homeResources.primaryColor}}>{scoreArray.home}</span>
+          <span style={{background: this.props.awayResources.primaryColor}}>{scoreArray.away}</span>
+        </div>
+      );
+
+        let rowMarkup = (
+          <div className="scoringRow" key={i}>
+            <img src={imgPath} alt=''/>
+            <h4>{teamCode}</h4>
+            {scoreDiv}
+            {emptyNet}
+            {strength}
+            {scoreData}
+            <div className="scoreTime">
+              <h4>{time}&nbsp;</h4>
+            </div>
+          </div>
+        );
+        if (rowMarkup !== undefined) {
+          switch (period) {
+            case '1st':
+              scoringData.firstScoring.push(rowMarkup);
+              break;
+            case '2nd':
+              scoringData.secondScoring.push(rowMarkup);
+              break;
+            case '3rd':
+              scoringData.thirdScoring.push(rowMarkup);
+              break;
+            case 'SO':
+              scoringData.soScoring.push(rowMarkup);
+              break;
+            default:
+              scoringData.otScoring.push(rowMarkup);
+              break;
+          }
+        }
 
 
       // ...
@@ -107,14 +171,56 @@ export class ScoringTable extends React.Component {
   render() {
 
     let scoringData = this.parseScoringData(this.props.plays);
-    if (scoringData.length === 0) {
-      scoringData = <div className="no-scoring-message">No Score</div>
+    let noScoreMessage = '';
+    if (scoringData.firstScoring.length === 0 && scoringData.secondScoring.length === 0 && scoringData.thirdScoring.length === 0 && scoringData.otScoring.length === 0 && scoringData.soScoring.length === 0) {
+      noScoreMessage = <div className="no-scoring-message">No Score</div>
     }
     return(
       <div className="scoringTable">
-        <SimpleBar>
-          {scoringData}
-        </SimpleBar>
+        <div className="section-title">
+          <h1>Scoring Summary</h1>
+        </div>
+        {noScoreMessage}
+        {(scoringData.soScoring !== undefined && scoringData.soScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>SO</span>
+            </div>
+            {scoringData.soScoring[0]}
+          </div>
+        }
+        {(scoringData.otScoring !== undefined && scoringData.otScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>OT</span>
+            </div>
+            {scoringData.otScoring}
+          </div>
+        }
+        {(scoringData.thirdScoring !== undefined && scoringData.thirdScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>3rd Period</span>
+            </div>
+            {scoringData.thirdScoring}
+          </div>
+        }
+        {(scoringData.secondScoring !== undefined && scoringData.secondScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>2nd Period</span>
+            </div>
+            {scoringData.secondScoring}
+          </div>
+        }
+        {(scoringData.firstScoring !== undefined && scoringData.firstScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>1st Period</span>
+            </div>
+            {scoringData.firstScoring}
+          </div>
+        }
       </div>
     )
   }
