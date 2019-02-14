@@ -101,7 +101,7 @@ componentDidUpdate() {
     )
     return(
       <div className="rinkMap">
-        <img src="/resources/rink.svg" alt='rink-map'/>
+        <img src="./resources/rink.svg" alt='rink-map'/>
         {output.toolTips}
         <svg viewBox="-100 -42.5 200 85" className="shotsSVGData">
           <clipPath id="logoCircle">
