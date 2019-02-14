@@ -2,7 +2,7 @@
   "name": "hot-games",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://cgilroy.github.io/hot-games/",
+  "homepage": "https://cgilroy.github.io/hot-games/",
   "dependencies": {
     "@emotion/core": "^10.0.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.6",
