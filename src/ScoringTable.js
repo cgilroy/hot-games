@@ -86,8 +86,8 @@ export class ScoringTable extends React.Component {
       let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
       if (scoringPlay.team !== undefined) {
         imgPath = (scoringPlay.team.triCode === this.props.homeTricode) ? (
-          this.props.homeResources.imagePath
-        ) : (this.props.awayResources.imagePath)
+          this.props.homeResources.logo
+        ) : (this.props.awayResources.logo)
       }
 
       // if (strength !== 'EVEN') {

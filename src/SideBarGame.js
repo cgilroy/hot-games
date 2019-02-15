@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import resources from './TeamResources.js';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class SideBarGame extends Component {
@@ -83,7 +84,7 @@ export class SideBarGame extends Component {
               <div className={"teamsAndScore"}>
                 <div className={"teamInfo"}>
                   <div className="homeLogo">
-                    <img src={getLogoPath(homeName)} alt={homeName}/>
+                    <img src={resources[data.gameData.teams.home.id].logo} alt={homeName}/>
                   </div>
                   <h2>{homeTriCode}</h2>
                   {homePPLogoBadge}
@@ -91,7 +92,7 @@ export class SideBarGame extends Component {
                 </div>
                 <div className="teamInfo">
                   <div className="awayLogo">
-                    <img src={getLogoPath(awayName)} alt={awayName}/>
+                    <img src={resources[data.gameData.teams.away.id].logo} alt={awayName}/>
                   </div>
                   <h2>{awayTriCode}</h2>
                   {awayPPLogoBadge}

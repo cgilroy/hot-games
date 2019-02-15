@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import RinkSVG from './resources/rink.svg';
 
 export class RinkMap extends React.Component {
   parsePlays(plays) {
@@ -101,14 +102,14 @@ componentDidUpdate() {
     )
     return(
       <div className="rinkMap">
-        <img src="./resources/rink.svg" alt='rink-map'/>
+        <img src={RinkSVG} alt='rink-map'/>
         {output.toolTips}
         <svg viewBox="-100 -42.5 200 85" className="shotsSVGData">
           <clipPath id="logoCircle">
             <circle fill="none" cx="0" cy="0" r="15px"/>
           </clipPath>
           <g>
-            <image xlinkHref={this.props.homeResources.imagePath} clipPath="url(#logoCircle)" height="30px" width="30px" opacity="0.5" x='-15' y='-15'></image>
+            <image xlinkHref={this.props.homeResources.logo} clipPath="url(#logoCircle)" height="30px" width="30px" opacity="0.5" x='-15' y='-15'></image>
           </g>
           {output.shotsArray}
         </svg>

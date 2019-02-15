@@ -9,6 +9,7 @@ import './ActiveGameArea.css';
 import TestLiveData from './json-test-livegame.json';
 import TestFinalData from './json-test-endedgame.json';
 import resources from './TeamResources';
+import StarSVG from './resources/star.svg';
 // import ScheduledBG from '/resources/ice-bg.jpg';
 
 export class ActiveGameArea extends Component {
@@ -81,9 +82,8 @@ export class ActiveGameArea extends Component {
           let homeCityName = data.gameData.teams.home.locationName;
           let awayTeamName = data.gameData.teams.away.teamName;
           let awayCityName = data.gameData.teams.away.locationName;
-          let testResources = resources[data.gameData.teams.home.id];
-          let homeResources = getTeamResources(data.gameData.teams.home.name);
-          let awayResources = getTeamResources(data.gameData.teams.away.name);
+          let homeResources = resources[data.gameData.teams.home.id];
+          let awayResources = resources[data.gameData.teams.away.id];
           let venue = {
             name: data.gameData.teams.home.venue.name,
             city: data.gameData.teams.home.venue.city
@@ -122,6 +122,8 @@ export class ActiveGameArea extends Component {
                 awayTeamName={awayTeamName}
                 homeCityName={homeCityName}
                 awayCityName={awayCityName}
+                homeTeamId={data.gameData.teams.home.id}
+                awayTeamId={data.gameData.teams.away.id}
                 records={this.recordArrayToStrings(this.props.records)}
                 ppData={ppData}
                 />
@@ -416,22 +418,22 @@ export class ActiveGameArea extends Component {
 function ThreeStars(props) {
   let starLogoPaths=['','',''];
   let firstStarData = props.homeSkaterData["ID"+props.firstStar.id];
-  starLogoPaths[0] = props.homeResources.imagePath;
+  starLogoPaths[0] = props.homeResources.logo;
   if (firstStarData === undefined) {
     firstStarData = props.awaySkaterData["ID"+props.firstStar.id]
-    starLogoPaths[0] = props.awayResources.imagePath;
+    starLogoPaths[0] = props.awayResources.logo;
   }
   let secondStarData = props.homeSkaterData["ID"+props.secondStar.id];
-  starLogoPaths[1] = props.homeResources.imagePath;
+  starLogoPaths[1] = props.homeResources.logo;
   if (secondStarData === undefined) {
     secondStarData = props.awaySkaterData["ID"+props.secondStar.id]
-    starLogoPaths[1] = props.awayResources.imagePath;
+    starLogoPaths[1] = props.awayResources.logo;
   }
   let thirdStarData = props.homeSkaterData["ID"+props.thirdStar.id];
-  starLogoPaths[2] = props.homeResources.imagePath;
+  starLogoPaths[2] = props.homeResources.logo;
   if (thirdStarData === undefined) {
     thirdStarData = props.awaySkaterData["ID"+props.thirdStar.id]
-    starLogoPaths[2] = props.awayResources.imagePath;
+    starLogoPaths[2] = props.awayResources.logo;
   }
 
   let starData = [firstStarData,secondStarData,thirdStarData];
@@ -504,7 +506,7 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -519,10 +521,10 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -537,13 +539,13 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -687,8 +689,8 @@ function MainGameBanner(props) {
   console.log(props);
   // let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
   // let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
-  let homeTeamResources = resources[1];
-  let awayTeamResources = resources[2];
+  let homeTeamResources = resources[props.homeTeamId];
+  let awayTeamResources = resources[props.awayTeamId];
   let homePPLogoBadge = props.ppData.homeTeamOnPP ? (
     <span className="logoPPBadge">
       {props.ppData.powerPlayStrength}
@@ -709,11 +711,11 @@ function MainGameBanner(props) {
           <h1>{props.homeTeamName}</h1>
           <span className="teamRecord">{props.records.home}</span>
         </div>
-        <img src={homeTeamResources.imagePath} alt=''/>
+        <img src={homeTeamResources.logo} alt=''/>
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
-        <img src={awayTeamResources.imagePath} alt=''/>
+        <img src={awayTeamResources.logo} alt=''/>
         <div className="nameAndRec">
           <h1>{props.awayTeamName}</h1>
           <span className="teamRecord">{props.records.away}</span>
