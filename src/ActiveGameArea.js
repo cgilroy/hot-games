@@ -8,6 +8,7 @@ import Moment from 'react-moment';
 import './ActiveGameArea.css';
 import TestLiveData from './json-test-livegame.json';
 import TestFinalData from './json-test-endedgame.json';
+import resources from './TeamResources';
 // import ScheduledBG from '/resources/ice-bg.jpg';
 
 export class ActiveGameArea extends Component {
@@ -80,6 +81,7 @@ export class ActiveGameArea extends Component {
           let homeCityName = data.gameData.teams.home.locationName;
           let awayTeamName = data.gameData.teams.away.teamName;
           let awayCityName = data.gameData.teams.away.locationName;
+          let testResources = resources[data.gameData.teams.home.id];
           let homeResources = getTeamResources(data.gameData.teams.home.name);
           let awayResources = getTeamResources(data.gameData.teams.away.name);
           let venue = {
@@ -683,8 +685,10 @@ function BannerPeriodTable(props) {
 
 function MainGameBanner(props) {
   console.log(props);
-  let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
-  let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
+  // let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
+  // let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
+  let homeTeamResources = resources[1];
+  let awayTeamResources = resources[2];
   let homePPLogoBadge = props.ppData.homeTeamOnPP ? (
     <span className="logoPPBadge">
       {props.ppData.powerPlayStrength}
