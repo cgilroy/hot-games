@@ -138,6 +138,8 @@ export class ActiveGameArea extends Component {
                   awayTricode={awayTricode}
                   homeResources={homeResources}
                   awayResources={awayResources}
+                  hasShootout={data.liveData.linescore.hasShootout}
+                  playsByPeriod={data.liveData.plays.playsByPeriod}
                 />
               );
             }
