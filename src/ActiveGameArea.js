@@ -140,6 +140,7 @@ export class ActiveGameArea extends Component {
                   awayResources={awayResources}
                   hasShootout={data.liveData.linescore.hasShootout}
                   playsByPeriod={data.liveData.plays.playsByPeriod}
+                  shootoutScore={data.liveData.linescore.shootoutInfo}
                 />
               );
             }

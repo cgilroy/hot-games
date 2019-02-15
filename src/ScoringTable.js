@@ -1,4 +1,6 @@
 import React from 'react';
+import XMark from './resources/x-mark.svg';
+import CheckMark from './resources/check-mark.svg';
 // import SimpleBar from 'simplebar-react';
 // import 'simplebar/dist/simplebar.min.css';
 
@@ -175,6 +177,7 @@ export class ScoringTable extends React.Component {
         homeTricode={this.props.homeTricode}
         awayTricode={this.props.awayTricode}
         playsByPeriod={this.props.playsByPeriod}
+        shootoutScore={this.props.shootoutScore}
       />
     ) : '';
     let noScoreMessage = '';
@@ -235,7 +238,7 @@ function ShootoutTable(props) {
     for (let i = (shootOutPlays.length-1);i>=0;i--) {
       let thisPlay = props.allPlays[shootOutPlays[i]];
       if (thisPlay.result.eventTypeId.search('SHOT') === -1 && thisPlay.result.eventTypeId !== "GOAL") {continue};
-      let symbol = (thisPlay.result.eventTypeId === "GOAL") ? (<td>Y</td>) : (<td>N</td>);
+      let symbol = (thisPlay.result.eventTypeId === "GOAL") ? (<td><img src={CheckMark}/></td>) : (<td><img src={XMark}/></td>);
       if (thisPlay.team.triCode === props.homeTricode) {
         soHomeArray.push(
           <tr key={"so-row"+i}>
@@ -254,14 +257,33 @@ function ShootoutTable(props) {
     }
     return(
       <div className="shootOutSection">
-        <table>
-          <thead><tr><th>{props.homeTricode}</th></tr></thead>
-          {soHomeArray}
-        </table>
-        <table>
-          <thead><tr><th>{props.awayTricode}</th></tr></thead>
-          {soAwayArray}
-        </table>
+        <div className="scoringRow periodHeader">
+          <span>SO</span>
+        </div>
+        <div className="soTables">
+          <table>
+            <thead>
+              <tr>
+                <th><img src={props.homeResources.logo}/></th>
+                <th><span>{props.shootoutScore.home.scores}</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              {soHomeArray}
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th><span>{props.shootoutScore.away.scores}</span></th>
+                <th><img src={props.awayResources.logo}/></th>
+              </tr>
+            </thead>
+            <tbody>
+              {soAwayArray}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

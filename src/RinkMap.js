@@ -9,7 +9,7 @@ export class RinkMap extends React.Component {
     for (let i = 0;i<=plays.allPlays.length-1;i++) {
       let playData = plays.allPlays[i];
 
-      if(playData.result.eventTypeId === "SHOT" || playData.result.eventTypeId === "GOAL") {
+      if((playData.result.eventTypeId === "SHOT" || playData.result.eventTypeId === "GOAL") && playData.about.ordinalNum !== "SO") {
         let shotData = {
           description: playData.result.description,
           type: playData.result.eventTypeId,
