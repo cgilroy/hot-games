@@ -230,7 +230,6 @@ export class ScoringTable extends React.Component {
 
 function ShootoutTable(props) {
   let startIndex = props.playsByPeriod[props.playsByPeriod.length-1].startIndex;
-  let endIndex = props.playsByPeriod[props.playsByPeriod.length-1].endIndex;
   let shootOutPlays = props.playsByPeriod[props.playsByPeriod.length-1].plays;
   if (shootOutPlays.length !== 0 && props.allPlays[startIndex].about.ordinalNum === "SO") {
     let soHomeArray = [];
@@ -238,7 +237,7 @@ function ShootoutTable(props) {
     for (let i = (shootOutPlays.length-1);i>=0;i--) {
       let thisPlay = props.allPlays[shootOutPlays[i]];
       if (thisPlay.result.eventTypeId.search('SHOT') === -1 && thisPlay.result.eventTypeId !== "GOAL") {continue};
-      let symbol = (thisPlay.result.eventTypeId === "GOAL") ? (<td><img src={CheckMark}/></td>) : (<td><img src={XMark}/></td>);
+      let symbol = (thisPlay.result.eventTypeId === "GOAL") ? (<td><img src={CheckMark} alt='checkmark'/></td>) : (<td><img src={XMark} alt='xmark'/></td>);
       if (thisPlay.team.triCode === props.homeTricode) {
         soHomeArray.push(
           <tr key={"so-row"+i}>
@@ -264,7 +263,7 @@ function ShootoutTable(props) {
           <table>
             <thead>
               <tr>
-                <th><img src={props.homeResources.logo}/></th>
+                <th><img src={props.homeResources.logo} alt='home-logo'/></th>
                 <th><span>{props.shootoutScore.home.scores}</span></th>
               </tr>
             </thead>
@@ -276,7 +275,7 @@ function ShootoutTable(props) {
             <thead>
               <tr>
                 <th><span>{props.shootoutScore.away.scores}</span></th>
-                <th><img src={props.awayResources.logo}/></th>
+                <th><img src={props.awayResources.logo} alt='away-logo'/></th>
               </tr>
             </thead>
             <tbody>

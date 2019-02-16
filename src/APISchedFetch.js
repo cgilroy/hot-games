@@ -23,8 +23,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    let dateTest = '?date=2019-02-07';
-    // let dateTest = '';
+    // let dateTest = '?date=2019-02-14';
+    let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
@@ -37,7 +37,6 @@ export class APISchedFetch extends Component {
     let gamesContentData = [];
     let records = [];
     var fetches = [];
-    console.log("dateslength",data.dates[0].games.length)
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
       let iterGame = data.dates[0].games[i];
       let homeTeam = iterGame.teams.home;
@@ -83,12 +82,10 @@ export class APISchedFetch extends Component {
     };
 
     Promise.all(fetches).then(() => {
-      console.log("allGames",allGames[2]);
       sortByKey(liveGames,'gamePk');
       sortByKey(scheduledGames,'gamePk');
       sortByKey(finalGames,'gamePk');
       sortByKey(allGamesJSON,'gamePk');
-      // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
         this.setState({
@@ -120,10 +117,8 @@ export class APISchedFetch extends Component {
   }
 
 
-  componentDidMount() {
-
+componentDidMount() {
   this.refreshData();
-
   this._interval = window.setInterval(this.refreshData,5000);
 }
 
@@ -132,18 +127,11 @@ componentWillUnMount() {
 }
 
 sideBarClick(gameFID) {
-  console.log(gameFID);
   this.setState({mainGamePk: gameFID});
-
-
 }
 
   render() {
-    let test = new Date().toString();
     let activeGameVar = this.state.mainGamePk;
-    let a= this.state.liveGames;
-    let b= this.state.scheduledGames;
-    let c = this.state.finalGames;
     let tg = this.state.gamesData;
     let activeGameData = tg.find(obj => {
       return obj.gamePk == activeGameVar
