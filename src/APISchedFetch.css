@@ -118,6 +118,10 @@
   font-size: 0.9em;
 }
 
+.sideBarGame.final .timeRemaining h1 {
+  color: black;
+}
+
 .sideBarGame .teamInfo h2:last-child {
   margin-left: auto;
 }

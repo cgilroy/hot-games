@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import resources from './TeamResources.js';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class SideBarGame extends Component {
@@ -78,24 +79,30 @@ export class SideBarGame extends Component {
                 <span>PP</span>
               </div>
             ) : ('');
+            let homeTextStyle = {color:'#262626'};
+            let awayTextStyle = {color:'#262626'};
+            if (gameState === 'final') {
+              homeTextStyle = (homeScore < awayScore) ? ({color:'#959595'}) : {color:'black'};
+              awayTextStyle = (awayScore < homeScore) ? ({color:'#959595'}) : {color:'black'};
+            }
 
             let teamsAndScore = (
               <div className={"teamsAndScore"}>
                 <div className={"teamInfo"}>
                   <div className="homeLogo">
-                    <img src={getLogoPath(homeName)} alt={homeName}/>
+                    <img src={resources[data.gameData.teams.home.id].logo} alt={homeName}/>
                   </div>
-                  <h2>{homeTriCode}</h2>
+                  <h2 style={homeTextStyle}>{homeTriCode}</h2>
                   {homePPLogoBadge}
-                  <h2>{homeScore}</h2>
+                  <h2 style={homeTextStyle}>{homeScore}</h2>
                 </div>
                 <div className="teamInfo">
                   <div className="awayLogo">
-                    <img src={getLogoPath(awayName)} alt={awayName}/>
+                    <img src={resources[data.gameData.teams.away.id].logo} alt={awayName}/>
                   </div>
-                  <h2>{awayTriCode}</h2>
+                  <h2 style={awayTextStyle}>{awayTriCode}</h2>
                   {awayPPLogoBadge}
-                  <h2>{awayScore}</h2>
+                  <h2 style={awayTextStyle}>{awayScore}</h2>
                 </div>
               </div>
             )

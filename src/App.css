@@ -96,7 +96,7 @@
 }
 
 .gameDiv.final {
-  /* background: #262626; */
+  background: #f7f7f7;
 }
 
 .gameDiv h2 {
@@ -148,7 +148,7 @@
 
 @font-face {
   font-family: 'digital-font';
-  src:url('/resources/digital-7.ttf');
+  src:url('./resources/digital-7.ttf');
 }
 
 .gameDiv .timeRemaining {
@@ -427,6 +427,33 @@ span .eventRow:first-child{
   display: block;
   color: #262626;
   /* border: 1px solid white */
+}
+
+.shootOutSection .soTables {
+  display: flex;
+  font-size: 0.8em;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+
+.shootOutSection table {
+  width: 100%;
+}
+
+.shootOutSection thead tr {
+  height: 30px;
+}
+
+.shootOutSection thead tr span {
+  font-size: 20px;
+}
+
+.shootOutSection tr {
+  height: 40px;
+}
+
+.shootOutSection thead img {
+  height: 30px;
 }
 
 .liveData .scoringRow {

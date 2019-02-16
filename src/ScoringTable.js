@@ -1,4 +1,6 @@
 import React from 'react';
+import XMark from './resources/x-mark.svg';
+import CheckMark from './resources/check-mark.svg';
 // import SimpleBar from 'simplebar-react';
 // import 'simplebar/dist/simplebar.min.css';
 
@@ -10,8 +12,7 @@ export class ScoringTable extends React.Component {
         firstScoring: [],
         secondScoring:[],
         thirdScoring:[],
-        otScoring:[],
-        soScoring:[]
+        otScoring:[]
       }
     }
     this.parseScoringData = this.parseScoringData.bind(this);
@@ -37,15 +38,16 @@ export class ScoringTable extends React.Component {
       firstScoring: [],
       secondScoring:[],
       thirdScoring:[],
-      otScoring:[],
-      soScoring:[]
+      otScoring:[]
     };
+
     for (let i = scoringPlays.length-1; i >= 0; i--) {
       let playIndex = scoringPlays[i];
       let scoringPlay = plays.allPlays[playIndex];
       let teamCode = scoringPlay.team.triCode;
       let players = scoringPlay.players;
       let period = scoringPlay.about.ordinalNum;
+      if (period === "SO") {continue};
       let strength = scoringPlay.result.strength.code;
       let emptyNet = scoringPlay.result.emptyNet;
       let scoreArray = scoringPlay.about.goals;
@@ -86,8 +88,8 @@ export class ScoringTable extends React.Component {
       let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
       if (scoringPlay.team !== undefined) {
         imgPath = (scoringPlay.team.triCode === this.props.homeTricode) ? (
-          this.props.homeResources.imagePath
-        ) : (this.props.awayResources.imagePath)
+          this.props.homeResources.logo
+        ) : (this.props.awayResources.logo)
       }
 
       // if (strength !== 'EVEN') {
@@ -152,9 +154,6 @@ export class ScoringTable extends React.Component {
             case '3rd':
               scoringData.thirdScoring.push(rowMarkup);
               break;
-            case 'SO':
-              scoringData.soScoring.push(rowMarkup);
-              break;
             default:
               scoringData.otScoring.push(rowMarkup);
               break;
@@ -164,15 +163,25 @@ export class ScoringTable extends React.Component {
 
       // ...
     }
-    return scoringData;
+    return scoringData
   }
 
 
   render() {
-
     let scoringData = this.parseScoringData(this.props.plays);
+    let shootOutTable = this.props.hasShootout ? (
+      <ShootoutTable
+        allPlays={this.props.plays.allPlays}
+        homeResources={this.props.homeResources}
+        awayResources={this.props.awayResources}
+        homeTricode={this.props.homeTricode}
+        awayTricode={this.props.awayTricode}
+        playsByPeriod={this.props.playsByPeriod}
+        shootoutScore={this.props.shootoutScore}
+      />
+    ) : '';
     let noScoreMessage = '';
-    if (scoringData.firstScoring.length === 0 && scoringData.secondScoring.length === 0 && scoringData.thirdScoring.length === 0 && scoringData.otScoring.length === 0 && scoringData.soScoring.length === 0) {
+    if (scoringData.firstScoring.length === 0 && scoringData.secondScoring.length === 0 && scoringData.thirdScoring.length === 0 && scoringData.otScoring.length === 0) {
       noScoreMessage = <div className="no-scoring-message">No Score</div>
     }
     return(
@@ -181,14 +190,7 @@ export class ScoringTable extends React.Component {
           <h1>Scoring Summary</h1>
         </div>
         {noScoreMessage}
-        {(scoringData.soScoring !== undefined && scoringData.soScoring.length !== 0) &&
-          <div className="periodSection">
-            <div className="scoringRow periodHeader">
-              <span>SO</span>
-            </div>
-            {scoringData.soScoring[0]}
-          </div>
-        }
+        {shootOutTable}
         {(scoringData.otScoring !== undefined && scoringData.otScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
@@ -221,6 +223,67 @@ export class ScoringTable extends React.Component {
             {scoringData.firstScoring}
           </div>
         }
+      </div>
+    )
+  }
+}
+
+function ShootoutTable(props) {
+  let startIndex = props.playsByPeriod[props.playsByPeriod.length-1].startIndex;
+  let endIndex = props.playsByPeriod[props.playsByPeriod.length-1].endIndex;
+  let shootOutPlays = props.playsByPeriod[props.playsByPeriod.length-1].plays;
+  if (shootOutPlays.length !== 0 && props.allPlays[startIndex].about.ordinalNum === "SO") {
+    let soHomeArray = [];
+    let soAwayArray = [];
+    for (let i = (shootOutPlays.length-1);i>=0;i--) {
+      let thisPlay = props.allPlays[shootOutPlays[i]];
+      if (thisPlay.result.eventTypeId.search('SHOT') === -1 && thisPlay.result.eventTypeId !== "GOAL") {continue};
+      let symbol = (thisPlay.result.eventTypeId === "GOAL") ? (<td><img src={CheckMark}/></td>) : (<td><img src={XMark}/></td>);
+      if (thisPlay.team.triCode === props.homeTricode) {
+        soHomeArray.push(
+          <tr key={"so-row"+i}>
+            <td><span>{thisPlay.result.description}</span></td>
+            {symbol}
+          </tr>
+        )
+      } else {
+        soAwayArray.push(
+          <tr key={"so-row"+i}>
+            {symbol}
+            <td><span>{thisPlay.result.description}</span></td>
+          </tr>
+        )
+      }
+    }
+    return(
+      <div className="shootOutSection">
+        <div className="scoringRow periodHeader">
+          <span>SO</span>
+        </div>
+        <div className="soTables">
+          <table>
+            <thead>
+              <tr>
+                <th><img src={props.homeResources.logo}/></th>
+                <th><span>{props.shootoutScore.home.scores}</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              {soHomeArray}
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th><span>{props.shootoutScore.away.scores}</span></th>
+                <th><img src={props.awayResources.logo}/></th>
+              </tr>
+            </thead>
+            <tbody>
+              {soAwayArray}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

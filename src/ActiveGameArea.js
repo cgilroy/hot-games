@@ -8,6 +8,8 @@ import Moment from 'react-moment';
 import './ActiveGameArea.css';
 import TestLiveData from './json-test-livegame.json';
 import TestFinalData from './json-test-endedgame.json';
+import resources from './TeamResources';
+import StarSVG from './resources/star.svg';
 // import ScheduledBG from '/resources/ice-bg.jpg';
 
 export class ActiveGameArea extends Component {
@@ -80,8 +82,8 @@ export class ActiveGameArea extends Component {
           let homeCityName = data.gameData.teams.home.locationName;
           let awayTeamName = data.gameData.teams.away.teamName;
           let awayCityName = data.gameData.teams.away.locationName;
-          let homeResources = getTeamResources(data.gameData.teams.home.name);
-          let awayResources = getTeamResources(data.gameData.teams.away.name);
+          let homeResources = resources[data.gameData.teams.home.id];
+          let awayResources = resources[data.gameData.teams.away.id];
           let venue = {
             name: data.gameData.teams.home.venue.name,
             city: data.gameData.teams.home.venue.city
@@ -120,6 +122,8 @@ export class ActiveGameArea extends Component {
                 awayTeamName={awayTeamName}
                 homeCityName={homeCityName}
                 awayCityName={awayCityName}
+                homeTeamId={data.gameData.teams.home.id}
+                awayTeamId={data.gameData.teams.away.id}
                 records={this.recordArrayToStrings(this.props.records)}
                 ppData={ppData}
                 />
@@ -134,6 +138,9 @@ export class ActiveGameArea extends Component {
                   awayTricode={awayTricode}
                   homeResources={homeResources}
                   awayResources={awayResources}
+                  hasShootout={data.liveData.linescore.hasShootout}
+                  playsByPeriod={data.liveData.plays.playsByPeriod}
+                  shootoutScore={data.liveData.linescore.shootoutInfo}
                 />
               );
             }
@@ -414,22 +421,22 @@ export class ActiveGameArea extends Component {
 function ThreeStars(props) {
   let starLogoPaths=['','',''];
   let firstStarData = props.homeSkaterData["ID"+props.firstStar.id];
-  starLogoPaths[0] = props.homeResources.imagePath;
+  starLogoPaths[0] = props.homeResources.logo;
   if (firstStarData === undefined) {
     firstStarData = props.awaySkaterData["ID"+props.firstStar.id]
-    starLogoPaths[0] = props.awayResources.imagePath;
+    starLogoPaths[0] = props.awayResources.logo;
   }
   let secondStarData = props.homeSkaterData["ID"+props.secondStar.id];
-  starLogoPaths[1] = props.homeResources.imagePath;
+  starLogoPaths[1] = props.homeResources.logo;
   if (secondStarData === undefined) {
     secondStarData = props.awaySkaterData["ID"+props.secondStar.id]
-    starLogoPaths[1] = props.awayResources.imagePath;
+    starLogoPaths[1] = props.awayResources.logo;
   }
   let thirdStarData = props.homeSkaterData["ID"+props.thirdStar.id];
-  starLogoPaths[2] = props.homeResources.imagePath;
+  starLogoPaths[2] = props.homeResources.logo;
   if (thirdStarData === undefined) {
     thirdStarData = props.awaySkaterData["ID"+props.thirdStar.id]
-    starLogoPaths[2] = props.awayResources.imagePath;
+    starLogoPaths[2] = props.awayResources.logo;
   }
 
   let starData = [firstStarData,secondStarData,thirdStarData];
@@ -502,7 +509,7 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -517,10 +524,10 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -535,13 +542,13 @@ function ThreeStars(props) {
         </div>
         <span className="stars">
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
           <span className="star">
-            <img src="/resources/star.svg" />
+            <img src={StarSVG} />
           </span>
         </span>
       </div>
@@ -683,8 +690,10 @@ function BannerPeriodTable(props) {
 
 function MainGameBanner(props) {
   console.log(props);
-  let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
-  let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
+  // let homeTeamResources = getTeamResources(props.homeCityName+" "+props.homeTeamName);
+  // let awayTeamResources = getTeamResources(props.awayCityName+" "+props.awayTeamName);
+  let homeTeamResources = resources[props.homeTeamId];
+  let awayTeamResources = resources[props.awayTeamId];
   let homePPLogoBadge = props.ppData.homeTeamOnPP ? (
     <span className="logoPPBadge">
       {props.ppData.powerPlayStrength}
@@ -705,11 +714,11 @@ function MainGameBanner(props) {
           <h1>{props.homeTeamName}</h1>
           <span className="teamRecord">{props.records.home}</span>
         </div>
-        <img src={homeTeamResources.imagePath} alt=''/>
+        <img src={homeTeamResources.logo} alt=''/>
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
-        <img src={awayTeamResources.imagePath} alt=''/>
+        <img src={awayTeamResources.logo} alt=''/>
         <div className="nameAndRec">
           <h1>{props.awayTeamName}</h1>
           <span className="teamRecord">{props.records.away}</span>
@@ -726,127 +735,127 @@ function getTeamResources(teamName) {
   var primaryColor: string;
   switch (teamName) {
     case 'Anaheim Ducks':
-      imagePath = '/resources/NHL-Icons-ANA.svg';
+      imagePath = './resources/NHL-Icons-ANA.svg';
       primaryColor = '#B09862';
       break;
     case 'Arizona Coyotes':
-    imagePath = '/resources/NHL-Icons-PHO.svg';
+    imagePath = './resources/NHL-Icons-PHO.svg';
     primaryColor = '#8C2633';
       break;
     case 'Boston Bruins':
-      imagePath = '/resources/NHL-Icons-BOS.svg';
+      imagePath = './resources/NHL-Icons-BOS.svg';
       primaryColor = '#000000';
       break;
     case 'Buffalo Sabres':
-      imagePath = '/resources/NHL-Icons-BUF.svg';
+      imagePath = './resources/NHL-Icons-BUF.svg';
       primaryColor = '#002654';
       break;
     case 'Calgary Flames':
-      imagePath = '/resources/NHL-Icons-CAL.svg';
+      imagePath = './resources/NHL-Icons-CAL.svg';
       primaryColor = '#C8102E';
       break;
     case 'Carolina Hurricanes':
-    imagePath = '/resources/NHL-Icons-CAR.svg';
+    imagePath = './resources/NHL-Icons-CAR.svg';
     primaryColor = '#CC0000';
     break;
     case 'Chicago Blackhawks':
-    imagePath = '/resources/NHL-Icons-CHI.svg';
+    imagePath = './resources/NHL-Icons-CHI.svg';
     primaryColor = '#CF0A2C';
     break;
     case 'Colorado Avalanche':
-    imagePath = '/resources/NHL-Icons-COL.svg';
+    imagePath = './resources/NHL-Icons-COL.svg';
     primaryColor = '#6F263D';
     break;
     case 'Columbus Blue Jackets':
-    imagePath = '/resources/NHL-Icons-COL1.svg';
+    imagePath = './resources/NHL-Icons-COL1.svg';
     primaryColor = '#002654';
     break;
     case 'Dallas Stars':
-    imagePath = '/resources/NHL-Icons-DAL.svg';
+    imagePath = './resources/NHL-Icons-DAL.svg';
     primaryColor = '#006847';
     break;
     case 'Detroit Red Wings':
-    imagePath = '/resources/NHL-Icons-DET.svg';
+    imagePath = './resources/NHL-Icons-DET.svg';
     primaryColor = '#CE1126';
     break;
     case 'Edmonton Oilers':
-    imagePath = '/resources/NHL-Icons-EDM.svg';
+    imagePath = './resources/NHL-Icons-EDM.svg';
     primaryColor = '#041E42';
     break;
     case 'Florida Panthers':
-      imagePath = '/resources/NHL-Icons-FLO.svg';
+      imagePath = './resources/NHL-Icons-FLO.svg';
       primaryColor = '#041E42';
       break;
     case 'Los Angeles Kings':
-    imagePath = '/resources/NHL-Icons-LAK.svg';
+    imagePath = './resources/NHL-Icons-LAK.svg';
     primaryColor = '#111111';
     break;
     case 'Minnesota Wild':
-    imagePath = '/resources/NHL-Icons-MIN.svg';
+    imagePath = './resources/NHL-Icons-MIN.svg';
     primaryColor = '#154734';
     break;
     case 'Montréal Canadiens':
-    imagePath = '/resources/NHL-Icons-MTL.svg';
+    imagePath = './resources/NHL-Icons-MTL.svg';
     primaryColor = '#AF1E2D';
     break;
     case 'Nashville Predators':
-    imagePath = '/resources/NHL-Icons-NAS.svg';
+    imagePath = './resources/NHL-Icons-NAS.svg';
     primaryColor = '#041E42';
     break;
     case 'New Jersey Devils':
-    imagePath = '/resources/NHL-Icons-NJD.svg';
+    imagePath = './resources/NHL-Icons-NJD.svg';
     primaryColor = '#CE1126';
     break;
     case 'New York Islanders':
-      imagePath = '/resources/NHL-Icons-NYI.svg';
+      imagePath = './resources/NHL-Icons-NYI.svg';
       primaryColor = '#00539B';
       break;
     case 'New York Rangers':
-      imagePath = '/resources/NHL-Icons-NYR.svg';
+      imagePath = './resources/NHL-Icons-NYR.svg';
       primaryColor = '#0038A8';
       break;
     case 'Ottawa Senators':
-    imagePath = '/resources/NHL-Icons-OTT.svg';
+    imagePath = './resources/NHL-Icons-OTT.svg';
     primaryColor = '#E31837';
     break;
     case 'Philadelphia Flyers':
-    imagePath = '/resources/NHL-Icons-PHI.svg';
+    imagePath = './resources/NHL-Icons-PHI.svg';
     primaryColor = '#F74902';
     break;
     case 'Pittsburgh Penguins':
-    imagePath = '/resources/NHL-Icons-PIT.svg';
+    imagePath = './resources/NHL-Icons-PIT.svg';
     primaryColor = '#FCB514';
     break;
     case 'San Jose Sharks':
-    imagePath = '/resources/NHL-Icons-SJ.svg';
+    imagePath = './resources/NHL-Icons-SJ.svg';
     primaryColor = '#006D75';
     break;
     case 'St. Louis Blues':
-      imagePath = '/resources/NHL-Icons-SL.svg';
+      imagePath = './resources/NHL-Icons-SL.svg';
       primaryColor = '#002F87';
       break;
     case 'Tampa Bay Lightning':
-    imagePath = '/resources/NHL-Icons-TAM.svg';
+    imagePath = './resources/NHL-Icons-TAM.svg';
     primaryColor = '#002868';
     break;
     case 'Toronto Maple Leafs':
-      imagePath = '/resources/NHL-Icons-TOR.svg';
+      imagePath = './resources/NHL-Icons-TOR.svg';
       primaryColor = '#003E7E';
       break;
     case 'Vancouver Canucks':
-    imagePath = '/resources/NHL-Icons-VAN.svg';
+    imagePath = './resources/NHL-Icons-VAN.svg';
     primaryColor = '#001F5B';
     break;
     case 'Vegas Golden Knights':
-    imagePath = '/resources/NHL-Icons-VGS.svg';
+    imagePath = './resources/NHL-Icons-VGS.svg';
     primaryColor = '#B4975A';
     break;
     case 'Winnipeg Jets':
-    imagePath = '/resources/NHL-Icons-WIN.svg';
+    imagePath = './resources/NHL-Icons-WIN.svg';
     primaryColor = '#041E42';
     break;
     case 'Washington Capitals':
-      imagePath = '/resources/NHL-Icons-WAS.svg';
+      imagePath = './resources/NHL-Icons-WAS.svg';
       primaryColor = '#C8102E';
     break;
     default:

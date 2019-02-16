@@ -52,8 +52,8 @@ export class LatestPlays extends React.Component {
         let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
         if (iterPlay.team !== undefined) {
           imgPath = (iterPlay.team.triCode === data.homeTricode) ? (
-            data.homeResources.imagePath
-          ) : (data.awayResources.imagePath)
+            data.homeResources.logo
+          ) : (data.awayResources.logo)
         }
         let newPlay = (
           <div className="eventRow" key={iterPlay.about.eventIdx}>
