@@ -79,8 +79,8 @@ export class SideBarGame extends Component {
                 <span>PP</span>
               </div>
             ) : ('');
-            let homeTextStyle = {color:'black'};
-            let awayTextStyle = {color:'black'};
+            let homeTextStyle = {color:'#262626'};
+            let awayTextStyle = {color:'#262626'};
             if (gameState === 'final') {
               homeTextStyle = (homeScore < awayScore) ? ({color:'#959595'}) : {color:'black'};
               awayTextStyle = (awayScore < homeScore) ? ({color:'#959595'}) : {color:'black'};
