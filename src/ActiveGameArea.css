@@ -114,13 +114,13 @@
   display: flex;
   /* min-width: 200px; */
   background: black;
-  flex: 0 0 200px;
+  flex: 0 0 150px;
 }
 
-.timeAndScore h2 {
+.bannerGroup h2 {
   color: white;
   background: #222;
-  font-family: 'digital-font';
+  /* font-family: 'digital-font'; */
   font-weight: lighter;
   /* padding: 3px 0; */
   line-height: 80px;

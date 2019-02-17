@@ -1,0 +1,175 @@
+.liveData.mobileActive .nav-bar {
+  display: none;
+}
+
+.nav-bar {
+  height: 22px;
+  background: linear-gradient(45deg, #188FFF 0%, #0036B0 100%);
+  color: white;
+  position: relative;
+  padding: 8px;
+}
+
+.nav-bar button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  height: 100%;
+  font-size: 18px;
+}
+
+.nav-bar h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 767px)  {
+  .totalViewContainer {
+    display: block !important;
+  }
+  .mainGameArea {
+    display: none;
+  }
+
+  .totalViewContainer .gamesSideBar {
+    display: none;
+  }
+
+  .totalViewContainer .liveData .top {
+    display: block;
+  }
+
+  .totalViewContainer .liveData .top-left,
+  .totalViewContainer .liveData .top-right {
+    min-width: 0;
+    padding: 0
+  }
+
+  .totalViewContainer .liveData .scoringRow>h4 {
+    padding: 0;
+    min-width: 35px;
+  }
+
+  .totalViewContainer .rinkMap {
+    padding: 2px;
+  }
+
+  .mainGameArea.mobileActive {
+    display: block;
+  }
+
+  .gamesSideBar.mobileActive {
+    display: flex;
+  }
+
+  .liveData.mobileActive .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gamesSideBar {
+    padding: 0 !important;
+  }
+
+  .gamesSideBar,.gamesScroll,.disclaimer {
+    width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .totalViewContainer .gamesScroll {
+    margin-top:0;
+  }
+
+  .gamesScroll h3 {
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .bannerGroup {
+    position: absolute;
+    top:0;
+    width: 50%;
+    height: 48px;
+  }
+
+  .bannerGroup.home {
+    left: 0;
+  }
+
+  .bannerGroup.away {
+    right: 0;
+  }
+
+  .bannerContainer .bannerGroup img {
+    height: 35px;
+    width: 35px;
+  }
+
+  .bannerContainer .bannerGroup .bannerLabel {
+    font-size: 8px;
+    margin: 3px;
+  }
+
+  .timeAndScore {
+    margin-top:48px;
+    width: 100%;
+    flex: auto !important;
+  }
+
+  .bannerContainer .bannerGroup h2 {
+    line-height: 48px;
+    font-size: 28px;
+    padding: 0 4px;
+  }
+
+  .bannerContainer .bannerGroup .logoPPBadge {
+    padding: 2px;
+    font-size: 13px;
+  }
+
+  .bannerGroup h1 {
+    display: none;
+  }
+
+  .teamRecord {
+    display: none;
+  }
+
+  .bannerContainer {
+    height: auto !important;
+  }
+
+  .totalViewContainer .penaltyTable .scorer {
+    max-width: 250px;
+  }
+
+  .totalViewContainer .liveData .scoreData {
+    display: block;
+  }
+
+  .totalViewContainer .liveData .assistData {
+    display: flex;
+    padding: 0;
+    flex-wrap: nowrap;
+  }
+
+  .totalViewContainer .liveData .assistData .assistOne,
+  .totalViewContainer .liveData .assistData .assistTwo {
+    padding-left: 0;
+    font-size: 0.7em;
+  }
+
+  .scoringRow img {
+    margin: 0;
+  }
+
+  .totalViewContainer .scoringRowScore span {
+    min-width: 20px;
+  }
+
+  .__react_component_tooltip {
+    display: none;
+  }
+}

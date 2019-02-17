@@ -16,14 +16,15 @@ export class APISchedFetch extends Component {
       gamesData:[],
       gamesContentData:[],
       loading:true,
-      records:[]
+      records:[],
+      mobileActive:'list'
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-14';
+    // let dateTest = '?date=2019-02-15';
     let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -127,7 +128,12 @@ componentWillUnMount() {
 }
 
 sideBarClick(gameFID) {
-  this.setState({mainGamePk: gameFID});
+  this.setState({mainGamePk: gameFID, mobileActive:'gameView'});
+
+}
+
+backButtonClick() {
+  this.setState({mobileActive:'list'});
 }
 
   render() {
@@ -152,12 +158,12 @@ sideBarClick(gameFID) {
         loading={this.state.loading}
       />
     ) : (
-      <ActiveGameArea gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} />
+      <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
     )
     return (
 
       <div className="totalViewContainer">
-        <div className="gamesSideBar">
+        <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
@@ -181,7 +187,7 @@ sideBarClick(gameFID) {
               <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
             </div>
         </div>
-        <div className={"mainGameArea " + (this.state.loading ? 'loading' : '')}>
+        <div className={"mainGameArea " + (this.state.loading ? 'loading ' : '') + (this.state.mobileActive === 'gameView' ? 'mobileActive' : '')}>
           { mainGameArea }
         </div>
       </div>

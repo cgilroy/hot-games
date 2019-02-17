@@ -114,6 +114,8 @@ export class ActiveGameArea extends Component {
               awayTeamId={data.gameData.teams.away.id}
               records={this.recordArrayToStrings(this.props.records)}
               ppData={ppData}
+              homeScore={homeScore}
+              awayScore={awayScore}
               />
           );
 
@@ -298,7 +300,11 @@ export class ActiveGameArea extends Component {
     }
 
     return (
-      <div className={"liveData"}>
+      <div className={"liveData " + (this.props.mobileActive === 'gameView' ? 'mobileActive' : '')}>
+        <div className="nav-bar">
+          <button onClick={this.props.backButtonClick}>Back</button>
+          <h3>Live Score</h3>
+        </div>
         {allData.gameBanner}
         {allData.media.gameRecap}
         {allData.media.gamePreview}
@@ -518,7 +524,6 @@ function TimeAndScore(props) {
   } else {
     return (
       <div className="timeAndScore">
-        <h2>{props.homeScore}</h2>
         <div className="timeRemaining">
           <h1>{props.timeLeft}
           { ((props.gameState === 'inprogress') || (props.gameState === 'inprogress-critical') || ((props.currentPeriodOrdinal === 'OT' || props.currentPeriodOrdinal === 'SO') && props.gameState === 'final')) &&
@@ -532,7 +537,6 @@ function TimeAndScore(props) {
             awayName={props.awayTricode}
           />
         </div>
-        <h2>{props.awayScore}</h2>
       </div>
     )
   }
@@ -622,9 +626,11 @@ function MainGameBanner(props) {
           <span className="teamRecord">{props.records.home}</span>
         </div>
         <img src={homeTeamResources.logo} alt=''/>
+        <h2>{props.homeScore}</h2>
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
+        <h2>{props.awayScore}</h2>
         <img src={awayTeamResources.logo} alt=''/>
         <div className="nameAndRec">
           <h1>{props.awayTeamName}</h1>
