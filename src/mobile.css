@@ -165,6 +165,16 @@
     margin: 0;
   }
 
+  .liveData .section-title {
+    box-sizing: border-box;
+  }
+
+  .liveData .latestPlays .eventRow,
+  .liveData .scoringTable .scoringRow,
+  .eventRow, .scoringRow {
+    box-sizing: border-box;
+  }
+
   .totalViewContainer .scoringRowScore span {
     min-width: 20px;
   }
