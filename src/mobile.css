@@ -10,13 +10,19 @@
   padding: 8px;
 }
 
-.nav-bar button {
+.nav-bar span {
   position: absolute;
   left: 0;
   top: 0;
   color: white;
   height: 100%;
   font-size: 18px;
+  background: none;
+  border: none;
+}
+
+.nav-bar span img {
+  height: 100%;
 }
 
 .nav-bar h3 {
@@ -167,6 +173,7 @@
 
   .liveData .section-title {
     box-sizing: border-box;
+    height: 30px;
   }
 
   .liveData .latestPlays .eventRow,

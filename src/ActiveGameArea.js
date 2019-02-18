@@ -10,6 +10,7 @@ import TestLiveData from './json-test-livegame.json';
 import TestFinalData from './json-test-endedgame.json';
 import resources from './TeamResources';
 import StarSVG from './resources/star.svg';
+import ChevronLeft from './resources/chevron-left.svg';
 // import ScheduledBG from '/resources/ice-bg.jpg';
 
 export class ActiveGameArea extends Component {
@@ -302,7 +303,7 @@ export class ActiveGameArea extends Component {
     return (
       <div className={"liveData " + (this.props.mobileActive === 'gameView' ? 'mobileActive' : '')}>
         <div className="nav-bar">
-          <button onClick={this.props.backButtonClick}>Back</button>
+          <span onClick={this.props.backButtonClick}><img src={ChevronLeft} /></span>
           <h3>Live Score</h3>
         </div>
         {allData.gameBanner}
