@@ -294,6 +294,7 @@ span .eventRow:first-child{
 
 .liveData .top-left{
   min-width: 480px;
+  width: 100%;
   padding:5px;
 }
 
@@ -305,6 +306,7 @@ span .eventRow:first-child{
 .liveData .top-right{
   width: 100%;
   padding:5px;
+  max-width: 290px;
 }
 
 .liveData .bottom {
@@ -558,6 +560,23 @@ span .eventRow:first-child{
   height: 100%;
   /* overflow-y: scroll; */
   width: 100%;
+}
+
+.boxScore table {
+  font-size: 13px;
+}
+
+.boxScore table td:first-child {
+  min-width: 85px;
+  max-width: 90px;
+  padding:6px 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.boxScore table td {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .boxScore .ReactTable {
