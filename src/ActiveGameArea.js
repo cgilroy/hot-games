@@ -106,6 +106,7 @@ export class ActiveGameArea extends Component {
           );
           let gameBanner = (
             <MainGameBanner
+              gameState={gameState}
               timeAndScore={timeAndScore}
               homeTeamName={homeTeamName}
               awayTeamName={awayTeamName}
@@ -627,11 +628,15 @@ function MainGameBanner(props) {
           <span className="teamRecord">{props.records.home}</span>
         </div>
         <img src={homeTeamResources.logo} alt=''/>
-        <h2>{props.homeScore}</h2>
+        { (props.gameState.search('pre') === -1 && props.gameState.search('sched') === -1) &&
+          <h2>{props.homeScore}</h2>
+        }
       </div>
       {props.timeAndScore}
       <div className="bannerGroup away" style={{background: awayTeamResources.primaryColor}}>
+      { (props.gameState.search('pre') === -1 && props.gameState.search('sched') === -1) &&
         <h2>{props.awayScore}</h2>
+      }
         <img src={awayTeamResources.logo} alt=''/>
         <div className="nameAndRec">
           <h1>{props.awayTeamName}</h1>
