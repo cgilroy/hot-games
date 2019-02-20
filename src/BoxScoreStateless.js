@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 
 export class BoxScoreStateless extends React.Component {
 
@@ -78,8 +76,8 @@ export class BoxScoreStateless extends React.Component {
           savePercentage = savePercentage.toFixed(3);
           let currentGoalieArray = {
             name: firstInitial + '. ' + lastName,
-            saves: goalieStats.saves,
             shots: goalieStats.shots,
+            saves: goalieStats.saves,
             savePercentage: savePercentage,
             timeOnIce: goalieStats.timeOnIce
           };
@@ -119,6 +117,9 @@ export class BoxScoreStateless extends React.Component {
     let z = makeTable(goalieColumns,goalieArray,resources,this.props.activeBoxTeam);
     return(
       <div className="boxScore">
+        <div className="section-title">
+          <h1>Stats</h1>
+        </div>
         <div className="buttonRow">
           <button className={this.props.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.props.onClick('home')}>{this.props.homeTeamName}</button>
           <button className={this.props.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.props.onClick('away')}>{this.props.awayTeamName}</button>
@@ -137,53 +138,27 @@ function makeTable ( headers, data, resources, activeBoxTeam ) {
   ) : (
     {background:resources.away.primaryColor}
   )
-  let tableRow = (row) => {
+  let tableRow = (row,index) => {
     let rowData = [];
 
     for ( var key in row ) {
       // Add our row:
       rowData.push(
-        <td>{row[key]}</td>
+        <td key={key+index}>{row[key]}</td>
       )
     }
 
-    return (<tr>{rowData}</tr>)
+    return (<tr key={"row"+index}>{rowData}</tr>)
   }
 
-  let headerRow = headers.map(title => {
+  let headerRow = headers.map((title,index) => {
 
-    return (<th>{title}</th>)
+    return (<th key={index}>{title}</th>)
   })
 
-  let tableData = data.map(row => {
-    return tableRow(row);
+  let tableData = data.map((row,index) => {
+    return tableRow(row,index);
   });
 
   return (<table><thead style={headerColour}><tr>{headerRow}</tr></thead><tbody>{tableData}</tbody></table>);
-
-    // // Check type
-    // if ( typeof data !== 'object' ) return false;
-    //
-    // // Start our HTML
-    // var headerRow = '';
-    // var dataArray = [];
-    // // Loop through members of the object
-    // // make header row
-    // for ( let i = 0; i <= headers.length-1;i++ ) {
-    //   headerRow+=<th>{headers[i].Header}</th>
-    // }
-    // for ( i = 0; i <= data.length-1;i++ ) {
-    //     // https://jslinterrors.com/the-body-of-a-for-in-should-be-wrapped-in-an-if-statement
-    //     for ( j = 0; j <= headers.length-1;i++  ) {
-    //         // https://jslinterrors.com/the-body-of-a-for-in-should-be-wrapped-in-an-if-statement
-    //         // Add our row:
-    //         dataArray.push(
-    //
-    //         )
-    //     }
-    // }
-    // // Finish the table:
-    // html += "</tbody></table>";
-    // // Return the table
-    // return html;
 }

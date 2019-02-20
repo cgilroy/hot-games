@@ -40,7 +40,7 @@
   font-size: 13px;
   /* border-bottom: 1px solid #e7e7e7; */
   padding: 5px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .section-title h1 {
@@ -199,7 +199,7 @@ div[class*='inprogress'] .timeRemaining {
   width: 100%;
   height: 100%;
   transition: 0s ease height;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -251,7 +251,6 @@ div[class*='inprogress'] .timeRemaining {
 .penaltyTable .scorer {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 330px;
 }
 
 span .eventRow:first-child{
@@ -511,7 +510,7 @@ span .eventRow:first-child{
   align-items: baseline;
   padding-right: 3px;
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   right: 0;
 
 }
@@ -533,7 +532,8 @@ span .eventRow:first-child{
   padding-left: 6px;
   display: flex;
   align-items: center;
-  /* width: 100%; */
+  width: 100%;
+  min-width: 0;
   white-space: nowrap;
 }
 

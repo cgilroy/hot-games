@@ -30,6 +30,14 @@
   font-size: 15px;
 }
 
+.nameAndRec--mobile {
+  display: none;
+}
+
+.nameAndRec--desktop {
+  display: block;
+}
+
 @media screen and (max-width: 767px)  {
   .totalViewContainer {
     display: block !important;
@@ -123,6 +131,7 @@
     margin-top:48px;
     width: 100%;
     flex: auto !important;
+    background: rgba(0,0,0,0.9) !important;
   }
 
   .bannerContainer .bannerGroup h2 {
@@ -137,7 +146,7 @@
   }
 
   .bannerGroup h1 {
-    display: none;
+    /* display: none; */
   }
 
   .teamRecord {
@@ -146,10 +155,6 @@
 
   .bannerContainer {
     height: auto !important;
-  }
-
-  .totalViewContainer .penaltyTable .scorer {
-    max-width: 250px;
   }
 
   .totalViewContainer .liveData .scoreData {
@@ -200,6 +205,33 @@
   }
 
   .__react_component_tooltip {
+    display: none;
+  }
+
+  .liveData .description {
+    display: none;
+  }
+
+  .liveData .blurb {
+    position: relative !important;
+    background: none !important;
+    color: #262626;
+  }
+
+  .gameRecap img, .gamePreview img {
+    display: none;
+  }
+
+  .liveData .gameRecap h1, .liveData .gamePreview h1 {
+    font-size: 15px;
+  }
+
+  .liveData .nameAndRec--mobile {
+    display: block;
+    font-size: 15px;
+  }
+
+  .nameAndRec--desktop {
     display: none;
   }
 }

@@ -108,16 +108,17 @@ export class ActiveGameArea extends Component {
             <MainGameBanner
               gameState={gameState}
               timeAndScore={timeAndScore}
-              homeTeamName={homeTeamName}
-              awayTeamName={awayTeamName}
-              homeCityName={homeCityName}
-              awayCityName={awayCityName}
               homeTeamId={data.gameData.teams.home.id}
               awayTeamId={data.gameData.teams.away.id}
+              homeTeamName={homeTeamName}
+              awayTeamName={awayTeamName}
               records={this.recordArrayToStrings(this.props.records)}
               ppData={ppData}
               homeScore={homeScore}
               awayScore={awayScore}
+              mobileActive={this.props.mobileActive}
+              homeTricode={homeTricode}
+              awayTricode={awayTricode}
               />
           );
 
@@ -482,6 +483,7 @@ function GameRecap(props) {
   let subhead = item.subhead;
   let imgSrc = item.media.image.cuts['1136x640'].src;
   let description = item.preview;
+  let bgImg = {backgroundImage:"url("+imgSrc+")"};
   return (
     <div className="gameRecap">
       <div className="blurb">
@@ -618,13 +620,15 @@ function MainGameBanner(props) {
       {props.ppData.powerPlayStrength}
     </span>
   ) : ('');
+
   return (
     <div className="bannerContainer">
       <div className="bannerGroup home" style={{background: homeTeamResources.primaryColor}}>
         <span className="bannerLabel">HOME</span>
         {homePPLogoBadge}
         <div className="nameAndRec">
-          <h1>{props.homeTeamName}</h1>
+          <h1 className="nameAndRec--desktop">{props.homeTeamName}</h1>
+          <h1 className="nameAndRec--mobile">{props.homeTricode}</h1>
           <span className="teamRecord">{props.records.home}</span>
         </div>
         <img src={homeTeamResources.logo} alt=''/>
@@ -639,7 +643,8 @@ function MainGameBanner(props) {
       }
         <img src={awayTeamResources.logo} alt=''/>
         <div className="nameAndRec">
-          <h1>{props.awayTeamName}</h1>
+          <h1 className="nameAndRec--desktop">{props.awayTeamName}</h1>
+          <h1 className="nameAndRec--mobile">{props.awayTricode}</h1>
           <span className="teamRecord">{props.records.away}</span>
         </div>
         {awayPPLogoBadge}
