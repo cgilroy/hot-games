@@ -302,7 +302,7 @@ export class ActiveGameArea extends Component {
     }
 
     return (
-      <div className={"liveData " + (this.props.mobileActive === 'gameView' ? 'mobileActive' : '')}>
+      <div className={"liveData"}>
         <div className="nav-bar">
           <span onClick={this.props.backButtonClick}><img src={ChevronLeft} /></span>
           <h3>Live Score</h3>

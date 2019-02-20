@@ -109,10 +109,14 @@ export class BoxScoreStateless extends React.Component {
     const forwardColumns = ['Forwards','G','A','+/-','TOI'];
     const defenseColumns = ['Defense','G','A','+/-','TOI'];
     const goalieColumns = ['Goalies','SA','SV','SV%','TOI'];
+    let resources = {
+      home: this.props.homeResources,
+      away: this.props.awayResources
+    }
 
-    let x = makeTable(forwardColumns,forwardArray);
-    let y = makeTable(defenseColumns,defenseArray);
-    let z = makeTable(goalieColumns,goalieArray);
+    let x = makeTable(forwardColumns,forwardArray,resources,this.props.activeBoxTeam);
+    let y = makeTable(defenseColumns,defenseArray,resources,this.props.activeBoxTeam);
+    let z = makeTable(goalieColumns,goalieArray,resources,this.props.activeBoxTeam);
     return(
       <div className="boxScore">
         <div className="buttonRow">
@@ -127,8 +131,12 @@ export class BoxScoreStateless extends React.Component {
   }
 }
 
-function makeTable ( headers, data ) {
-
+function makeTable ( headers, data, resources, activeBoxTeam ) {
+  let headerColour = (activeBoxTeam === 'home') ? (
+    {background:resources.home.primaryColor}
+  ) : (
+    {background:resources.away.primaryColor}
+  )
   let tableRow = (row) => {
     let rowData = [];
 
@@ -151,7 +159,7 @@ function makeTable ( headers, data ) {
     return tableRow(row);
   });
 
-  return (<table><thead><tr>{headerRow}</tr></thead><tbody>{tableData}</tbody></table>);
+  return (<table><thead style={headerColour}><tr>{headerRow}</tr></thead><tbody>{tableData}</tbody></table>);
 
     // // Check type
     // if ( typeof data !== 'object' ) return false;

@@ -564,6 +564,16 @@ span .eventRow:first-child{
 
 .boxScore table {
   font-size: 13px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.boxScore table thead th {
+  color: white;
+  font-weight: normal;
+  padding: 8px 10px;
+  font-size: 11px;
 }
 
 .boxScore table td:first-child {
@@ -577,6 +587,14 @@ span .eventRow:first-child{
 .boxScore table td {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.boxScore table tbody tr {
+  border-top: 1px solid #e7e7e7
+}
+
+.boxScore table tbody tr:first-child {
+  border-top: none;
 }
 
 .boxScore .ReactTable {
@@ -645,23 +663,26 @@ span .eventRow:first-child{
   width: 100%;
   /* height: 20px; */
   display: flex;
+  margin-bottom: 5px;
   /* border:1px solid black */
 }
 
 .buttonRow button {
   width: 100%;
   background:none;
-  border: none;
+  border: 1px solid #d2d2d2;
   cursor: pointer;
   color: #262626;
   padding: 3px;
 }
 
+.buttonRow button:first-child {
+  border-right: none;
+}
+
 
 .buttonRow button.active {
-  background: white;
-  border-bottom: 3px solid #ff520d;
-  font-weight: bold;
+  background: #e0e0e0;
 }
 
 .buttonRow button:focus {

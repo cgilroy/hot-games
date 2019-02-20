@@ -1,4 +1,4 @@
-.liveData.mobileActive .nav-bar {
+.nav-bar {
   display: none;
 }
 
@@ -49,7 +49,8 @@
   .totalViewContainer .liveData .top-left,
   .totalViewContainer .liveData .top-right {
     min-width: 0;
-    padding: 0
+    padding: 0;
+    max-width: none;
   }
 
   .totalViewContainer .liveData .scoringRow>h4 {
@@ -69,7 +70,7 @@
     display: flex;
   }
 
-  .liveData.mobileActive .nav-bar {
+  .nav-bar {
     display: flex;
     align-items: center;
     justify-content: center;
