@@ -187,6 +187,18 @@
     min-width: 20px;
   }
 
+  .liveData .buttonRow button {
+    height:30px;
+    font-size: 13px;
+    width: 40%;
+    border-radius: 3px;
+    border-right: 1px solid #d2d2d2;
+  }
+
+  .liveData .buttonRow {
+    justify-content: space-evenly;
+  }
+
   .__react_component_tooltip {
     display: none;
   }
