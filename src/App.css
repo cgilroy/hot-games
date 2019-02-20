@@ -200,6 +200,7 @@ div[class*='inprogress'] .timeRemaining {
   height: 100%;
   transition: 0s ease height;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .liveData .latestPlays {
