@@ -241,7 +241,7 @@ box-sizing: border-box;
 }
 
 .heroImage {
-  height: 540px;
+  /* height: 540px; */
   width: 100%;
   position: relative;
 }

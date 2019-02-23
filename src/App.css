@@ -197,7 +197,7 @@ div[class*='inprogress'] .timeRemaining {
   /* flex-wrap: wrap; */
   background: white;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   transition: 0s ease height;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

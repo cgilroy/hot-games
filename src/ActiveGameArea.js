@@ -288,6 +288,7 @@ export class ActiveGameArea extends Component {
     let awayTeamName = this.props.data.gameData.teams.away.teamName;
 
     let boxScore = '';
+    let topSection = '';
     if (allData.gameState === 'final' || allData.gameState.search('progress') !== -1) {
       boxScore = (
         <BoxScoreStateless
@@ -299,6 +300,20 @@ export class ActiveGameArea extends Component {
           activeBoxTeam={this.state.activeBoxTeam}
           onClick={this.handleClick}
         />
+      );
+      topSection = (
+        <div className="top">
+          <div className="top-left">
+            {allData.rinkMap}
+            {allData.threeStars}
+            {allData.currentPlays}
+            {allData.scoringTable}
+            {allData.penaltyTable}
+          </div>
+          <div className="top-right">
+            {boxScore}
+          </div>
+        </div>
       )
     }
 
@@ -311,29 +326,8 @@ export class ActiveGameArea extends Component {
         {allData.gameBanner}
         {allData.media.gameRecap}
         {allData.media.gamePreview}
-        <div className="top">
-
-          <div className="top-left">
-            {allData.rinkMap}
-            {allData.threeStars}
-            {allData.currentPlays}
-            {allData.scoringTable}
-            {allData.penaltyTable}
-          </div>
-          <div className="top-right">
-            {boxScore}
-          </div>
-        </div>
-        <div className="bottom">
-
-          <div className="bottomData">
-
-          </div>
-
-        </div>
+        {topSection}
       </div>
-
-
     )
   }
 
