@@ -164,17 +164,22 @@
   .totalViewContainer .liveData .assistData {
     display: flex;
     padding: 0;
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
   }
 
   .totalViewContainer .liveData .assistData .assistOne,
   .totalViewContainer .liveData .assistData .assistTwo {
     padding-left: 0;
     font-size: 0.7em;
+    width: auto;
   }
 
   .scoringRow img {
     margin: 0;
+  }
+
+  .scoringTable .scoringRow {
+    height: auto;
   }
 
   .liveData .section-title {
