@@ -214,7 +214,7 @@
     display: none;
   }
 
-  .liveData .description {
+  .liveData .gameRecap .description {
     display: none;
   }
 
@@ -224,8 +224,12 @@
     color: #262626;
   }
 
-  .gameRecap img, .gamePreview img {
+  .gameRecap img {
     display: none;
+  }
+
+  .liveData .gamePreview .description {
+    position: relative;
   }
 
   .liveData .gameRecap h1, .liveData .gamePreview h1 {
