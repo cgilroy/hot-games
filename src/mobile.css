@@ -41,6 +41,7 @@
 @media screen and (max-width: 767px)  {
   .totalViewContainer {
     display: block !important;
+    min-width: 355px;
   }
   .mainGameArea {
     display: none;
