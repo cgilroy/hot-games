@@ -16,15 +16,16 @@ export class APISchedFetch extends Component {
       gamesData:[],
       gamesContentData:[],
       loading:true,
-      records:[]
+      records:[],
+      mobileActive:'list'
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
 
   refreshData() {
-    let dateTest = '?date=2019-02-07';
-    // let dateTest = '';
+    // let dateTest = '?date=2019-02-14';
+    let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
@@ -37,7 +38,6 @@ export class APISchedFetch extends Component {
     let gamesContentData = [];
     let records = [];
     var fetches = [];
-    console.log("dateslength",data.dates[0].games.length)
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
       let iterGame = data.dates[0].games[i];
       let homeTeam = iterGame.teams.home;
@@ -83,12 +83,10 @@ export class APISchedFetch extends Component {
     };
 
     Promise.all(fetches).then(() => {
-      console.log("allGames",allGames[2]);
       sortByKey(liveGames,'gamePk');
       sortByKey(scheduledGames,'gamePk');
       sortByKey(finalGames,'gamePk');
       sortByKey(allGamesJSON,'gamePk');
-      // this.setState({liveGames: allGames[0],scheduledGames:allGames[1],finalGames:allGames[2]});
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
         this.setState({
@@ -119,31 +117,25 @@ export class APISchedFetch extends Component {
 
   }
 
-
   componentDidMount() {
+    this.refreshData();
+    this._interval = window.setInterval(this.refreshData,5000);
+  }
 
-  this.refreshData();
+  componentWillUnMount() {
+    this._interval && window.clearInterval(this._interval);
+  }
 
-  this._interval = window.setInterval(this.refreshData,5000);
-}
+  sideBarClick(gameFID) {
+    this.setState({mainGamePk: gameFID, mobileActive:'gameView'});
+  }
 
-componentWillUnMount() {
-  this._interval && window.clearInterval(this._interval);
-}
-
-sideBarClick(gameFID) {
-  console.log(gameFID);
-  this.setState({mainGamePk: gameFID});
-
-
-}
+  backButtonClick() {
+    this.setState({mobileActive:'list'});
+  }
 
   render() {
-    let test = new Date().toString();
     let activeGameVar = this.state.mainGamePk;
-    let a= this.state.liveGames;
-    let b= this.state.scheduledGames;
-    let c = this.state.finalGames;
     let tg = this.state.gamesData;
     let activeGameData = tg.find(obj => {
       return obj.gamePk == activeGameVar
@@ -164,12 +156,12 @@ sideBarClick(gameFID) {
         loading={this.state.loading}
       />
     ) : (
-      <ActiveGameArea gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} />
+      <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
     )
     return (
 
       <div className="totalViewContainer">
-        <div className="gamesSideBar">
+        <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
@@ -193,7 +185,7 @@ sideBarClick(gameFID) {
               <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
             </div>
         </div>
-        <div className={"mainGameArea " + (this.state.loading ? 'loading' : '')}>
+        <div className={"mainGameArea " + (this.state.loading ? 'loading ' : '') + (this.state.mobileActive === 'gameView' ? 'mobileActive' : '')}>
           { mainGameArea }
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './mobile.css';
 import { APISchedFetch } from './APISchedFetch.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';

@@ -14,7 +14,6 @@ export class LatestPlays extends React.Component {
       gamePk: props.gamePk
     }
     this.parsePlayData = this.parsePlayData.bind(this);
-    // this.addItem = this.addItem.bind(this);
   }
 
   shouldAddPlay(play) {
