@@ -24,7 +24,7 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-15';
+    // let dateTest = '?date=2019-02-14';
     let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
@@ -117,24 +117,22 @@ export class APISchedFetch extends Component {
 
   }
 
+  componentDidMount() {
+    this.refreshData();
+    this._interval = window.setInterval(this.refreshData,5000);
+  }
 
-componentDidMount() {
-  this.refreshData();
-  this._interval = window.setInterval(this.refreshData,5000);
-}
+  componentWillUnMount() {
+    this._interval && window.clearInterval(this._interval);
+  }
 
-componentWillUnMount() {
-  this._interval && window.clearInterval(this._interval);
-}
+  sideBarClick(gameFID) {
+    this.setState({mainGamePk: gameFID, mobileActive:'gameView'});
+  }
 
-sideBarClick(gameFID) {
-  this.setState({mainGamePk: gameFID, mobileActive:'gameView'});
-
-}
-
-backButtonClick() {
-  this.setState({mobileActive:'list'});
-}
+  backButtonClick() {
+    this.setState({mobileActive:'list'});
+  }
 
   render() {
     let activeGameVar = this.state.mainGamePk;

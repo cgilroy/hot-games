@@ -1,93 +1,97 @@
 /* CSS for ActiveGameArea.js */
+
 .bannerContainer {
-  height: 80px;
-  width: 100%;
-  display: flex;
-  position: sticky;
-  top: 0;
-  z-index: 999
+  z-index  : 999;
+  display  : flex;
+  position : sticky;
+  top      : 0;
+  width    : 100%;
+  height   : 80px;
 }
 
 .bannerGroup {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  display         : flex;
+  width           : 50%;
+  align-items     : center;
+  justify-content : flex-end;
 }
 
 .bannerGroup .nameAndRec {
-  display: flex;
-  align-items: baseline;
-  color: white;
-  justify-content: center;
-  flex-wrap: wrap;
+  display         : flex;
+  color           : white;
+  align-items     : baseline;
+  flex-wrap       : wrap;
+  justify-content : center;
 }
 
 .bannerGroup .nameAndRec h1 {
   /* width: 100%; */
-  font-size: 24px;
-  margin: 0 5px;
-  color: white;
-  font-weight: normal;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  margin      : 0 5px;
+  color       : white;
+  text-shadow : 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size   : 24px;
+  font-weight : normal;
 }
 
 .bannerGroup .nameAndRec .teamRecord {
-  font-size: 12px;
+  font-size : 12px;
 }
 
 .bannerGroup.home .bannerScore {
-  margin-left: 20px;
+  margin-left : 20px;
 }
 
 .bannerGroup.away .bannerScore {
-  margin-right: 20px;
+  margin-right : 20px;
 }
 
 .bannerGroup.away {
-  justify-content: flex-start;
+  justify-content : flex-start;
 }
 
 .bannerGroup.home {
-  justify-content: flex-end;
+  justify-content : flex-end;
 }
 
 .bannerGroup .logoPPBadge {
-  color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  padding: 5px;
-  border-radius: 3px;
-  background: #ff0000;
-  font-weight: bold;
-  margin: 0 auto;
+  margin        : 0 auto;
+  padding       : 5px;
+  color         : white;
+  border-radius : 3px;
+  background    : #ff0000;
+  box-shadow    : 0 1px 3px rgba(0, 0, 0, 0.12),
+                  0 1px 2px rgba(0, 0, 0, 0.24);
+  font-weight   : bold;
 }
 
 .bannerGroup .bannerLabel {
-  position: absolute;
-    top: 0;
-    margin: 6px;
-    padding: 3px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    color: white;
-    font-weight: bold;
-    font-size: 11px;
+  position    : absolute;
+  top         : 0;
+  margin      : 6px;
+  padding     : 3px;
+  color       : white;
+  text-shadow : 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size   : 11px;
+  font-weight : bold;
 }
 
 .bannerGroup.home .bannerLabel {
-  left: 0
+  left : 0;
 }
 
 .bannerGroup.away .bannerLabel {
-  right: 0
+  right : 0;
 }
 
 .bannerGroup .bannerScore {
-  width: 50px;
-  height: 100%;
-  background: #262626;
-  color: white;
-  display: flex;
-  align-items: center;
+  display     : flex;
+  width       : 50px;
+  height      : 100%;
+  color       : white;
+  background  : #262626;
+  align-items : center;
 }
 
 .bannerScore h1 {
@@ -95,336 +99,315 @@
 }
 
 .bannerContainer .scoreDivide {
-  height: 100%;
-  background: #ddd;
-  width: 2px;
+  width      : 2px;
+  height     : 100%;
+  background : #ddd;
 }
 
 .bannerGroup img {
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    background: white;
-    margin: 0 10px;
+  width         : 50px;
+  height        : 50px;
+  margin        : 0 10px;
+  border-radius : 10px;
+  background    : white;
+  box-shadow    : 0 1px 3px rgba(0, 0, 0, 0.12),
+                  0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .timeAndScore {
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  display: flex;
+  display         : flex;
+  height          : 100%;
+  background      : black;
+  align-items     : center;
+  flex            : 0 0 150px;
+  justify-content : center;
   /* min-width: 200px; */
-  background: black;
-  flex: 0 0 150px;
 }
 
 .bannerGroup h2 {
-  color: white;
-  background: #222;
+  min-width   : 22px;
+  height      : 100%;
+  margin      : 0;
+  padding     : 0 8px;
+  color       : white;
+  background  : #222;
+  font-size   : 2.5em;
+  font-weight : lighter;
+  line-height : 80px;
   /* font-family: 'digital-font'; */
-  font-weight: lighter;
   /* padding: 3px 0; */
-  line-height: 80px;
-  height: 100%;
-  font-size: 2.5em;
-  padding: 0 8px;
-  min-width: 22px;
-  margin: 0;
 }
 
 .timeAndScore h2:first-child {
-  /* border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px; */
+  /* border-top-left-radius: 5px; border-bottom-left-radius: 5px; */
 }
 
 .timeAndScore h2:last-child {
-  /* border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px; */
+  /* border-top-right-radius: 5px; border-bottom-right-radius: 5px; */
 }
 
 .bannerContainer .timeRemaining {
   /* min-width: 100px; */
-  width: 100%;
-  justify-content: center;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display         : -ms-flexbox;
+  display         : flex;
+  box-sizing      : border-box;
+  width           : 100%;
+  height          : 100%;
+  color           : white;
+  align-items     : center;
+  flex-direction  : column;
+  justify-content : center;
+  justify-content : space-between;
   /* border: 2px solid white; */
-  box-sizing: border-box;
-  color: white;
-  height: 100%;
   /* position: relative; */
-  justify-content: space-between;
 }
 
 div[class*='inprogress'] .timeRemaining {
-  font-family: 'digital-font', sans-serif;
-  color: #ffd800;
+  color       : #ffd800;
+  font-family : 'digital-font',
+                sans-serif;
 }
 
 .timeRemaining h1 span {
   /* font-size: 1.4em; */
-  font-weight: lighter;
-  padding-left: 5px;
+  padding-left : 5px;
+  font-weight  : lighter;
 }
+
 .timeRemaining h1:first-child {
   /* font-size: 1.4em; */
-  padding-left:0;
-  font-weight: lighter;
+  padding-left : 0;
+  font-weight  : lighter;
 }
 
 .timeAndScore .timeRemaining h1 {
-  margin:0;
-  top:0;
-  /* position: absolute; */
+  top    : 0;
+  margin : 0;
 }
 
-.timeAndScore.scheduled h1, .timeAndScore h1 {
-font-size: 14px;
-border-bottom: 1px solid #333;
-/* padding: 8px 4px 4px 4px; */
-width: 100%;
-box-sizing: border-box;
+.timeAndScore.scheduled h1,
+.timeAndScore h1 {
+  box-sizing    : border-box;
+  width         : 100%;
+  border-bottom : 1px solid #333;
+  font-size     : 14px;
 }
 
 .timeAndScore.scheduled h1 {
-  padding: 8px 4px;
+  padding : 8px 4px;
 }
 
 .timeAndScore.scheduled .venue {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display         : flex;
+  width           : 100%;
+  height          : 100%;
+  flex-direction  : column;
+  justify-content : center;
 }
 
 .timeAndScore.scheduled span {
-  width: 100%;
-  color: #757575;
-  font-size:11px;
+  width     : 100%;
+  color     : #757575;
+  font-size : 11px;
 }
 
-.timeAndScore table, .timeAndScore th {
-  font-size: 13px;
-  font-weight: 300;
-  /* height: 100% */
+.timeAndScore table,
+.timeAndScore th {
+  font-size   : 13px;
+  font-weight : 300;
 }
 
 .timeAndScore th {
-  color: #959595;
-  font-size: 11px;
+  color     : #959595;
+  font-size : 11px;
 }
 
 .timeAndScore table {
-  margin: 0 auto;
+  margin : 0 auto;
 }
 
 .timeAndScore .bannerPeriodTable {
-  display: flex;
-  align-items: center;
-  height: 100%
+  display     : flex;
+  height      : 100%;
+  align-items : center;
 }
 
-.gameRecap, .gamePreview {
-  width: 100%;
-  position: relative;
-  color: white;
-  /* overflow: hidden; */
-  /* height: 540px; */
+.gamePreview,
+.gameRecap {
+  position : relative;
+  width    : 100%;
+  color    : white;
 }
 
-.gameRecap p, .gamePreview p {
-  margin: 0;
+.gamePreview p,
+.gameRecap p {
+  margin : 0;
 }
 
 .heroImage {
-  /* height: 540px; */
-  width: 100%;
-  position: relative;
+  position : relative;
+  width    : 100%;
 }
 
-.gamePreview img, .gameRecap img {
-  width: 100%;
-}
-
-.gamePreview .heroImage:before{
-  /* background: linear-gradient(to bottom, rgba(0,0,0,0) 0% 40%, rgba(0,0,0,0.9) 100%);
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%; */
-}
-
-.gameRecap:before {
-  /* background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 50%,rgba(0,0,0,0.9) 100%); */
-  /* content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%; */
+.gamePreview img,
+.gameRecap img {
+  width : 100%;
 }
 
 .blurb {
-  text-align: left;
-  padding: 10px;
-  font-weight: normal;
-  color: white;
+  padding     : 10px;
+  color       : white;
+  text-align  : left;
+  font-weight : normal;
 }
 
 .gameRecap .blurb {
-  position: absolute;
-  top:0;
-  z-index: 99;
-  width: 100%;
-  background: #262626ed;
-  box-sizing: border-box;
+  z-index    : 99;
+  box-sizing : border-box;
+  position   : absolute;
+  top        : 0;
+  width      : 100%;
+  background : #262626ed;
 }
 
-.gameRecap .description, .gamePreview .description {
-  position: absolute;
-  bottom: 0;
-  text-align: left;
-  padding: 10px;
-  background: #262626ed;
-  width: 100%;
-  border-top: 2px solid #ff520d;
-  box-sizing: border-box;
+.gamePreview .description,
+.gameRecap .description {
+  box-sizing : border-box;
+  position   : absolute;
+  bottom     : 0;
+  width      : 100%;
+  padding    : 10px;
+  border-top : 2px solid #ff520d;
+  background : #262626ed;
+  text-align : left;
 }
 
-.gameRecap a, .gamePreview a {
-  text-decoration: none;
-  pointer-events: none;
-  color: white;
+.gamePreview a,
+.gameRecap a {
+  color           : white;
+  text-decoration : none;
+  pointer-events  : none;
 }
 
 .gamePreview h1 {
-  color: #262626;
-  font-size: 20px;
+  color     : #262626;
+  font-size : 20px;
 }
 
 .gameRecap h1 {
-  margin:0;
-  margin-bottom: 10px;
-  /* color:#262626; */
-  font-size: 22px;
+  margin        : 0;
+  margin-bottom : 10px;
+  font-size     : 22px;
 }
 
-.gameRecap h2, .gamePreview h2 {
+.gamePreview h2,
+.gameRecap h2 {
   /* color:#666; */
-  font-weight: normal;
-  margin:0;
-  font-size: 14px;
+  margin      : 0;
+  font-size   : 14px;
+  font-weight : normal;
 }
 
 .gamePreview h5 {
-  display: none;
+  display : none;
 }
 
 .noMediaContent {
-  margin: 10px auto;
-  /* height: 100%; */
-  color: #757575;
-  width: 300px;
-  align-items: center;
-  border: 1px solid #757575;
+  width       : 300px;
+  margin      : 10px auto;
+  color       : #757575;
+  border      : 1px solid #757575;
+  align-items : center;
 }
 
 .noMediaContent h1 {
-  margin:0;
-  font-weight: normal;
-  font-size: 22px;
+  margin      : 0;
+  font-size   : 22px;
+  font-weight : normal;
 }
 
 .rinkMap {
-  /* height: 200px; */
-  /* width: 400px; */
-  position: relative;
+  position : relative;
 }
 
 .rinkMap .tooltipTime {
-  margin-right: 4px;
+  margin-right : 4px;
 }
 
-.rinkMap .toolTipInfo {
-
-}
+.rinkMap .toolTipInfo {}
 
 .legendWrapper {
-  display: flex;
-  width: 100%;
-  font-size: 12px;
-  background: #c9ddf5;
-
+  display    : flex;
+  width      : 100%;
+  background : #c9ddf5;
+  font-size  : 12px;
 }
 
 .legendTricode {
-  font-weight: bold;
-  padding-right: 5px;
+  padding-right : 5px;
+  font-weight   : bold;
 }
 
 .legendHalf {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  display         : flex;
+  width           : 100%;
+  align-items     : center;
+  justify-content : center;
 }
 
 .legendText {
-  padding: 0 5px;
+  padding : 0 5px;
 }
 
 .shotsSVGData {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+  position : absolute;
+  top      : 0px;
+  left     : 0px;
 }
 
 .threeStars {
-  display: flex;
+  display : flex;
 }
 
-.starArea > img {
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  border: 2px solid #b2b2b2;
-  box-shadow: 0 2px 3px 1px #ddd
+.starArea>img {
+  width         : 80px;
+  height        : 80px;
+  border        : 2px solid #b2b2b2;
+  border-radius : 50%;
+  box-shadow    : 0 2px 3px 1px #ddd;
 }
 
 .starArea {
-  width: 33.333%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
+  display        : flex;
+  width          : 33.333%;
+  margin         : 10px;
+  align-items    : center;
+  flex-direction : column;
 }
 
 .starStats {
-  font-size: 12px
+  font-size : 12px;
 }
 
 .stars {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
 }
 
 .starName {
-  font-size: 13px;
-  width: 100%;
-  text-align: center;
-  padding: 5px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display         : flex;
+  width           : 100%;
+  padding         : 5px 0;
+  text-align      : center;
+  align-items     : center;
+  font-size       : 13px;
+  justify-content : center;
 }
 
 .starName img {
-  width: 30px;
-  height: 30px;
+  width  : 30px;
+  height : 30px;
 }
 
-.star img {
-}
+.star img {}

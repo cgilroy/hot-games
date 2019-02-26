@@ -1,149 +1,158 @@
 .nav-bar {
-  display: none;
+  display : none;
 }
 
 .nav-bar {
-  height: 22px;
-  background: linear-gradient(45deg, #188FFF 0%, #0036B0 100%);
-  color: white;
-  position: relative;
-  padding: 8px;
+  position   : relative;
+  height     : 22px;
+  padding    : 8px;
+  color      : white;
+  background : linear-gradient(
+                 45deg,
+                 #188FFF 0%,
+                 #0036B0 100%
+               );
 }
 
 .nav-bar span {
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: white;
-  height: 100%;
-  font-size: 18px;
-  background: none;
-  border: none;
+  position   : absolute;
+  top        : 0;
+  left       : 0;
+  height     : 100%;
+  color      : white;
+  border     : none;
+  background : none;
+  font-size  : 18px;
 }
 
 .nav-bar span img {
-  height: 100%;
+  height : 100%;
 }
 
 .nav-bar h3 {
-  margin: 0;
-  font-size: 15px;
+  margin    : 0;
+  font-size : 15px;
 }
 
 .nameAndRec--mobile {
-  display: none;
+  display : none;
 }
 
 .nameAndRec--desktop {
-  display: block;
+  display : block;
 }
 
-@media screen and (max-width: 767px)  {
+@media
+  screen
+  and (max-width : 767px) {
   .totalViewContainer {
-    display: block !important;
-    min-width: 355px;
+    display   : block !important;
+    min-width : 355px;
   }
+
   .mainGameArea {
-    display: none;
+    display : none;
   }
 
   .totalViewContainer .gamesSideBar {
-    display: none;
+    display : none;
   }
 
   .totalViewContainer .liveData .top {
-    display: block;
+    display : block;
   }
 
   .totalViewContainer .liveData .top-left,
   .totalViewContainer .liveData .top-right {
-    min-width: 0;
-    padding: 0;
-    max-width: none;
+    min-width : 0;
+    max-width : none;
+    padding   : 0;
   }
 
   .totalViewContainer .liveData .scoringRow>h4 {
-    padding: 0;
-    min-width: 35px;
+    min-width : 35px;
+    padding   : 0;
   }
 
   .totalViewContainer .rinkMap {
-    padding: 2px;
+    padding : 2px;
   }
 
   .mainGameArea.mobileActive {
-    display: block;
+    display : block;
   }
 
   .gamesSideBar.mobileActive {
-    display: flex;
+    display : flex;
   }
 
   .nav-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
   }
 
   .gamesSideBar {
-    padding: 0 !important;
+    padding : 0 !important;
   }
 
-  .gamesSideBar,.gamesScroll,.disclaimer {
-    width: 100% !important;
-    max-height: 100% !important;
+  .disclaimer,
+  .gamesScroll,
+  .gamesSideBar {
+    width      : 100% !important;
+    max-height : 100% !important;
   }
 
   .totalViewContainer .gamesScroll {
-    margin-top:0;
+    margin-top : 0;
   }
 
   .gamesScroll h3 {
-    height: 30px;
-    line-height: 30px;
+    height      : 30px;
+    line-height : 30px;
   }
 
   .bannerGroup {
-    position: absolute;
-    top:0;
-    width: 50%;
-    height: 48px;
+    position : absolute;
+    top      : 0;
+    width    : 50%;
+    height   : 48px;
   }
 
   .bannerGroup.home {
-    left: 0;
+    left : 0;
   }
 
   .bannerGroup.away {
-    right: 0;
+    right : 0;
   }
 
   .bannerContainer .bannerGroup img {
-    height: 35px;
-    width: 35px;
+    width  : 35px;
+    height : 35px;
   }
 
   .bannerContainer .bannerGroup .bannerLabel {
-    font-size: 8px;
-    margin: 3px;
+    margin    : 3px;
+    font-size : 8px;
   }
 
   .timeAndScore {
-    margin-top:48px;
-    width: 100%;
-    flex: auto !important;
-    background: rgba(0,0,0,0.9) !important;
+    width      : 100%;
+    margin-top : 48px;
+    background : rgba(0,0,0,0.9) !important;
+    flex       : auto !important;
   }
 
   .bannerContainer .bannerGroup h2 {
-    line-height: 48px;
-    font-size: 28px;
-    padding: 0 4px;
+    padding     : 0 4px;
+    font-size   : 28px;
+    line-height : 48px;
   }
 
   .bannerContainer .bannerGroup .logoPPBadge {
-    padding: 2px;
-    font-size: 13px;
+    padding   : 2px;
+    font-size : 13px;
   }
 
   .bannerGroup h1 {
@@ -151,97 +160,99 @@
   }
 
   .teamRecord {
-    display: none;
+    display : none;
   }
 
   .bannerContainer {
-    height: auto !important;
+    height : auto !important;
   }
 
   .totalViewContainer .liveData .scoreData {
-    display: block;
+    display : block;
   }
 
   .totalViewContainer .liveData .assistData {
-    display: flex;
-    padding: 0;
+    display : flex;
+    padding : 0;
     /* flex-wrap: nowrap; */
   }
 
   .totalViewContainer .liveData .assistData .assistOne,
   .totalViewContainer .liveData .assistData .assistTwo {
-    padding-left: 0;
-    font-size: 0.7em;
-    width: auto;
+    width        : auto;
+    padding-left : 0;
+    font-size    : 0.7em;
   }
 
   .scoringRow img {
-    margin: 0;
+    margin : 0;
   }
 
   .scoringTable .scoringRow {
-    height: auto;
+    height : auto;
   }
 
   .liveData .section-title {
-    box-sizing: border-box;
-    height: 30px;
+    box-sizing : border-box;
+    height     : 30px;
   }
 
+  .eventRow,
   .liveData .latestPlays .eventRow,
   .liveData .scoringTable .scoringRow,
-  .eventRow, .scoringRow {
-    box-sizing: border-box;
+  .scoringRow {
+    box-sizing : border-box;
   }
 
   .totalViewContainer .scoringRowScore span {
-    min-width: 20px;
+    min-width : 20px;
   }
 
   .liveData .buttonRow button {
-    height:30px;
-    font-size: 13px;
-    width: 40%;
-    border-radius: 3px;
-    border-right: 1px solid #d2d2d2;
+    width         : 40%;
+    height        : 30px;
+    border-right  : 1px solid #d2d2d2;
+    border-radius : 3px;
+    font-size     : 13px;
   }
 
   .liveData .buttonRow {
-    justify-content: space-evenly;
+    justify-content : space-evenly;
   }
 
   .__react_component_tooltip {
-    display: none;
+    display : none;
   }
 
   .liveData .gameRecap .description {
-    display: none;
+    display : none;
   }
 
   .liveData .blurb {
-    position: relative !important;
-    background: none !important;
-    color: #262626;
+    position   : relative !important;
+    color      : #262626;
+    background : none !important;
   }
 
   .gameRecap img {
-    display: none;
+    display : none;
   }
 
   .liveData .gamePreview .description {
-    position: relative;
+    position : relative;
   }
 
-  .liveData .gameRecap h1, .liveData .gamePreview h1 {
-    font-size: 15px;
+  .liveData .gamePreview h1,
+  .liveData .gameRecap h1 {
+    font-size : 15px;
   }
 
   .liveData .nameAndRec--mobile {
-    display: block;
-    font-size: 15px;
+    display   : block;
+    font-size : 15px;
   }
 
   .nameAndRec--desktop {
-    display: none;
+    display : none;
   }
 }
