@@ -14,10 +14,7 @@
     "react-dom": "^16.5.2",
     "react-moment": "^0.8.1",
     "react-scripts": "1.1.5",
-    "react-stack-grid": "^0.7.1",
-    "react-table": "^6.8.6",
-    "react-transition-group": "^1.2.1",
-    "simplebar-react": "0.0.1-beta.4"
+    "react-transition-group": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
