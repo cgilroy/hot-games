@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import SimpleBar from 'simplebar-react';
 
 export class BoxScoreStateless extends React.Component {
 
@@ -30,18 +27,18 @@ export class BoxScoreStateless extends React.Component {
             name: firstInitial + '. ' + lastName,
             goals: skaterStats.goals,
             assists: skaterStats.assists,
-            points: +skaterStats.goals + +skaterStats.assists,
+            // points: +skaterStats.goals + +skaterStats.assists,
             plusMinus: skaterStats.plusMinus,
-            shots: skaterStats.shots,
-            penaltyMinutes: skaterStats.penaltyMinutes,
-            hits: skaterStats.hits,
-            blocked: skaterStats.blocked,
-            giveaways: skaterStats.giveaways,
-            takeaways: skaterStats.takeaways,
-            faceOffPct: +skaterStats.faceOffWins / +skaterStats.faceoffTaken,
+            // shots: skaterStats.shots,
+            // penaltyMinutes: skaterStats.penaltyMinutes,
+            // hits: skaterStats.hits,
+            // blocked: skaterStats.blocked,
+            // giveaways: skaterStats.giveaways,
+            // takeaways: skaterStats.takeaways,
+            // faceOffPct: +skaterStats.faceOffWins / +skaterStats.faceoffTaken,
             timeOnIce: skaterStats.timeOnIce,
-            powerPlayTimeOnIce: skaterStats.powerPlayTimeOnIce,
-            shortHandedTimeOnIce: skaterStats.shortHandedTimeOnIce
+            // powerPlayTimeOnIce: skaterStats.powerPlayTimeOnIce,
+            // shortHandedTimeOnIce: skaterStats.shortHandedTimeOnIce
 
           };
           forwardArray.push(currentForwardArray);
@@ -54,18 +51,18 @@ export class BoxScoreStateless extends React.Component {
             name: firstInitial + '. ' + lastName,
             goals: skaterStats.goals,
             assists: skaterStats.assists,
-            points: +skaterStats.goals + +skaterStats.assists,
+            // points: +skaterStats.goals + +skaterStats.assists,
             plusMinus: skaterStats.plusMinus,
-            shots: skaterStats.shots,
-            penaltyMinutes: skaterStats.penaltyMinutes,
-            hits: skaterStats.hits,
-            blocked: skaterStats.blocked,
-            giveaways: skaterStats.giveaways,
-            takeaways: skaterStats.takeaways,
-            faceOffPct: +skaterStats.faceOffWins / +skaterStats.faceoffTaken,
+            // shots: skaterStats.shots,
+            // penaltyMinutes: skaterStats.penaltyMinutes,
+            // hits: skaterStats.hits,
+            // blocked: skaterStats.blocked,
+            // giveaways: skaterStats.giveaways,
+            // takeaways: skaterStats.takeaways,
+            // faceOffPct: +skaterStats.faceOffWins / +skaterStats.faceoffTaken,
             timeOnIce: skaterStats.timeOnIce,
-            powerPlayTimeOnIce: skaterStats.powerPlayTimeOnIce,
-            shortHandedTimeOnIce: skaterStats.shortHandedTimeOnIce
+            // powerPlayTimeOnIce: skaterStats.powerPlayTimeOnIce,
+            // shortHandedTimeOnIce: skaterStats.shortHandedTimeOnIce
           };
           defenseArray.push(currentDefenseArray);
         } else if (playerType === 'Goalie') {
@@ -79,8 +76,8 @@ export class BoxScoreStateless extends React.Component {
           savePercentage = savePercentage.toFixed(3);
           let currentGoalieArray = {
             name: firstInitial + '. ' + lastName,
-            saves: goalieStats.saves,
             shots: goalieStats.shots,
+            saves: goalieStats.saves,
             savePercentage: savePercentage,
             timeOnIce: goalieStats.timeOnIce
           };
@@ -95,6 +92,7 @@ export class BoxScoreStateless extends React.Component {
   }
 
   render() {
+
     let array = [];
     let forwardArray = [];
     let defenseArray = [];
@@ -105,133 +103,62 @@ export class BoxScoreStateless extends React.Component {
       defenseArray = array[1];
       goalieArray = array[2];
     }
-    const forwardColumns = [{
-      Header: 'Forwards',
-      accessor: 'name',
-      width:140 // String-based value accessors!
-    },{
-      Header: 'G',
-      accessor: 'goals',
-      width:30
-    },{
-      Header: 'A',
-      accessor: 'assists',
-      width:30
-    },{
-      Header: 'P',
-      accessor: 'points',
-      width:30
-    },{
-      Header: '+/-',
-      accessor: 'plusMinus',
-      width:30
-    },{
-      Header: 'SOG',
-      accessor: 'shots',
-      width:40
-    },{
-      Header: 'PIM',
-      accessor: 'penaltyMinutes',
-      width:40
-    },{
-      Header: 'HITS',
-      accessor: 'hits',
-      width:50
-    },{
-      Header: 'TOI',
-      accessor: 'timeOnIce',
-      width:60
-    }];
-    const defenseColumns = [{
-      Header: 'Defense',
-      accessor: 'name',
-      width:140// String-based value accessors!
-    },{
-      Header: 'G',
-      accessor: 'goals',
-      width:30
-    },{
-      Header: 'A',
-      accessor: 'assists',
-      width:30
-    },{
-      Header: 'P',
-      accessor: 'points',
-      width:30
-    },{
-      Header: '+/-',
-      accessor: 'plusMinus',
-      width:30
-    },{
-      Header: 'SOG',
-      accessor: 'shots',
-      width:40
-    },{
-      Header: 'PIM',
-      accessor: 'penaltyMinutes',
-      width:40
-    },{
-      Header: 'HITS',
-      accessor: 'hits',
-      width:50
-    },{
-      Header: 'TOI',
-      accessor: 'timeOnIce',
-      width:60
-    }];
-    const goalieColumns = [{
-      Header: 'Goalies',
-      accessor: 'name',
-      width:140// String-based value accessors!
-    },{
-      Header: 'SHOTS',
-      accessor: 'shots',
-      width:80
-    },{
-      Header: 'SAVES',
-      accessor: 'saves',
-      width:80
-    },{
-      Header: 'SV%',
-      accessor: 'savePercentage',
-      width:80
-    },{
-      Header: 'TOI',
-      accessor: 'timeOnIce',
-      width:80
-    }];
+
+    const forwardColumns = ['Forwards','G','A','+/-','TOI'];
+    const defenseColumns = ['Defense','G','A','+/-','TOI'];
+    const goalieColumns = ['Goalies','SA','SV','SV%','TOI'];
+    let resources = {
+      home: this.props.homeResources,
+      away: this.props.awayResources
+    }
+
+    let x = makeTable(forwardColumns,forwardArray,resources,this.props.activeBoxTeam);
+    let y = makeTable(defenseColumns,defenseArray,resources,this.props.activeBoxTeam);
+    let z = makeTable(goalieColumns,goalieArray,resources,this.props.activeBoxTeam);
     return(
       <div className="boxScore">
-        <SimpleBar style={{height:'240px'}}>
-          <ReactTable
-            data={forwardArray}
-            columns={forwardColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-          <ReactTable
-            data={defenseArray}
-            columns={defenseColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-          <ReactTable
-            data={goalieArray}
-            columns={goalieColumns}
-            resizable={false}
-            sortable={false}
-            noDataText="No stats available"
-            minRows={0}
-            showPaginationBottom={false}
-          />
-        </SimpleBar>
+        <div className="section-title">
+          <h1>Stats</h1>
+        </div>
+        <div className="buttonRow">
+          <button className={this.props.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.props.onClick('home')}>{this.props.homeTeamName}</button>
+          <button className={this.props.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.props.onClick('away')}>{this.props.awayTeamName}</button>
+        </div>
+        {x}
+        {y}
+        {z}
       </div>
     )
   }
+}
+
+function makeTable ( headers, data, resources, activeBoxTeam ) {
+  let headerColour = (activeBoxTeam === 'home') ? (
+    {background:resources.home.primaryColor}
+  ) : (
+    {background:resources.away.primaryColor}
+  )
+  let tableRow = (row,index) => {
+    let rowData = [];
+
+    for ( var key in row ) {
+      // Add our row:
+      rowData.push(
+        <td key={key+index}>{row[key]}</td>
+      )
+    }
+
+    return (<tr key={"row"+index}>{rowData}</tr>)
+  }
+
+  let headerRow = headers.map((title,index) => {
+
+    return (<th key={index}>{title}</th>)
+  })
+
+  let tableData = data.map((row,index) => {
+    return tableRow(row,index);
+  });
+
+  return (<table><thead style={headerColour}><tr>{headerRow}</tr></thead><tbody>{tableData}</tbody></table>);
 }

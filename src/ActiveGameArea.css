@@ -1,0 +1,413 @@
+/* CSS for ActiveGameArea.js */
+
+.bannerContainer {
+  z-index  : 999;
+  display  : flex;
+  position : sticky;
+  top      : 0;
+  width    : 100%;
+  height   : 80px;
+}
+
+.bannerGroup {
+  display         : flex;
+  width           : 50%;
+  align-items     : center;
+  justify-content : flex-end;
+}
+
+.bannerGroup .nameAndRec {
+  display         : flex;
+  color           : white;
+  align-items     : baseline;
+  flex-wrap       : wrap;
+  justify-content : center;
+}
+
+.bannerGroup .nameAndRec h1 {
+  /* width: 100%; */
+  margin      : 0 5px;
+  color       : white;
+  text-shadow : 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size   : 24px;
+  font-weight : normal;
+}
+
+.bannerGroup .nameAndRec .teamRecord {
+  font-size : 12px;
+}
+
+.bannerGroup.home .bannerScore {
+  margin-left : 20px;
+}
+
+.bannerGroup.away .bannerScore {
+  margin-right : 20px;
+}
+
+.bannerGroup.away {
+  justify-content : flex-start;
+}
+
+.bannerGroup.home {
+  justify-content : flex-end;
+}
+
+.bannerGroup .logoPPBadge {
+  margin        : 0 auto;
+  padding       : 5px;
+  color         : white;
+  border-radius : 3px;
+  background    : #ff0000;
+  box-shadow    : 0 1px 3px rgba(0, 0, 0, 0.12),
+                  0 1px 2px rgba(0, 0, 0, 0.24);
+  font-weight   : bold;
+}
+
+.bannerGroup .bannerLabel {
+  position    : absolute;
+  top         : 0;
+  margin      : 6px;
+  padding     : 3px;
+  color       : white;
+  text-shadow : 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size   : 11px;
+  font-weight : bold;
+}
+
+.bannerGroup.home .bannerLabel {
+  left : 0;
+}
+
+.bannerGroup.away .bannerLabel {
+  right : 0;
+}
+
+.bannerGroup .bannerScore {
+  display     : flex;
+  width       : 50px;
+  height      : 100%;
+  color       : white;
+  background  : #262626;
+  align-items : center;
+}
+
+.bannerScore h1 {
+  /* width: 100%; */
+}
+
+.bannerContainer .scoreDivide {
+  width      : 2px;
+  height     : 100%;
+  background : #ddd;
+}
+
+.bannerGroup img {
+  width         : 50px;
+  height        : 50px;
+  margin        : 0 10px;
+  border-radius : 10px;
+  background    : white;
+  box-shadow    : 0 1px 3px rgba(0, 0, 0, 0.12),
+                  0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.timeAndScore {
+  display         : flex;
+  height          : 100%;
+  background      : black;
+  align-items     : center;
+  flex            : 0 0 150px;
+  justify-content : center;
+  /* min-width: 200px; */
+}
+
+.bannerGroup h2 {
+  min-width   : 22px;
+  height      : 100%;
+  margin      : 0;
+  padding     : 0 8px;
+  color       : white;
+  background  : #222;
+  font-size   : 2.5em;
+  font-weight : lighter;
+  line-height : 80px;
+  /* font-family: 'digital-font'; */
+  /* padding: 3px 0; */
+}
+
+.timeAndScore h2:first-child {
+  /* border-top-left-radius: 5px; border-bottom-left-radius: 5px; */
+}
+
+.timeAndScore h2:last-child {
+  /* border-top-right-radius: 5px; border-bottom-right-radius: 5px; */
+}
+
+.bannerContainer .timeRemaining {
+  /* min-width: 100px; */
+  display         : -ms-flexbox;
+  display         : flex;
+  box-sizing      : border-box;
+  width           : 100%;
+  height          : 100%;
+  color           : white;
+  align-items     : center;
+  flex-direction  : column;
+  justify-content : center;
+  justify-content : space-between;
+  /* border: 2px solid white; */
+  /* position: relative; */
+}
+
+div[class*='inprogress'] .timeRemaining {
+  color       : #ffd800;
+  font-family : 'digital-font',
+                sans-serif;
+}
+
+.timeRemaining h1 span {
+  /* font-size: 1.4em; */
+  padding-left : 5px;
+  font-weight  : lighter;
+}
+
+.timeRemaining h1:first-child {
+  /* font-size: 1.4em; */
+  padding-left : 0;
+  font-weight  : lighter;
+}
+
+.timeAndScore .timeRemaining h1 {
+  top    : 0;
+  margin : 0;
+}
+
+.timeAndScore.scheduled h1,
+.timeAndScore h1 {
+  box-sizing    : border-box;
+  width         : 100%;
+  border-bottom : 1px solid #333;
+  font-size     : 14px;
+}
+
+.timeAndScore.scheduled h1 {
+  padding : 8px 4px;
+}
+
+.timeAndScore.scheduled .venue {
+  display         : flex;
+  width           : 100%;
+  height          : 100%;
+  flex-direction  : column;
+  justify-content : center;
+}
+
+.timeAndScore.scheduled span {
+  width     : 100%;
+  color     : #757575;
+  font-size : 11px;
+}
+
+.timeAndScore table,
+.timeAndScore th {
+  font-size   : 13px;
+  font-weight : 300;
+}
+
+.timeAndScore th {
+  color     : #959595;
+  font-size : 11px;
+}
+
+.timeAndScore table {
+  margin : 0 auto;
+}
+
+.timeAndScore .bannerPeriodTable {
+  display     : flex;
+  height      : 100%;
+  align-items : center;
+}
+
+.gamePreview,
+.gameRecap {
+  position : relative;
+  width    : 100%;
+  color    : white;
+}
+
+.gamePreview p,
+.gameRecap p {
+  margin : 0;
+}
+
+.heroImage {
+  position : relative;
+  width    : 100%;
+}
+
+.gamePreview img,
+.gameRecap img {
+  width : 100%;
+}
+
+.blurb {
+  padding     : 10px;
+  color       : white;
+  text-align  : left;
+  font-weight : normal;
+}
+
+.gameRecap .blurb {
+  z-index    : 99;
+  box-sizing : border-box;
+  position   : absolute;
+  top        : 0;
+  width      : 100%;
+  background : #262626ed;
+}
+
+.gamePreview .description,
+.gameRecap .description {
+  box-sizing : border-box;
+  position   : absolute;
+  bottom     : 0;
+  width      : 100%;
+  padding    : 10px;
+  border-top : 2px solid #ff520d;
+  background : #262626ed;
+  text-align : left;
+}
+
+.gamePreview a,
+.gameRecap a {
+  color           : white;
+  text-decoration : none;
+  pointer-events  : none;
+}
+
+.gamePreview h1 {
+  color     : #262626;
+  font-size : 20px;
+}
+
+.gameRecap h1 {
+  margin        : 0;
+  margin-bottom : 10px;
+  font-size     : 22px;
+}
+
+.gamePreview h2,
+.gameRecap h2 {
+  /* color:#666; */
+  margin      : 0;
+  font-size   : 14px;
+  font-weight : normal;
+}
+
+.gamePreview h5 {
+  display : none;
+}
+
+.noMediaContent {
+  width       : 300px;
+  margin      : 10px auto;
+  color       : #757575;
+  border      : 1px solid #757575;
+  align-items : center;
+}
+
+.noMediaContent h1 {
+  margin      : 0;
+  font-size   : 22px;
+  font-weight : normal;
+}
+
+.rinkMap {
+  position : relative;
+}
+
+.rinkMap .tooltipTime {
+  margin-right : 4px;
+}
+
+.rinkMap .toolTipInfo {}
+
+.legendWrapper {
+  display    : flex;
+  width      : 100%;
+  background : #c9ddf5;
+  font-size  : 12px;
+}
+
+.legendTricode {
+  padding-right : 5px;
+  font-weight   : bold;
+}
+
+.legendHalf {
+  display         : flex;
+  width           : 100%;
+  align-items     : center;
+  justify-content : center;
+}
+
+.legendText {
+  padding : 0 5px;
+}
+
+.shotsSVGData {
+  position : absolute;
+  top      : 0px;
+  left     : 0px;
+}
+
+.threeStars {
+  display : flex;
+}
+
+.starArea>img {
+  width         : 80px;
+  height        : 80px;
+  border        : 2px solid #b2b2b2;
+  border-radius : 50%;
+  box-shadow    : 0 2px 3px 1px #ddd;
+}
+
+.starArea {
+  display        : flex;
+  width          : 33.333%;
+  margin         : 10px;
+  align-items    : center;
+  flex-direction : column;
+}
+
+.starStats {
+  font-size : 12px;
+}
+
+.stars {
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+}
+
+.starName {
+  display         : flex;
+  width           : 100%;
+  padding         : 5px 0;
+  text-align      : center;
+  align-items     : center;
+  font-size       : 13px;
+  justify-content : center;
+}
+
+.starName img {
+  width  : 30px;
+  height : 30px;
+}
+
+.star img {}

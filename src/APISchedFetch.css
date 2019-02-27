@@ -1,69 +1,145 @@
+.totalViewContainer {
+  display : flex;
+}
+
 .gamesSideBar {
-  width: 200px;
-  margin-left: 0;
-  /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+  display        : flex;
+  max-height     : 100vh;
+  margin-left    : 0;
+  padding        : 0 8px;
+  background     : #e0e4e9;
+  flex-direction : column;
+}
 
+.gamesSideBar .disclaimer {
+  width     : 230px;
+  font-size : 10px;
+}
+
+.gamesScroll h3 {
+  margin      : 0;
+  padding     : 4px;
+  color       : white;
+  background  : linear-gradient(
+                  45deg,
+                  #188FFF 0%,
+                  #0036B0 100%
+                );
+  font-size   : 15px;
+  font-weight : normal;
+}
+
+.gamesSideBar>img {
+  z-index    : 999;
+  width      : 200px;
+  min-height : 200px;
+  margin     : 0 auto;
+}
+
+.gamesScroll {
+  margin: 8px 0;
+  width: 230px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mainGameArea {
+  width  : 100%;
+  height : 100vh;
+}
+
+.mainGameArea.loading {
+  display         : flex;
+  height          : 100vh;
+  align-items     : center;
+  justify-content : center;
 }
 
 .sideBarScore {
-  display: flex;
+  display : flex;
 }
 
 .sideBarScore {
-  display: flex;
+  display : flex;
+}
+
+.sideBarGame:first-child {
+  border-top : 1px solid #ddd;
 }
 
 .sideBarGame {
-  border-bottom: 1px solid #ddd;
-  padding: 4px;
-  height: auto;
-  min-height: 0;
+  position      : relative;
+  height        : auto;
+  min-height    : 0;
+  padding       : 5px 10px;
+  border-bottom : 1px solid #ddd;
+  background    : white;
+}
+
+.sideBarGame.active {
+  background : #e6f2fa;
+}
+
+.sideBarGame span {
+  position    : absolute;
+  top         : 0;
+  left        : 0;
+  height      : 100%;
+  border-left : 4px solid #ff520d;
 }
 
 .sideBarGame .teamInfo {
-  display: flex;
-  width: 100px;
-  align-items: center;
-  padding: 2px;
+  display     : flex;
+  width       : 120px;
+  padding     : 2px;
+  align-items : center;
 }
 
 .sideBarGame .teamInfo h2 {
-  font-size: 0.9em;
-  width: auto;
-  margin: 0;
+  width       : auto;
+  margin      : 0;
+  font-size   : 0.9em;
+  font-weight : normal;
 }
 
 .sideBarGame .timeRemaining {
-  box-sizing: border-box;
-  background: none;
-  border: none;
-  width: 100%;
+  box-sizing : border-box;
+  border     : none;
+  background : none;
 }
 
 .sideBarGame.gameDiv .timeRemaining h1 {
-  color: #262626;
-  font-family: sans-serif;
-  font-size: 1em;
+  color       : #262626;
+  font-family : sans-serif;
+  font-size   : 0.9em;
+}
+
+.sideBarGame.final .timeRemaining h1 {
+  color : black;
 }
 
 .sideBarGame .teamInfo h2:last-child {
-  margin-left: auto;
+  margin-left : auto;
 }
 
-.sideBarGame>div {
-  display: flex;
-  align-items: flex-end;
+.sideBarGame {
+  display         : flex;
+  justify-content : space-between;
 }
+
 .sideBarGame:last-child {
-  border-bottom: none;
-}
-.sideBarGame:hover {
-  background: #e6f2fa;
-  cursor: pointer;
+  border-bottom : none;
 }
 
-.sideBarGame .homeLogo, .sideBarGame .awayLogo {
-  height: 20px;
-  width: 20px;
-  margin-right: 6px;
+.sideBarGame:hover {
+  background : #e6f2fa;
+  cursor     : pointer;
+}
+
+.sideBarGame .awayLogo,
+.sideBarGame .homeLogo {
+  width        : 20px;
+  height       : 20px;
+  margin-right : 6px;
 }
