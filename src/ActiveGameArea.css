@@ -203,6 +203,7 @@ div[class*='inprogress'] .timeRemaining {
   height          : 100%;
   flex-direction  : column;
   justify-content : center;
+  padding         : 5px 0px;
 }
 
 .timeAndScore.scheduled span {
