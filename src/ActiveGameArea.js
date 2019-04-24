@@ -228,10 +228,18 @@ export class ActiveGameArea extends Component {
   recordArrayToStrings(records) {
     let hr = records.home;
     let ar = records.away;
-    return({
-      home: "("+hr.wins+'-'+hr.losses+'-'+hr.ot+")",
-      away: "("+ar.wins+'-'+ar.losses+'-'+ar.ot+")"
-    })
+    let returnData = (hr.ot !== undefined) ? (
+      {
+        home: "("+hr.wins+'-'+hr.losses+'-'+hr.ot+")",
+        away: "("+ar.wins+'-'+ar.losses+'-'+ar.ot+")"
+      }
+    ) : (
+      {
+        home: "("+hr.wins+'-'+hr.losses+")",
+        away: "("+ar.wins+'-'+ar.losses+")"
+      }
+    );
+    return(returnData)
   }
 
   shouldComponentUpdate(nextProps,nextState) {
