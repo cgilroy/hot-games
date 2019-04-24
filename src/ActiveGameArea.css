@@ -191,6 +191,7 @@ div[class*='inprogress'] .timeRemaining {
   width         : 100%;
   border-bottom : 1px solid #333;
   font-size     : 14px;
+  white-space   : nowrap;
 }
 
 .timeAndScore.scheduled h1 {
@@ -200,9 +201,10 @@ div[class*='inprogress'] .timeRemaining {
 .timeAndScore.scheduled .venue {
   display         : flex;
   width           : 100%;
-  height          : 100%;
   flex-direction  : column;
   justify-content : center;
+  padding         : 5px 0px;
+  flex            : 1;
 }
 
 .timeAndScore.scheduled span {

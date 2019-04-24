@@ -192,7 +192,7 @@ div[class*='inprogress'] .timeRemaining {
 .liveData {
   width      : 100%;
   overflow-y : auto;
-  background : white;
+  background : #e0e4e9;
   transition : 0s ease height;
   height: 100%;
   -webkit-overflow-scrolling: touch;
@@ -286,6 +286,7 @@ span .eventRow:first-child {
 
 .liveData .top {
   display : flex;
+  background: white;
   /* margin-right: 10px; */
   /* flex-wrap: wrap; */
 }

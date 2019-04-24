@@ -36,7 +36,7 @@ export class PenaltyTable extends React.Component {
       thirdPlays:[],
       otPlays:[]
     };
-    for (let i = penaltyPlays.length-1; i >= 0; i--) {
+    for (let i = 0; i <= penaltyPlays.length-1; i++) {
       let playIndex = penaltyPlays[i];
       let penaltyPlay = plays.allPlays[playIndex];
       let teamCode = penaltyPlay.team.triCode;
@@ -124,20 +124,12 @@ export class PenaltyTable extends React.Component {
           <h1>Penalty Summary</h1>
         </div>
         {noPenaltyMessage}
-        {(penaltyData.otPlays !== undefined && penaltyData.otPlays.length !== 0) &&
+        {(penaltyData.firstPlays !== undefined && penaltyData.firstPlays.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
-              <span>OT</span>
+              <span>1st Period</span>
             </div>
-            {penaltyData.otPlays}
-          </div>
-        }
-        {(penaltyData.thirdPlays !== undefined && penaltyData.thirdPlays.length !== 0) &&
-          <div className="periodSection">
-            <div className="scoringRow periodHeader">
-              <span>3rd Period</span>
-            </div>
-            {penaltyData.thirdPlays}
+            {penaltyData.firstPlays}
           </div>
         }
         {(penaltyData.secondPlays !== undefined && penaltyData.secondPlays.length !== 0) &&
@@ -148,12 +140,20 @@ export class PenaltyTable extends React.Component {
             {penaltyData.secondPlays}
           </div>
         }
-        {(penaltyData.firstPlays !== undefined && penaltyData.firstPlays.length !== 0) &&
+        {(penaltyData.thirdPlays !== undefined && penaltyData.thirdPlays.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
-              <span>1st Period</span>
+              <span>3rd Period</span>
             </div>
-            {penaltyData.firstPlays}
+            {penaltyData.thirdPlays}
+          </div>
+        }
+        {(penaltyData.otPlays !== undefined && penaltyData.otPlays.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>OT</span>
+            </div>
+            {penaltyData.otPlays}
           </div>
         }
       </div>

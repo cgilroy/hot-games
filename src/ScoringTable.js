@@ -41,7 +41,7 @@ export class ScoringTable extends React.Component {
       otScoring:[]
     };
 
-    for (let i = scoringPlays.length-1; i >= 0; i--) {
+    for (let i = 0; i <= scoringPlays.length-1; i++) {
       let playIndex = scoringPlays[i];
       let scoringPlay = plays.allPlays[playIndex];
       let teamCode = scoringPlay.team.triCode;
@@ -191,20 +191,12 @@ export class ScoringTable extends React.Component {
         </div>
         {noScoreMessage}
         {shootOutTable}
-        {(scoringData.otScoring !== undefined && scoringData.otScoring.length !== 0) &&
+        {(scoringData.firstScoring !== undefined && scoringData.firstScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
-              <span>OT</span>
+              <span>1st Period</span>
             </div>
-            {scoringData.otScoring}
-          </div>
-        }
-        {(scoringData.thirdScoring !== undefined && scoringData.thirdScoring.length !== 0) &&
-          <div className="periodSection">
-            <div className="scoringRow periodHeader">
-              <span>3rd Period</span>
-            </div>
-            {scoringData.thirdScoring}
+            {scoringData.firstScoring}
           </div>
         }
         {(scoringData.secondScoring !== undefined && scoringData.secondScoring.length !== 0) &&
@@ -215,12 +207,20 @@ export class ScoringTable extends React.Component {
             {scoringData.secondScoring}
           </div>
         }
-        {(scoringData.firstScoring !== undefined && scoringData.firstScoring.length !== 0) &&
+        {(scoringData.thirdScoring !== undefined && scoringData.thirdScoring.length !== 0) &&
           <div className="periodSection">
             <div className="scoringRow periodHeader">
-              <span>1st Period</span>
+              <span>3rd Period</span>
             </div>
-            {scoringData.firstScoring}
+            {scoringData.thirdScoring}
+          </div>
+        }
+        {(scoringData.otScoring !== undefined && scoringData.otScoring.length !== 0) &&
+          <div className="periodSection">
+            <div className="scoringRow periodHeader">
+              <span>OT</span>
+            </div>
+            {scoringData.otScoring}
           </div>
         }
       </div>
