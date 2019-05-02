@@ -5,6 +5,7 @@ body {
   width: 1200px;
   margin: 0 auto;
   background: #e0e4e9;
+  cursor: default;
 }
 
 @media only screen and (max-width: 1200px){
