@@ -5,10 +5,10 @@ import { LatestPlays } from './LatestPlays.js';
 import { BoxScoreStateless } from './BoxScoreStateless.js';
 import { RinkMap } from './RinkMap.js';
 import Moment from 'react-moment';
-import './ActiveGameArea.css';
+import '../css/ActiveGameArea.css';
 import resources from './TeamResources';
-import StarSVG from './resources/star.svg';
-import ChevronLeft from './resources/chevron-left.svg';
+import StarSVG from '../resources/star.svg';
+import ChevronLeft from '../resources/chevron-left.svg';
 
 export class ActiveGameArea extends Component {
 

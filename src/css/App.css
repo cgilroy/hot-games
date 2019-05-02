@@ -1,6 +1,6 @@
 @font-face {
   font-family : 'digital-font';
-  src         : url('./resources/digital-7.ttf');
+  src         : url('../resources/digital-7.ttf');
 }
 
 .App {

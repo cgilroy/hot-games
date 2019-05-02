@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import RinkSVG from './resources/rink.svg';
+import RinkSVG from '../resources/rink.svg';
 
 export class RinkMap extends React.Component {
   parsePlays(plays) {
