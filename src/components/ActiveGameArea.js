@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScoringTable } from './ScoringTable.js';
 import { PenaltyTable } from './PenaltyTable.js';
 import { LatestPlays } from './LatestPlays.js';
-import { BoxScoreStateless } from './BoxScoreStateless.js';
+import { BoxScore } from './BoxScore.js';
 import { RinkMap } from './RinkMap.js';
 import Moment from 'react-moment';
 import '../css/ActiveGameArea.css';
@@ -275,7 +275,7 @@ export class ActiveGameArea extends Component {
     let topSection = '';
     if (allData.gameState === 'final' || allData.gameState.search('progress') !== -1) {
       boxScore = (
-        <BoxScoreStateless
+        <BoxScore
           playerData={boxData}
           homeResources={allData.resources.home}
           awayResources={allData.resources.away}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class BoxScoreStateless extends React.Component {
+export class BoxScore extends React.Component {
 
   parseStatData = (playerData) => {
     let players = playerData.players;
