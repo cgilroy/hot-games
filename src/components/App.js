@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import './mobile.css';
+import '../css/App.css';
+import '../css/mobile.css';
 import { APISchedFetch } from './APISchedFetch.js';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faChevronUp, faChevronDown);
 export class App extends Component {
   render() {
     return (

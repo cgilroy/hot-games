@@ -1,6 +1,6 @@
 import React from 'react';
-import XMark from './resources/x-mark.svg';
-import CheckMark from './resources/check-mark.svg';
+import XMark from '../resources/x-mark.svg';
+import CheckMark from '../resources/check-mark.svg';
 // import SimpleBar from 'simplebar-react';
 // import 'simplebar/dist/simplebar.min.css';
 

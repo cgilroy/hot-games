@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {SideBarGame} from './SideBarGame.js';
 import {ActiveGameArea} from './ActiveGameArea.js';
-import './APISchedFetch.css';
+import '../css/APISchedFetch.css';
 import { BounceLoader } from 'react-spinners';
 // import { css } from '@emotion/core';
 
@@ -24,8 +24,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-14';
-    let dateTest = '';
+    let dateTest = '?date=2019-04-21';
+    // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
   .then(schedResults => {
     return schedResults.json();
