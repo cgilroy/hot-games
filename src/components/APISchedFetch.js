@@ -24,12 +24,20 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-02-21';
-    let dateTest = '';
+    let dateTest = '?date=2017-08-22';
+    // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest) // fetching the scheduled games from the NHL API
   .then(schedResults => {
     return schedResults.json();
   }).then(data => {
+    // if there are no games, stop loading and leave the function
+    if (data.dates.length === 0) {
+      this.setState({
+        loading: false
+      })
+      return
+    };
+
     let liveGames = [];
     let scheduledGames = [];
     let finalGames = [];
@@ -157,16 +165,26 @@ export class APISchedFetch extends Component {
     });
 
     // if content is loading display the bounce loader in the main game area
-    let mainGameArea = (this.state.loading) ? (
-      <BounceLoader
-        sizeUnit={"px"}
-        size={50}
-        color={'#262626'}
-        loading={this.state.loading}
-      />
-    ) : (
-      <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
-    )
+    let mainGameArea = ''
+    if (this.state.loading) {
+      mainGameArea = (
+        <BounceLoader
+          sizeUnit={"px"}
+          size={50}
+          color={'#262626'}
+          loading={this.state.loading}
+        />
+      )
+    } else {
+      mainGameArea = (this.state.gamesData.length !== 0) ? (
+        <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
+      ) : (
+        <div className='noMediaContent'>
+          <h1>No Games Scheduled</h1>
+        </div>
+      )
+    }
+
     return (
 
       <div className="totalViewContainer">
