@@ -16,7 +16,7 @@ export class SideBarGame extends Component {
       expanded: false
     }
     this.refreshGame = this.refreshGame.bind(this);
-    this.wasClicked = this.wasClicked.bind(this);
+    this.sideBarGameClick = this.sideBarGameClick.bind(this);
   }
   refreshGame() {
     let data = this.props.data;
@@ -40,6 +40,7 @@ export class SideBarGame extends Component {
       let homeTriCode = data.gameData.teams.home.abbreviation;
       let awayTriCode = data.gameData.teams.away.abbreviation;
 
+      // depending on state of the game show the start time, or the time left in the period
       let timeRemaining = [];
       if ((gameState === "inprogress-critical") || (gameState === "inprogress") || (gameState === "final")) {
         let timeLeft = data.liveData.linescore.currentPeriodTimeRemaining;
@@ -71,6 +72,8 @@ export class SideBarGame extends Component {
           <span>PP</span>
         </div>
       ) : ('');
+
+      // text color changes once the game ends
       let homeTextStyle = {color:'#262626'};
       let awayTextStyle = {color:'#262626'};
       if (gameState === 'final') {
@@ -109,15 +112,7 @@ export class SideBarGame extends Component {
     }
   }
 
-  handleClick(team) {
-    if(team === 'home'){
-      this.setState({activeBoxTeam:team});
-    }else{
-      this.setState({activeBoxTeam:team});
-    }
-  }
-
-  wasClicked() {
+  sideBarGameClick() {
     this.props.sideClick(this.props.data.gameData.game.pk);
   }
 
@@ -126,10 +121,10 @@ export class SideBarGame extends Component {
     let gameState = this.props.data.gameData.status.detailedState;
     gameState = gameState.toLowerCase().replace(/\s/g, '');
     let gameID = this.props.data.gameData.game.pk;
-    let activeClass = (this.props.activeID === gameID) ? 'active' : '';
+    let activeClass = (this.props.activeID === gameID) ? 'active' : ''; // active game gets a red bar (<span> element) beside to signify
 
     return (
-      <div className={"sideBarGame gameDiv " + gameState + ' ' + activeClass} key={gameID} onClick={this.wasClicked}>
+      <div className={"sideBarGame gameDiv " + gameState + ' ' + activeClass} key={gameID} onClick={this.sideBarGameClick}>
         {activeClass === 'active' &&
           <span></span>
         }

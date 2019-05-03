@@ -46,27 +46,8 @@ export class PenaltyTable extends React.Component {
       let description = penaltyPlay.result.description;
       this.penaltyOn = '';
       this.drewBy = '';
-      this.assistTwo = '';
-      for (let j = 0, k = players.length; j < k; j++) {
-        // let scorer = '';
-        // let assistOne = '';
-        // let assistTwo = '';
-        switch (players[j].playerType) {
-          case 'Scorer':
-            this.scorer = players[j].player.fullName + " (" + players[j].seasonTotal + ")";
-            break;
-          case 'Assist':
-            if(j<2){
-              this.assistOne = players[j].player.fullName;
-            }else {
-              this.assistTwo = players[j].player.fullName;
-            };
-            break;
-          default:
 
-        }
-      }
-
+      // some plays aren't attributed to either team but we need to assign a blank image to them
       let imgPath = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
       if (penaltyPlay.team !== undefined) {
         imgPath = (penaltyPlay.team.triCode === this.props.homeTricode) ? (
@@ -74,37 +55,35 @@ export class PenaltyTable extends React.Component {
         ) : (this.props.awayResources.logo)
       }
 
-        let rowMarkup = (
-
-          <div className="scoringRow" key={penaltyPlay.about.eventIdx}>
-            <img src={imgPath} alt=''/>
-            <h4>{teamCode}</h4>
-            <div className="scoreData">
-              <p className="scorer">{description}</p>
-            </div>
-            <div className="scoreTime">
-              <h4>{time}&nbsp;</h4>
-            </div>
+      let rowMarkup = (
+        <div className="scoringRow" key={penaltyPlay.about.eventIdx}>
+          <img src={imgPath} alt=''/>
+          <h4>{teamCode}</h4>
+          <div className="scoreData">
+            <p className="scorer">{description}</p>
           </div>
-        );
-        if (rowMarkup !== undefined) {
-          switch (period) {
-            case '1st':
-              penaltyData.firstPlays.push(rowMarkup);
-              break;
-            case '2nd':
-              penaltyData.secondPlays.push(rowMarkup);
-              break;
-            case '3rd':
-              penaltyData.thirdPlays.push(rowMarkup);
-              break;
-            default:
-              penaltyData.otPlays.push(rowMarkup);
-              break;
-          }
+          <div className="scoreTime">
+            <h4>{time}&nbsp;</h4>
+          </div>
+        </div>
+      );
+
+      if (rowMarkup !== undefined) {
+        switch (period) {
+          case '1st':
+            penaltyData.firstPlays.push(rowMarkup);
+            break;
+          case '2nd':
+            penaltyData.secondPlays.push(rowMarkup);
+            break;
+          case '3rd':
+            penaltyData.thirdPlays.push(rowMarkup);
+            break;
+          default:
+            penaltyData.otPlays.push(rowMarkup);
+            break;
         }
-
-
+      }
       // ...
     }
     return penaltyData;

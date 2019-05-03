@@ -112,9 +112,9 @@ export class BoxScore extends React.Component {
       away: this.props.awayResources
     }
 
-    let x = makeTable(forwardColumns,forwardArray,resources,this.props.activeBoxTeam);
-    let y = makeTable(defenseColumns,defenseArray,resources,this.props.activeBoxTeam);
-    let z = makeTable(goalieColumns,goalieArray,resources,this.props.activeBoxTeam);
+    let forwardTable = makeTable(forwardColumns,forwardArray,resources,this.props.activeBoxTeam);
+    let defenseTable = makeTable(defenseColumns,defenseArray,resources,this.props.activeBoxTeam);
+    let goalieTable = makeTable(goalieColumns,goalieArray,resources,this.props.activeBoxTeam);
     return(
       <div className="boxScore">
         <div className="section-title">
@@ -124,9 +124,9 @@ export class BoxScore extends React.Component {
           <button className={this.props.activeBoxTeam === 'home' ? 'active' : ''} onClick={()=>this.props.onClick('home')}>{this.props.homeTeamName}</button>
           <button className={this.props.activeBoxTeam === 'away' ? 'active' : ''} onClick={()=>this.props.onClick('away')}>{this.props.awayTeamName}</button>
         </div>
-        {x}
-        {y}
-        {z}
+        {forwardTable}
+        {defenseTable}
+        {goalieTable}
       </div>
     )
   }

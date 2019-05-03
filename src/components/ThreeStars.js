@@ -2,6 +2,7 @@ import React from 'react'
 import StarSVG from '../resources/star.svg'
 
 function ThreeStars(props) {
+  // grab team logos and box data for the three star players
   let starLogoPaths=['','',''];
   let firstStarData = props.homeSkaterData["ID"+props.firstStar.id];
   starLogoPaths[0] = props.homeResources.logo;
@@ -23,6 +24,7 @@ function ThreeStars(props) {
   }
 
   let starData = [firstStarData,secondStarData,thirdStarData];
+
   let starTables = [];
   let errorPhotos=[];
   for (let i=0;i<=2;i++) {
@@ -33,7 +35,7 @@ function ThreeStars(props) {
         +data.stats.goalieStats.saves / +data.stats.goalieStats.shots
       ) : (0);
       savePercentage = savePercentage.toFixed(3);
-      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/goalie.jpg");
+      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/goalie.jpg");// if player has no image we use a default picture
       jsx = (
         <table>
         <thead>
@@ -55,7 +57,7 @@ function ThreeStars(props) {
         </table>
       )
     } else {
-      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/skater.jpg");
+      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/skater.jpg"); // if player has no image we use a default picture
       jsx = (
         <table>
           <thead>
