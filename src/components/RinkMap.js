@@ -1,3 +1,5 @@
+// RinkMap.js
+// Parses the play data and generates the shot/goal svg component
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import RinkSVG from '../resources/rink.svg';
@@ -24,10 +26,13 @@ export class RinkMap extends React.Component {
           ) : (this.props.awayResources.primaryColor),
           time: playData.about.periodTime.replace(/^0/,'')
         }
+        // even periods need x/y data flipped to keep each teams data on same side
         if (playData.about.period % 2 === 0) {
           shotData.coordinates.x = -shotData.coordinates.x;
           shotData.coordinates.y = -shotData.coordinates.y;
         }
+
+        // adding <g> shot/goal elements to add to the rink svg; also add the associated tooltip element
         let element = '';
         let toolTip = '';
         if (shotData.type === "SHOT") {
@@ -61,32 +66,15 @@ export class RinkMap extends React.Component {
         shotsArray.push(element);
         toolTips.push(toolTip);
       }
-      // if(playData.coordinates.x !== "" && playData.team !== undefined) {
-      //   let shotData = {
-      //     description: playData.result.description,
-      //     type: playData.result.eventTypeId,
-      //     coordinates: {
-      //       x: playData.coordinates.x,
-      //       y: playData.coordinates.y,
-      //       team: playData.team.name
-      //     }
-      //   }
-      //   let element = (
-      //     <g>
-      //       <circle cx={shotData.coordinates.x} cy={shotData.coordinates.y} r="1.4"></circle>
-      //     </g>
-      //   );
-      //   shotsArray.push(element);
-      // }
     }
 
     return ({
       shotsArray,
       toolTips
-  })
-}
+    })
+  }
 
-componentDidUpdate() {
+  componentDidUpdate() {
     ReactTooltip.rebuild()
   }
 

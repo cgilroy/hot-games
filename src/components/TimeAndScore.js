@@ -36,7 +36,7 @@ function TimeAndScore(props) {
   }
 }
 
-function BannerPeriodTable(props) {
+function BannerPeriodTable(props) { // this table displays the goals per team per period
   let data = props.periodData.periods;
   let homeData = [];
   let awayData = [];
@@ -55,7 +55,7 @@ function BannerPeriodTable(props) {
     }
   }
   let overtimeGame = false;
-  if (data.length > 3) {
+  if (data.length > 3) { // anything over 3 periods is overtime
     overtimeGame = true;
     let homeValue = data[data.length-1].home.goals;
     let homeStyle = (homeValue === 0) ? ({color: '#959595'}) : {};

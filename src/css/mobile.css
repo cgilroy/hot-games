@@ -231,7 +231,7 @@
   .liveData .blurb {
     position   : relative !important;
     color      : #262626;
-    background : none !important;
+    background : white !important;
   }
 
   .gameRecap img {

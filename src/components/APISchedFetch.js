@@ -9,24 +9,24 @@ export class APISchedFetch extends Component {
   constructor() {
     super();
     this.state = {
-      liveGames: [],
-      scheduledGames: [],
-      finalGames:[],
-      mainGamePk: "",
-      gamesData:[],
-      gamesContentData:[],
+      liveGames: [], // array of game data for live games
+      scheduledGames: [], // array of game data for scheduled games
+      finalGames:[], // array of game data for ended games
+      mainGamePk: "", // gamePk (id) of the game to be displayed in the main game area
+      gamesData:[], // array of all game data
+      gamesContentData:[], // array of all content (pregame/postgame) data
       loading:true,
       records:[],
-      mobileActive:'list'
+      mobileActive:'list' // keeps track of view state for mobile (list => display the list; gameView => display the game data)
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
 
   refreshData() {
-    let dateTest = '?date=2019-04-21';
-    // let dateTest = '';
-    fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest)
+    // let dateTest = '?date=2019-02-21';
+    let dateTest = '';
+    fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest) // fetching the scheduled games from the NHL API
   .then(schedResults => {
     return schedResults.json();
   }).then(data => {
@@ -38,6 +38,7 @@ export class APISchedFetch extends Component {
     let gamesContentData = [];
     let records = [];
     var fetches = [];
+    // looping through the scheduled games for the day
     for (let i = 0, j = data.dates[0].games.length; i < j; i++) {
       let iterGame = data.dates[0].games[i];
       let homeTeam = iterGame.teams.home;
@@ -45,7 +46,6 @@ export class APISchedFetch extends Component {
       let gameState = iterGame.status.detailedState;
       gameState = gameState.toLowerCase().replace(/\s/g, '');
       let gamePk = iterGame.gamePk;
-      // let gameTime = iterGame.gameDate;
       let gameRecords = {
         gamePk: gamePk,
         home: homeTeam.leagueRecord,
@@ -55,6 +55,7 @@ export class APISchedFetch extends Component {
 
       let apiString = 'https://statsapi.web.nhl.com//api/v1/game/' + gamePk + '/feed/live';
       let apiContentString = 'https://statsapi.web.nhl.com/api/v1/game/' + gamePk + '/content'
+      // fetch live game data for each game; each fetch is added to an array of Promises to be sure all data is fetched before parsing
       fetches.push(
         fetch(apiString)
         .then(gameResults => {
@@ -72,6 +73,7 @@ export class APISchedFetch extends Component {
           allGamesJSON = allGamesJSON.concat(gameData);
         })
       );
+      // content data is available at a different endpoint and needs its own fetch
       fetches.push(
         fetch(apiContentString)
         .then(contentRaw => {
@@ -83,10 +85,12 @@ export class APISchedFetch extends Component {
     };
 
     Promise.all(fetches).then(() => {
+      // all promises resolved so now we can update the data in the app (but we need to sort it as Promises are not necessarily resolved in order)
       sortByKey(liveGames,'gamePk');
       sortByKey(scheduledGames,'gamePk');
       sortByKey(finalGames,'gamePk');
       sortByKey(allGamesJSON,'gamePk');
+      // if no main game is set, default to the first one
       if (this.state.mainGamePk === "") {
         let firstGamePk = allGames[3].dates[0].games[0].gamePk;
         this.setState({
@@ -119,27 +123,30 @@ export class APISchedFetch extends Component {
 
   componentDidMount() {
     this.refreshData();
-    this._interval = window.setInterval(this.refreshData,5000);
+    this._interval = window.setInterval(this.refreshData,5000); // set refresh interval to 5s
   }
 
   componentWillUnMount() {
-    this._interval && window.clearInterval(this._interval);
+    this._interval && window.clearInterval(this._interval); // remove refresh interval when unmounted
   }
 
   sideBarClick(gameFID) {
-    this.setState({mainGamePk: gameFID, mobileActive:'gameView'});
+    this.setState({mainGamePk: gameFID, mobileActive:'gameView'}); // handles sidebar game click
   }
 
   backButtonClick() {
-    this.setState({mobileActive:'list'});
+    this.setState({mobileActive:'list'}); // used for mobile to provide back button functionality
   }
 
   render() {
     let activeGameVar = this.state.mainGamePk;
+    // grab the game data to be displayed for the selected sidebar game
     let tg = this.state.gamesData;
     let activeGameData = tg.find(obj => {
       return obj.gamePk == activeGameVar
     });
+
+    // grab the preview/postgame data to be displayed for the selected sidebar game
     let tc = this.state.gamesContentData;
     let activeGameContent = tc.find(obj => {
       return obj.link === '/api/v1/game/' + activeGameVar + '/content'
@@ -148,6 +155,8 @@ export class APISchedFetch extends Component {
     let activeRecords = r.find(obj => {
       return obj.gamePk === activeGameVar
     });
+
+    // if content is loading display the bounce loader in the main game area
     let mainGameArea = (this.state.loading) ? (
       <BounceLoader
         sizeUnit={"px"}

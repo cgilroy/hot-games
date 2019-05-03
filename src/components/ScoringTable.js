@@ -1,8 +1,6 @@
 import React from 'react';
 import XMark from '../resources/x-mark.svg';
 import CheckMark from '../resources/check-mark.svg';
-// import SimpleBar from 'simplebar-react';
-// import 'simplebar/dist/simplebar.min.css';
 
 export class ScoringTable extends React.Component {
   constructor(props) {
@@ -41,13 +39,14 @@ export class ScoringTable extends React.Component {
       otScoring:[]
     };
 
+    //loop through the scoring plays
     for (let i = 0; i <= scoringPlays.length-1; i++) {
       let playIndex = scoringPlays[i];
       let scoringPlay = plays.allPlays[playIndex];
       let teamCode = scoringPlay.team.triCode;
       let players = scoringPlay.players;
       let period = scoringPlay.about.ordinalNum;
-      if (period === "SO") {continue};
+      if (period === "SO") {continue}; // don't want to add SO goals to table
       let strength = scoringPlay.result.strength.code;
       let emptyNet = scoringPlay.result.emptyNet;
       let scoreArray = scoringPlay.about.goals;
@@ -56,10 +55,8 @@ export class ScoringTable extends React.Component {
       let assistOne = '';
       let assistTwo = '';
       let seasonTotal = '';
+      // loop through each player involved in the scoring play
       for (let j = 0, k = players.length; j < k; j++) {
-        // let scorer = '';
-        // let assistOne = '';
-        // let assistTwo = '';
         switch (players[j].playerType) {
           case 'Scorer':
             scorer = players[j].player.fullName;
@@ -92,14 +89,9 @@ export class ScoringTable extends React.Component {
         ) : (this.props.awayResources.logo)
       }
 
-      // if (strength !== 'EVEN') {
-      //   strength = (
-      //     <p className="goalStrength">({strength})</p>
-      //   )
-      // } else {
-      //   strength = '';
-      // }
       let scoreData = '';
+
+      // SO goals currently not shown in table, but keeping this around for possible update
       if (period !== "SO") {
         scoreData = (
           <div className="scoreData">

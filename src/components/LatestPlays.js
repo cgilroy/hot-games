@@ -1,36 +1,17 @@
 import React from 'react';
 import {CSSTransitionGroup} from 'react-transition-group'; // ES6
-// var ReactCSSTransitionGroup = require('react-addons-css-transition-group'); // ES5 with npm
-// import SimpleBar from 'simplebar-react';
 
 export class LatestPlays extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playData: [],
+      playData: [], // play data to display
       playCount: 0,
-      prevLastEventId:'',
-      playsToAdd:'',
+      prevLastEventId:'', // keeps track of last event added to list to prevent duplicates
+      playsToAdd:'', // plays to add to the displayed playData
       gamePk: props.gamePk
     }
     this.parsePlayData = this.parsePlayData.bind(this);
-  }
-
-  shouldAddPlay(play) {
-
-  }
-
-  superscriptPeriod(period) {
-    switch (period) {
-      case '1st':
-        return (<span>1<sup>st</sup></span>);
-      case '2nd':
-        return (<span>2<sup>nd</sup></span>);
-      case '3rd':
-        return (<span>3<sup>rd</sup></span>);
-      default:
-    return (<span>{period}</span>);
-    }
   }
 
   parsePlayData(data) {
@@ -81,36 +62,36 @@ export class LatestPlays extends React.Component {
 
       // ...
   }
-    componentDidMount() {
 
-      if (this.props.plays !== undefined && this.props.plays.length !== 0) {
-        this.parsePlayData(this.props);
-      }
+  superscriptPeriod(period) {
+    switch (period) {
+      case '1st':
+        return (<span>1<sup>st</sup></span>);
+      case '2nd':
+        return (<span>2<sup>nd</sup></span>);
+      case '3rd':
+        return (<span>3<sup>rd</sup></span>);
+      default:
+    return (<span>{period}</span>);
     }
+  }
 
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.plays !== undefined && nextProps.plays.length !== 0) {
-        this.parsePlayData(nextProps);
-      }
+  componentDidMount() {
+
+    if (this.props.plays !== undefined && this.props.plays.length !== 0) {
+      this.parsePlayData(this.props);
     }
-    //
-    // addItem() {
-    //
-    //   let newItems = [
-    //     <div className="eventRow" key={Date().toString()}>
-    //       <p>haha</p>
-    //       <p>hahah</p>
-    //       <p>okay</p>
-    //     </div>
-    //   ];
-    //   newItems = newItems.concat(this.state.playData);
-    //   newItems = newItems.slice(0,10);
-    //     this.setState({playData:newItems});
-    // }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.plays !== undefined && nextProps.plays.length !== 0) {
+      this.parsePlayData(nextProps);
+    }
+  }
 
 
   render() {
-    // let items = this.state.playData;
+
     return(
 
         <div className="latestPlays">
