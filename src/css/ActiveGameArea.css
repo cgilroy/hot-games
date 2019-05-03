@@ -316,9 +316,7 @@ div[class*='inprogress'] .timeRemaining {
 
 .noMediaContent {
   width       : 300px;
-  margin      : 10px auto;
   color       : #757575;
-  border      : 1px solid #757575;
   align-items : center;
 }
 

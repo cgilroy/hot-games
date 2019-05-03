@@ -3,6 +3,7 @@ import {SideBarGame} from './SideBarGame.js';
 import {ActiveGameArea} from './ActiveGameArea.js';
 import '../css/APISchedFetch.css';
 import { BounceLoader } from 'react-spinners';
+import NHLShieldLogo from '../resources/NHL-Shield-Logo.svg';
 // import { css } from '@emotion/core';
 
 export class APISchedFetch extends Component {
@@ -24,16 +25,17 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    let dateTest = '?date=2017-08-22';
-    // let dateTest = '';
+    // let dateTest = '?date=2019-05-04';
+    let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest) // fetching the scheduled games from the NHL API
   .then(schedResults => {
     return schedResults.json();
   }).then(data => {
-    // if there are no games, stop loading and leave the function
+    // if there are no games, stop loading, leave the function, and hide the sidebar
     if (data.dates.length === 0) {
       this.setState({
-        loading: false
+        loading: false,
+        mobileActive: 'gameView'
       })
       return
     };
@@ -166,6 +168,7 @@ export class APISchedFetch extends Component {
 
     // if content is loading display the bounce loader in the main game area
     let mainGameArea = ''
+    let sideBarArea = ''
     if (this.state.loading) {
       mainGameArea = (
         <BounceLoader
@@ -174,21 +177,12 @@ export class APISchedFetch extends Component {
           color={'#262626'}
           loading={this.state.loading}
         />
-      )
+      );
     } else {
-      mainGameArea = (this.state.gamesData.length !== 0) ? (
-        <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
-      ) : (
-        <div className='noMediaContent'>
-          <h1>No Games Scheduled</h1>
-        </div>
-      )
-    }
-
-    return (
-
-      <div className="totalViewContainer">
-        <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
+      if (this.state.gamesData.length !== 0) {
+        mainGameArea = <ActiveGameArea backButtonClick={() => this.backButtonClick()} gameID={activeGameVar} data={activeGameData} content={activeGameContent} records={activeRecords} mobileActive={this.state.mobileActive}/>
+        sideBarArea = (
+          <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
               <h3>Today's Games</h3>
               <div className="gamesContainer live">
@@ -211,7 +205,24 @@ export class APISchedFetch extends Component {
               <p>This website is not in any way affiliated with the National Hockey League (NHL) or any of its respective teams. The NHL logo, team logos, team names, and other trademarks/copyrighted images are the property of their respective owners.</p>
               <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
             </div>
-        </div>
+          </div>
+        )
+      } else {
+        mainGameArea = (
+          <div style={{display:'flex',height:'100%',alignItems:'center',justifyContent:'center'}}>
+            <div className='noMediaContent'>
+              <img src={NHLShieldLogo} alt='NHL Logo'/>
+              <h1>No Games Scheduled</h1>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    return (
+
+      <div className="totalViewContainer">
+        { sideBarArea }
         <div className={"mainGameArea " + (this.state.loading ? 'loading ' : '') + (this.state.mobileActive === 'gameView' ? 'mobileActive' : '')}>
           { mainGameArea }
         </div>
