@@ -11,6 +11,7 @@ import TimeAndScore from './TimeAndScore.js';
 import MainGameBanner from './MainGameBanner.js';
 import '../css/ActiveGameArea.css';
 import resources from './TeamResources';
+import NHLShieldLogo from '../resources/NHL-Shield-Logo.svg';
 import ChevronLeft from '../resources/chevron-left.svg';
 
 export class ActiveGameArea extends Component {
@@ -174,8 +175,11 @@ export class ActiveGameArea extends Component {
           content={contentData}
         />
       ) : (
-        <div className="noMediaContent">
-          <h1>No Preview Available</h1>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+          <div className='noMediaContent'>
+            <img src={NHLShieldLogo} alt='NHL Logo'/>
+            <h1>No Preview Available</h1>
+          </div>
         </div>
       )
     }
