@@ -6,15 +6,16 @@ import RinkSVG from '../resources/rink.svg';
 
 export class RinkMap extends React.Component {
   parsePlays(plays) {
+    console.log(plays)
     let shotsArray = [];
     let toolTips = [];
     for (let i = 0;i<=plays.allPlays.length-1;i++) {
       let playData = plays.allPlays[i];
 
-      if((playData.result.eventTypeId === "SHOT" || playData.result.eventTypeId === "GOAL") && playData.about.ordinalNum !== "SO") {
+      if((playData.result.event.toUpperCase() === "SHOT" || playData.result.event.toUpperCase() === "GOAL") && playData.about.ordinalNum.toUpperCase() !== "SO") {
         let shotData = {
           description: playData.result.description,
-          type: playData.result.eventTypeId,
+          type: playData.result.event,
           coordinates: {
             x: -playData.coordinates.x,
             y: playData.coordinates.y,
@@ -35,7 +36,7 @@ export class RinkMap extends React.Component {
         // adding <g> shot/goal elements to add to the rink svg; also add the associated tooltip element
         let element = '';
         let toolTip = '';
-        if (shotData.type === "SHOT") {
+        if (shotData.type.toUpperCase() === "SHOT") {
           element = (
             <g key={"element"+i}>
               <line x1={shotData.coordinates.x - 1.4} y1={shotData.coordinates.y + 1.4} x2={shotData.coordinates.x + 1.4} y2={shotData.coordinates.y - 1.4} strokeWidth="0.6" stroke={shotData.color}></line>
