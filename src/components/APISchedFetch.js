@@ -25,8 +25,8 @@ export class APISchedFetch extends Component {
   }
 
   refreshData() {
-    // let dateTest = '?date=2019-05-04';
-    let dateTest = '';
+    let dateTest = '?date=2019-03-09';
+    // let dateTest = '';
     fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest) // fetching the scheduled games from the NHL API
   .then(schedResults => {
     return schedResults.json();
