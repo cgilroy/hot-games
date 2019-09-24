@@ -170,18 +170,29 @@ export class ActiveGameArea extends Component {
 
     let gamePreview = '';
     if (gameState.search('schedule') !== -1 || gameState.search('pre') !== -1) {
-      gamePreview = (contentData.editorial.preview.items.length !== 0) ? (
-        <GamePreview
-          content={contentData}
-        />
-      ) : (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
-          <div className='noMediaContent'>
-            <img src={NHLShieldLogo} alt='NHL Logo'/>
-            <h1>No Preview Available</h1>
+      try {
+        gamePreview = (contentData.editorial.preview.items.length !== 0) ? (
+          <GamePreview
+            content={contentData}
+          />
+        ) : (
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+            <div className='noMediaContent'>
+              <img src={NHLShieldLogo} alt='NHL Logo'/>
+              <h1>No Preview Available</h1>
+            </div>
           </div>
-        </div>
-      )
+        )
+      } catch(error) {
+        gamePreview = (
+          <div style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'20px'}}>
+            <div className='noMediaContent'>
+              <img src={NHLShieldLogo} alt='NHL Logo'/>
+              <h1>No Preview Available</h1>
+            </div>
+          </div>
+        )
+      }
     }
 
     let latestPlaysTable = '';
