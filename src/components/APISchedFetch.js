@@ -4,12 +4,15 @@ import {ActiveGameArea} from './ActiveGameArea.js';
 import '../css/APISchedFetch.css';
 import { BounceLoader } from 'react-spinners';
 import NHLShieldLogo from '../resources/NHL-Shield-Logo.svg';
+import { MyDatePicker } from './MyDatePicker.js';
+import moment from 'moment'
 // import { css } from '@emotion/core';
 
 export class APISchedFetch extends Component {
   constructor() {
     super();
     this.state = {
+      date: moment().format('YYYY-MM-DD'),
       liveGames: [], // array of game data for live games
       scheduledGames: [], // array of game data for scheduled games
       finalGames:[], // array of game data for ended games
@@ -22,12 +25,14 @@ export class APISchedFetch extends Component {
     };
     this.sideBarClick = this.sideBarClick.bind(this);
     this.refreshData = this.refreshData.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
-  refreshData() {
-    let dateTest = '?date=2019-03-09';
-    // let dateTest = '';
-    fetch('https://statsapi.web.nhl.com/api/v1/schedule'+dateTest) // fetching the scheduled games from the NHL API
+  refreshData(date = this.state.date) {
+    // let dateTest = '?date=2019-03-09';
+    // let fetchDate = date || this.state.date
+    let dateTest = '';
+    fetch('https://statsapi.web.nhl.com/api/v1/schedule?date='+date) // fetching the scheduled games from the NHL API
   .then(schedResults => {
     return schedResults.json();
   }).then(data => {
@@ -133,7 +138,7 @@ export class APISchedFetch extends Component {
 
   componentDidMount() {
     this.refreshData();
-    this._interval = window.setInterval(this.refreshData,5000); // set refresh interval to 5s
+    this._interval = window.setInterval(this.refreshData,10000); // set refresh interval to 5s
   }
 
   componentWillUnMount() {
@@ -146,6 +151,23 @@ export class APISchedFetch extends Component {
 
   backButtonClick() {
     this.setState({mobileActive:'list'}); // used for mobile to provide back button functionality
+  }
+
+  handleDateChange(date) {
+    this.setState({
+        date:date,
+        liveGames: [], // array of game data for live games
+        scheduledGames: [], // array of game data for scheduled games
+        finalGames:[], // array of game data for ended games
+        mainGamePk: "", // gamePk (id) of the game to be displayed in the main game area
+        gamesData:[], // array of all game data
+        gamesContentData:[], // array of all content (pregame/postgame) data
+        loading:true,
+        records:[],
+        // mobileActive:'list' // keeps track of view state for mobile (list => display the list; gameView => display the game data)
+    })
+    this.refreshData(date)
+    // this.setState({date:date})
   }
 
   render() {
@@ -185,6 +207,7 @@ export class APISchedFetch extends Component {
           <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
               <h3>Today's Games</h3>
+              <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
               <div className="gamesContainer live">
                 {
                   this.state.liveGames.map((game) => <SideBarGame key={game.gameData.game.pk} sideClick={this.sideBarClick} data={game} activeID={this.state.mainGamePk} />)
