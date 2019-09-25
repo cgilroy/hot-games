@@ -8,7 +8,7 @@ export class MyDatePicker extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            startDate: new Date()
+            startDate: moment(this.props.date).toDate()
         }
         this.handleDateChange = this.handleDateChange.bind(this)
     }
