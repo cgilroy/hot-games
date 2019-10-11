@@ -12,6 +12,14 @@ export class MyDatePicker extends React.Component {
         }
         this.handleDateChange = this.handleDateChange.bind(this)
     }
+    increaseDate = () => {
+        let newDate = moment(this.state.startDate).add(1, "days")
+        this.handleDateChange(newDate.format('YYYY-MM-DD'))
+    }
+    decreaseDate = () => {
+        let newDate = moment(this.state.startDate).subtract(1, "days")
+        this.handleDateChange(newDate.format('YYYY-MM-DD'))
+    }
     handleDateChange = date => {
         this.setState({
           startDate: date
@@ -19,6 +27,13 @@ export class MyDatePicker extends React.Component {
         this.props.updateDate(date)
       };    
     render() {
-        return <DatePicker selected={this.state.startDate} onChange={date => this.handleDateChange(moment(date).format('YYYY-MM-DD'))} />
+        return (
+            // <DatePicker selected={this.state.startDate} onChange={date => this.handleDateChange(moment(date).format('YYYY-MM-DD'))} />
+            <div style={{display:'flex'}}>
+                <button onClick={() => this.decreaseDate()}>&#8592;</button>
+                <p style={{width:'100%'}}>{moment(this.state.startDate).format('LL')}</p>
+                <button onClick={() => this.increaseDate()}>&#8594;</button>
+            </div>
+        )
     }
 }
