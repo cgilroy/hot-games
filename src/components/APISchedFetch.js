@@ -192,6 +192,19 @@ export class APISchedFetch extends Component {
     let mainGameArea = ''
     let sideBarArea = ''
     if (this.state.loading) {
+      sideBarArea = (
+        <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
+          <div className="gamesScroll">
+            <h3>Today's Games</h3>
+            <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
+            <p>Loading...</p>
+          </div>
+          <div className="disclaimer">
+            <p>This website is not in any way affiliated with the National Hockey League (NHL) or any of its respective teams. The NHL logo, team logos, team names, and other trademarks/copyrighted images are the property of their respective owners.</p>
+            <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
+          </div>
+        </div>
+      );
       mainGameArea = (
         <BounceLoader
           sizeUnit={"px"}
@@ -231,6 +244,19 @@ export class APISchedFetch extends Component {
           </div>
         )
       } else {
+        sideBarArea = (
+          <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
+            <div className="gamesScroll">
+              <h3>Today's Games</h3>
+              <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
+              <p>No Games</p>
+            </div>
+            <div className="disclaimer">
+              <p>This website is not in any way affiliated with the National Hockey League (NHL) or any of its respective teams. The NHL logo, team logos, team names, and other trademarks/copyrighted images are the property of their respective owners.</p>
+              <p>If you are the owner of a trademark/copyrighted material that is used on this website and would like it removed, please <a href="mailto:c.gilroy9@gmail.com?Subject=Trademark/Copyright%20Issue">contact me</a>.</p>
+            </div>
+          </div>
+        )
         mainGameArea = (
           <div style={{display:'flex',height:'100%',alignItems:'center',justifyContent:'center'}}>
             <div className='noMediaContent'>
