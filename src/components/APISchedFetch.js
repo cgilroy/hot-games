@@ -195,7 +195,7 @@ export class APISchedFetch extends Component {
       sideBarArea = (
         <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
           <div className="gamesScroll">
-            <h3>Today's Games</h3>
+            
             <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
             <p>Loading...</p>
           </div>
@@ -219,7 +219,7 @@ export class APISchedFetch extends Component {
         sideBarArea = (
           <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
-              <h3>Today's Games</h3>
+              
               <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
               <div className="gamesContainer live">
                 {
@@ -247,7 +247,7 @@ export class APISchedFetch extends Component {
         sideBarArea = (
           <div className={'gamesSideBar ' + (this.state.mobileActive === 'list' ? 'mobileActive' : '')}>
             <div className="gamesScroll">
-              <h3>Today's Games</h3>
+              
               <MyDatePicker date={this.state.date} updateDate={this.handleDateChange}/>
               <p>No Games</p>
             </div>
