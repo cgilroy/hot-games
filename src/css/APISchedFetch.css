@@ -13,7 +13,10 @@
 
 .gamesSideBar .datePicker {
   display: flex;
+  height: 38px;
   width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
   background  : linear-gradient(
                   45deg,
                   #188FFF 0%,
