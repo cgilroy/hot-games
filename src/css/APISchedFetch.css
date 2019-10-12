@@ -11,6 +11,31 @@
   flex-direction : column;
 }
 
+.gamesSideBar .datePicker {
+  display: flex;
+  width: 100%;
+  background  : linear-gradient(
+                  45deg,
+                  #188FFF 0%,
+                  #0036B0 100%
+                );
+  color: white;
+  align-items: center;
+}
+
+.gamesSideBar .datePicker__button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 3px;
+  width: 15%;
+}
+
+.gamesSideBar .datePicker__button:hover {
+  cursor: pointer;
+  color: #bbb
+}
+
 .gamesSideBar .disclaimer {
   width     : 230px;
   font-size : 10px;
@@ -42,6 +67,7 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background: white;
 }
 
 .mainGameArea {
