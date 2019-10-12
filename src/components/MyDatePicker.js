@@ -29,10 +29,10 @@ export class MyDatePicker extends React.Component {
     render() {
         return (
             // <DatePicker selected={this.state.startDate} onChange={date => this.handleDateChange(moment(date).format('YYYY-MM-DD'))} />
-            <div style={{display:'flex'}}>
-                <button onClick={() => this.decreaseDate()}>&#8592;</button>
+            <div className="datePicker">
+                <div className="datePicker__button" onClick={() => this.decreaseDate()}>&#9664;</div>
                 <p style={{width:'100%'}}>{moment(this.state.startDate).format('LL')}</p>
-                <button onClick={() => this.increaseDate()}>&#8594;</button>
+                <div className="datePicker__button" onClick={() => this.increaseDate()}>&#9654;</div>
             </div>
         )
     }
