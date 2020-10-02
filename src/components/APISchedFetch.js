@@ -12,7 +12,8 @@ export class APISchedFetch extends Component {
   constructor() {
     super();
     this.state = {
-      date: moment().format('YYYY-MM-DD'),
+      // date: moment().format('YYYY-MM-DD'),
+      date: '2020-09-27',
       liveGames: [], // array of game data for live games
       scheduledGames: [], // array of game data for scheduled games
       finalGames:[], // array of game data for ended games
@@ -39,8 +40,8 @@ export class APISchedFetch extends Component {
     // if there are no games, stop loading, leave the function, and hide the sidebar
     if (data.dates.length === 0) {
       this.setState({
-        loading: false,
-        mobileActive: 'gameView'
+        loading: false
+        // mobileActive: 'gameView'
       })
       return
     };
