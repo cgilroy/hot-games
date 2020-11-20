@@ -35,7 +35,7 @@ function ThreeStars(props) {
         +data.stats.goalieStats.saves / +data.stats.goalieStats.shots
       ) : (0);
       savePercentage = savePercentage.toFixed(3);
-      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/goalie.jpg");// if player has no image we use a default picture
+      errorPhotos.push("https://cms.nhl.bamgrid.com/images/headshots/current/168x168/goalie.jpg");// if player has no image we use a default picture
       jsx = (
         <table>
         <thead>
@@ -57,7 +57,7 @@ function ThreeStars(props) {
         </table>
       )
     } else {
-      errorPhotos.push("https://nhl.bamcontent.com/images/headshots/current/168x168/skater.jpg"); // if player has no image we use a default picture
+      errorPhotos.push("https://cms.nhl.bamgrid.com/images/headshots/current/168x168/skater.jpg"); // if player has no image we use a default picture
       jsx = (
         <table>
           <thead>
@@ -84,7 +84,7 @@ function ThreeStars(props) {
   return(
     <div className="threeStars">
       <div className="starArea">
-        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.firstStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[0]}} alt='No Photo'/>
+        <img src={"https://cms.nhl.bamgrid.com/images/headshots/current/168x168/"+props.firstStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[0]}} alt='No Photo'/>
         <span className="starName">
           <img src={starLogoPaths[0]} alt='logo' />
           {props.firstStar.fullName}
@@ -99,7 +99,7 @@ function ThreeStars(props) {
         </span>
       </div>
       <div className="starArea">
-        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.secondStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[1]}} alt='No Photo'/>
+        <img src={"https://cms.nhl.bamgrid.com/images/headshots/current/168x168/"+props.secondStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[1]}} alt='No Photo'/>
         <span className="starName">
           <img src={starLogoPaths[1]} alt='logo'/>
           {props.secondStar.fullName}
@@ -117,7 +117,7 @@ function ThreeStars(props) {
         </span>
       </div>
       <div className="starArea">
-        <img src={"https://nhl.bamcontent.com/images/headshots/current/168x168/"+props.thirdStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[2]}} alt='No Photo'/>
+        <img src={"https://cms.nhl.bamgrid.com/images/headshots/current/168x168/"+props.thirdStar.id+".jpg"} onError={(e)=>{e.target.onerror = null; e.target.src=errorPhotos[2]}} alt='No Photo'/>
         <span className="starName">
           <img src={starLogoPaths[2]} alt='logo'/>
           {props.thirdStar.fullName}
