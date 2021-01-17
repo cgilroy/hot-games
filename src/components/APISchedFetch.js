@@ -12,8 +12,8 @@ export class APISchedFetch extends Component {
   constructor() {
     super();
     this.state = {
-      // date: moment().format('YYYY-MM-DD'),
-      date: '2020-09-28',
+      date: moment().format('YYYY-MM-DD'),
+      // date: '2020-09-28',
       liveGames: [], // array of game data for live games
       scheduledGames: [], // array of game data for scheduled games
       finalGames:[], // array of game data for ended games
